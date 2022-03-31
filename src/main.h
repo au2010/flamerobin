@@ -31,6 +31,8 @@ class MainFrame;
 class Application: public wxApp
 {
 private:
+    // locale we'll be using
+    wxLocale m_locale;  
     // format local settings 
     // TODO: multilingual
     LocalSettings* localSetM;
