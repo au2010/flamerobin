@@ -33,6 +33,7 @@
 
 #include "wx/fileconf.h"
 #include "wx/filename.h"
+#include "wx/dir.h"
 
 #include "config/Config.h"
 #ifdef HAVE_FRCONFIG_H
@@ -327,8 +328,24 @@ void ConfigCache::update()
 
 wxString FRConfig::getHtmlTemplatesPath() const
 {
-    return getHomePath() + "html-templates"
-        + wxFileName::GetPathSeparator();
+    const wxString lang = wxLocale::GetLanguageCanonicalName(wxLocale::GetSystemLanguage());
+    wxString strPath = getHomePath() + lang + wxFileName::GetPathSeparator()  + "html-templates" + wxFileName::GetPathSeparator();
+    wxString result;
+    if (wxDir::Exists(strPath))
+    {
+        result = strPath;
+    }
+    if(!result)
+    {
+        wxString baselang = lang.BeforeFirst('_');
+        strPath = getHomePath() + baselang + wxFileName::GetPathSeparator() + "html-templates" + wxFileName::GetPathSeparator();
+        if (wxDir::Exists(strPath))
+            result = strPath;
+    }
+    if(!result)
+        result = getHomePath() + "html-templates" + wxFileName::GetPathSeparator();
+    
+    return result.c_str();
 }
 
 wxString FRConfig::getCodeTemplatesPath() const
