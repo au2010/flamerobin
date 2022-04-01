@@ -177,7 +177,7 @@ wxString loadEntireFile(const wxFileName& filename)
     }
 
     // read entire file into wxString buffer
-    std::ifstream filex(wx2std(filename.GetFullPath()).c_str());
+    std::ifstream filex(wx2std(filename.GetFullPath()).c_str(), std::ios::binary);
     if (!filex)
     {
         wxString msg;
@@ -188,7 +188,8 @@ wxString loadEntireFile(const wxFileName& filename)
 
     std::stringstream ss;
     ss << filex.rdbuf();
-    wxString s(ss.str());
+    wxConvAuto cnv;
+    wxString s(ss.str().c_str(), cnv);
     filex.close();
     return s;
 }
