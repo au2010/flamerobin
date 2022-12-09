@@ -40,13 +40,13 @@
     #include "frconfig.h"
 #endif
 #include "core/FRError.h"
-
+#include"gui/FRStyle.h"
 
 const wxString Config::pathSeparator = "/";
 
 FRConfig& config()
 {
-    static FRConfig c;
+    static FRConfig c;    
     return c;
 }
 
@@ -417,6 +417,12 @@ const wxString FRConfig::getSysTemplateFileName(const wxString& templateName)
         }
     }
     return fileName.GetFullPath();
+}
+
+wxString FRConfig::getXmlStylesPath() const
+{
+    return getHomePath() + "xml-styles"
+        + wxFileName::GetPathSeparator();
 }
 
 bool FRConfig::getUseLocalConfig() const
