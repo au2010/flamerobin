@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: flamerobin\n"
-"POT-Creation-Date: 2022-12-09 09:52+0900\n"
-"PO-Revision-Date: 2022-12-09 11:57+0900\n"
+"POT-Creation-Date: 2022-12-21 16:46+0900\n"
+"PO-Revision-Date: 2022-12-21 16:50+0900\n"
 "Last-Translator: akira uemura <git@arumeu.sakura.ne.jp>\n"
 "Language-Team: a.uemura\n"
 "Language: ja\n"
@@ -1535,15 +1535,15 @@ msgstr "UPDATE INSERT文としてコピー(&A)"
 
 #: gui/ExecuteSqlFrame.cpp:772 gui/controls/DataGrid.cpp:233
 msgid "Edit BLOB..."
-msgstr ""
+msgstr "BLOBの編集..."
 
 #: gui/ExecuteSqlFrame.cpp:773 gui/controls/DataGrid.cpp:234
 msgid "Import BLOB from file..."
-msgstr ""
+msgstr "ファイルからBLOBをインポートする..."
 
 #: gui/ExecuteSqlFrame.cpp:774 gui/controls/DataGrid.cpp:235
 msgid "Save BLOB to file..."
-msgstr ""
+msgstr "ファイルにBLOBを保存する..."
 
 #: gui/ExecuteSqlFrame.cpp:776
 msgid "Set field to &NULL"
@@ -1666,7 +1666,7 @@ msgstr "SQL文の実行"
 
 #: gui/ExecuteSqlFrame.cpp:1352
 msgid "Open File"
-msgstr ""
+msgstr "ファイルを開く"
 
 #: gui/ExecuteSqlFrame.cpp:1354 gui/ExecuteSqlFrame.cpp:1367
 msgid "SQL script files (*.sql)|*.sql|All files (*.*)|*.*"
@@ -3353,19 +3353,19 @@ msgstr "HTMLとして保存..."
 msgid "Printed from FlameRobin - www.flamerobin.org"
 msgstr "FlameRobinから印刷 - www.flamerobin.org"
 
-#: ibpp/_ibpp.cpp:220
+#: ibpp/_ibpp.cpp:250
 msgid "Can't find or load FBCLIENT.DLL or GDS32.DLL"
 msgstr "FBCLIENT.DLL 又は GDS32.DLL が 見つからないかロード出来ません"
 
-#: ibpp/_ibpp.cpp:244
+#: ibpp/_ibpp.cpp:274
 msgid "Can't find or load the Firebird Client Library"
 msgstr "Firebird Client Library が見つからないかロード出来ません"
 
-#: ibpp/_ibpp.cpp:255 ibpp/_ibpp.cpp:264
+#: ibpp/_ibpp.cpp:285 ibpp/_ibpp.cpp:294
 msgid "Entry-point isc_"
 msgstr "エントリポイント isc_"
 
-#: ibpp/_ibpp.cpp:258 ibpp/_ibpp.cpp:267
+#: ibpp/_ibpp.cpp:288 ibpp/_ibpp.cpp:297
 msgid "Entry-point fb_"
 msgstr "エントリポイント fb_"
 
