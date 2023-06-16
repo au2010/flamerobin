@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: flamerobin\n"
-"POT-Creation-Date: 2022-12-21 16:46+0900\n"
-"PO-Revision-Date: 2022-12-21 16:50+0900\n"
+"POT-Creation-Date: 2023-06-16 11:19+0900\n"
+"PO-Revision-Date: 2023-06-16 11:46+0900\n"
 "Last-Translator: akira uemura <git@arumeu.sakura.ne.jp>\n"
 "Language-Team: a.uemura\n"
 "Language: ja\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 "X-Poedit-Basepath: ../src\n"
 "X-Poedit-KeywordsList: _;wxGetTranslation\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -20,8 +20,9 @@ msgid ""
 "If you are already using FlameRobin's encrypted passwords, please enter the "
 "master password now, it will be used for the entire session."
 msgstr ""
-"すでにFlameRobinの暗号化されたパスワードを使用している場合は、マスターパス"
-"ワードを今すぐ入力してください。"
+"FlameRobin の暗号化されたパスワードをすでに使用している場合は、ここでマス"
+"ター パスワードを入力してください。マスター パスワードはセッション全体で使用"
+"されます。"
 
 #: MasterPassword.cpp:73
 msgid ""
@@ -99,37 +100,71 @@ msgstr "エラー。"
 msgid "Template \"%s\" not found."
 msgstr "テンプレート %s は見つかりませんでした。"
 
-#: core/FRDecimal.cpp:386 core/FRDecimal.cpp:435 core/FRDecimal.cpp:465
-#: core/FRDecimal.cpp:564 core/FRInt128.cpp:296
+#: core/FRDecimal.cpp:386 core/FRDecimal.cpp:435 core/FRDecimal.cpp:462
+#: core/FRDecimal.cpp:582 core/FRInt128.cpp:327
+#: gui/controls/DataGridRows.cpp:763
 msgid "0"
 msgstr "0"
 
-#: core/FRDecimal.cpp:455 core/FRInt128.cpp:99 core/FRInt128.cpp:292
-msgid "-"
-msgstr "-"
-
-#: core/FRDecimal.cpp:472
+#: core/FRDecimal.cpp:469
 msgid " E"
 msgstr " E"
 
+#: core/FRDecimal.cpp:473 core/FRInt128.cpp:101 core/FRInt128.cpp:323
+msgid "-"
+msgstr "-"
+
 #: core/FRDecimal.cpp:507
+msgid "SrcStr is empty!"
+msgstr "SrcStrが空です!"
+
+#: core/FRDecimal.cpp:512
 msgid "nan"
 msgstr "ナン"
 
-#: core/FRDecimal.cpp:512
+#: core/FRDecimal.cpp:517
 msgid "infinity"
 msgstr "インフィニティ"
+
+#: core/FRDecimal.cpp:545
+#, c-format
+msgid "Not numeric. Found 2nd decimalseparator (%c) at position %d."
+msgstr ""
+"数値ではありません。 2 番目の小数点記号 (%c) が%d の位置に見つかりました。"
+
+#: core/FRDecimal.cpp:565 core/FRDecimal.cpp:607 core/FRInt128.cpp:118
+#, c-format
+msgid "Not numeric. Invalid char (%c) at position %d."
+msgstr "数値ではありません。無効な文字 (%c) が位置 %d にあります。"
+
+#: core/FRDecimal.cpp:619
+#, c-format
+msgid "Not numeric. Invalid exponent (%c)."
+msgstr "数値ではありません。 無効な指数 (%c)。"
+
+#: core/FRDecimal.cpp:772 core/FRDecimal.cpp:840
+#, c-format
+msgid "Exponent (%d) out of range!"
+msgstr "指数 (%d) が範囲外です!"
 
 #: core/FRError.cpp:51
 msgid "Operation aborted"
 msgstr "中断されました"
 
-#: core/FRInt128.cpp:72
+#: core/FRInt128.cpp:73
 msgid "binary"
 msgstr "バイナリ"
 
-#: core/FRInt128.cpp:79 core/FRInt128.cpp:81
+#: core/FRInt128.cpp:80 core/FRInt128.cpp:82
 msgid " "
+msgstr ""
+
+#: core/FRInt128.cpp:128 core/FRInt128.cpp:254 core/FRInt128.cpp:275
+msgid "Int128: Value to big."
+msgstr ""
+
+#: core/FRInt128.cpp:266
+msgid "Int128: Value to small."
 msgstr ""
 
 #: core/StringUtils.cpp:174
@@ -172,7 +207,7 @@ msgstr "データベースの変更"
 
 #: frutils.cpp:134
 msgid "Select one or more fields... (use ctrl key)"
-msgstr "ctrlキーを使って一つ以上のフィールドを選択..."
+msgstr "一つ以上のフィールドを選択...(ctrlキーを使って)"
 
 #: frutils.cpp:134
 msgid "Table Fields"
@@ -196,8 +231,8 @@ msgstr "既知のデータベース証明書は使用出来ませんでした。
 msgid "Please enter connection credentials with administrative rights."
 msgstr "管理者権限のある接続認証情報を入力してください。"
 
-#: frutils.cpp:212 gui/DatabaseRegistrationDialog.cpp:503
-#: gui/DatabaseRegistrationDialog.cpp:507 gui/EventWatcherFrame.cpp:247
+#: frutils.cpp:212 gui/DatabaseRegistrationDialog.cpp:505
+#: gui/DatabaseRegistrationDialog.cpp:509 gui/EventWatcherFrame.cpp:247
 #: gui/EventWatcherFrame.cpp:353 gui/EventWatcherFrame.cpp:380
 #: gui/FieldPropertiesDialog.cpp:396 gui/MainFrame.cpp:1161
 #: gui/MetadataItemPropertiesFrame.cpp:708 gui/ServiceBaseFrame.cpp:126
@@ -994,25 +1029,25 @@ msgstr "保存されたユーザー名を使用し、パスワードは常に入
 msgid "Use trusted user authentication"
 msgstr "信頼されたユーザー認証を使用する"
 
-#: gui/DatabaseRegistrationDialog.cpp:186 gui/RestoreFrame.cpp:108
+#: gui/DatabaseRegistrationDialog.cpp:188 gui/RestoreFrame.cpp:108
 msgid "Default"
 msgstr "標準"
 
-#: gui/DatabaseRegistrationDialog.cpp:377 gui/UsernamePasswordDialog.cpp:58
+#: gui/DatabaseRegistrationDialog.cpp:379 gui/UsernamePasswordDialog.cpp:58
 msgid "Connect"
 msgstr "接続"
 
-#: gui/DatabaseRegistrationDialog.cpp:439
+#: gui/DatabaseRegistrationDialog.cpp:441
 msgid "Select database file"
 msgstr "データベースファイルの選択"
 
-#: gui/DatabaseRegistrationDialog.cpp:440
+#: gui/DatabaseRegistrationDialog.cpp:442
 msgid "Firebird database files (*.fdb, *.gdb)|*.fdb;*.gdb|All files (*.*)|*.*"
 msgstr ""
 "Firebirdデータベースファイル (*.fdb, *.gdb)|*.fdb;*.gdb|全てのファイル (*.*)|"
 "*.*"
 
-#: gui/DatabaseRegistrationDialog.cpp:507 gui/ExecuteSqlFrame.cpp:2557
+#: gui/DatabaseRegistrationDialog.cpp:509 gui/ExecuteSqlFrame.cpp:2557
 msgid "SYSTEM ERROR!"
 msgstr "システムエラー！"
 
@@ -1511,7 +1546,7 @@ msgstr "ロールバック(&R)"
 
 #: gui/ExecuteSqlFrame.cpp:761
 msgid "&Statement"
-msgstr ""
+msgstr "SQL文(&S)"
 
 #: gui/ExecuteSqlFrame.cpp:764
 msgid "I&nsert row"
@@ -1595,6 +1630,12 @@ msgid ""
 "\n"
 "which will be lost if you close without saving."
 msgstr ""
+"ファイルに変更を加えました\n"
+"\n"
+"%s\n"
+"\n"
+"\n"
+"保存せずに閉じると失われます。"
 
 #: gui/ExecuteSqlFrame.cpp:848 gui/ExecuteSqlFrame.cpp:2034
 #: gui/ExecuteSqlFrame.cpp:2071
@@ -1650,6 +1691,12 @@ msgid ""
 "has been modified by another program. Do you want to reload it?\n"
 "If you reload the file now your own modifications will be lost."
 msgstr ""
+"ファイル\n"
+"\n"
+"%s\n"
+"\n"
+"別のプログラムによって変更されました。 リロードしますか?\n"
+"ここでファイルを再ロードすると、自分で行った変更は失われます。"
 
 #: gui/ExecuteSqlFrame.cpp:1334
 msgid "&Reload"
@@ -1678,7 +1725,7 @@ msgstr "名前を付けて保存"
 
 #: gui/ExecuteSqlFrame.cpp:1405
 msgid "File saved"
-msgstr ""
+msgstr "ファイルが保存されました"
 
 #: gui/ExecuteSqlFrame.cpp:1409
 #, c-format
@@ -1694,11 +1741,11 @@ msgstr "BLOBをファイルに保存"
 msgid "No valid tables found."
 msgstr "デーブルにレコードが見つかりません。"
 
-#: gui/ExecuteSqlFrame.cpp:1756 gui/controls/DataGridRows.cpp:1823
+#: gui/ExecuteSqlFrame.cpp:1756 gui/controls/DataGridRows.cpp:1863
 msgid "Select a table"
 msgstr "テーブルの選択"
 
-#: gui/ExecuteSqlFrame.cpp:1757 gui/controls/DataGridRows.cpp:1824
+#: gui/ExecuteSqlFrame.cpp:1757 gui/controls/DataGridRows.cpp:1864
 msgid "Multiple tables found"
 msgstr "Multiple tables found"
 
@@ -1746,6 +1793,10 @@ msgid ""
 "\n"
 "They can not be set to NULL!"
 msgstr ""
+"次のフィールドは読み取り専用であるか、NULL 値を許容できません。\n"
+"%s\n"
+"\n"
+"NULL に設定することはできません!"
 
 #: gui/ExecuteSqlFrame.cpp:2032
 #, c-format
@@ -1756,6 +1807,11 @@ msgid ""
 "\n"
 "which will be lost if you load another file."
 msgstr ""
+"ファイルに変更を加えました\n"
+"\n"
+"%s\n"
+"\n"
+"別のファイルをロードすると失われます。"
 
 #: gui/ExecuteSqlFrame.cpp:2055
 msgid "Transaction started"
@@ -1770,6 +1826,11 @@ msgid ""
 "\n"
 "which will be lost if you set a different statement."
 msgstr ""
+"ファイルに変更を加えました\n"
+"\n"
+"%s\n"
+"\n"
+"別のSQL文を設定すると失われます。"
 
 #: gui/ExecuteSqlFrame.cpp:2173
 msgid ""
@@ -1785,6 +1846,9 @@ msgid ""
 "\"OFF\").\n"
 "Stopping further execution."
 msgstr ""
+"SET AUTODDL コマンドに無効なパラメーターが見つかりました (「ON」または「OFF」"
+"である必要があります)。\n"
+"これ以上の実行を停止します。"
 
 #: gui/ExecuteSqlFrame.cpp:2215
 msgid "Script execution finished."
@@ -1924,7 +1988,7 @@ msgstr ""
 #: gui/ExecuteSqlFrame.cpp:2856
 #, c-format
 msgid "%ld row(s) fetched"
-msgstr ""
+msgstr "%ld 行がフェッチされました"
 
 #: gui/ExecuteSqlFrame.cpp:3136
 msgid "Execute SQL Statements"
@@ -2002,11 +2066,11 @@ msgstr "インデックス%s を削除してよろしいですか?"
 
 #: gui/ExecuteSqlFrame.cpp:3763
 msgid "Editing Package Header"
-msgstr ""
+msgstr "パッケージヘッダーの編集"
 
 #: gui/ExecuteSqlFrame.cpp:3793
 msgid "Editing Package Body"
-msgstr ""
+msgstr "パッケージ本体の編集"
 
 #: gui/FieldPropertiesDialog.cpp:106
 msgid "Field name:"
@@ -2185,7 +2249,7 @@ msgstr "検索・置換"
 
 #: gui/InsertDialog.cpp:262
 msgid "Keep dialog open after inserting"
-msgstr ""
+msgstr "挿入後ダイアログを開いたままにする"
 
 #: gui/InsertDialog.cpp:264
 msgid "&Insert"
@@ -2205,7 +2269,7 @@ msgid "Invalid hexadecimal character"
 msgstr "無効な16進数文字"
 
 #: gui/InsertDialog.cpp:580 gui/InsertParametersDialog.cpp:735
-#: gui/controls/DataGridRows.cpp:2379
+#: gui/controls/DataGridRows.cpp:2419
 msgid "Cannot open BLOB file."
 msgstr "BLOBファイルを開けません。"
 
@@ -2223,17 +2287,17 @@ msgstr "実行(&E)"
 
 #: gui/InsertParametersDialog.cpp:371
 msgid "Insert Parameter(s) Into SQL "
-msgstr ""
+msgstr "SQL へのパラメータの挿入 "
 
-#: gui/InsertParametersDialog.cpp:628 gui/controls/DataGridRows.cpp:899
+#: gui/InsertParametersDialog.cpp:628 gui/controls/DataGridRows.cpp:937
 msgid "Cannot parse date"
 msgstr "日付を解析出来ません"
 
-#: gui/InsertParametersDialog.cpp:646 gui/controls/DataGridRows.cpp:1017
+#: gui/InsertParametersDialog.cpp:646 gui/controls/DataGridRows.cpp:1055
 msgid "Cannot parse time"
 msgstr "時刻を解析出来ません"
 
-#: gui/InsertParametersDialog.cpp:679 gui/controls/DataGridRows.cpp:1161
+#: gui/InsertParametersDialog.cpp:679 gui/controls/DataGridRows.cpp:1199
 msgid "Cannot parse timestamp"
 msgstr "日付を解析出来ません"
 
@@ -2253,11 +2317,11 @@ msgstr "無効な整数値"
 msgid "Invalid large integer value"
 msgstr "無効な large Integer値"
 
-#: gui/InsertParametersDialog.cpp:819 gui/controls/DataGridRows.cpp:1226
+#: gui/InsertParametersDialog.cpp:819 gui/controls/DataGridRows.cpp:1264
 msgid "Invalid float numeric value"
 msgstr "無効なfloat型浮動小数点数値"
 
-#: gui/InsertParametersDialog.cpp:825 gui/controls/DataGridRows.cpp:1292
+#: gui/InsertParametersDialog.cpp:825 gui/controls/DataGridRows.cpp:1330
 msgid "Invalid double numeric value"
 msgstr "無効なdouble型浮動小数点数値"
 
@@ -2658,7 +2722,7 @@ msgstr "テンプレートを処理中..."
 
 #: gui/MetadataItemPropertiesFrame.cpp:207
 msgid "Rendering page..."
-msgstr ""
+msgstr "ページをレンダリング中..."
 
 #: gui/MetadataItemPropertiesFrame.cpp:707
 msgid ""
@@ -2689,7 +2753,7 @@ msgstr "必須ファイルが見つかりません"
 
 #: gui/PreferencesDialog.cpp:503
 msgid "Invalid root node in confdef."
-msgstr ""
+msgstr "confdef のルート ノードが無効です。"
 
 #: gui/PreferencesDialog.cpp:605
 #, c-format
@@ -2698,7 +2762,7 @@ msgstr "間違った設定 \"%s\" が書かれています"
 
 #: gui/PreferencesDialog.cpp:760
 msgid "Code generation"
-msgstr ""
+msgstr "コード生成"
 
 #: gui/PreferencesDialog.cpp:764
 msgid "Code template metadata"
@@ -3080,7 +3144,7 @@ msgstr "パスワード(&P)："
 
 #: gui/UsernamePasswordDialog.cpp:56
 msgid "Connect as me (&trusted user authentication"
-msgstr ""
+msgstr "私として接続 (信頼されたユーザー認証(&T)"
 
 #: gui/controls/DataGrid.cpp:110
 msgid "Cannot open clipboard"
@@ -3175,7 +3239,7 @@ msgstr "中止(&A)"
 
 #: gui/controls/DataGrid.cpp:1081
 msgid "&Disable for this grid"
-msgstr ""
+msgstr "このグリッドを無効にする(&D)"
 
 #: gui/controls/DataGrid.cpp:1081
 msgid "&Continue"
@@ -3183,7 +3247,7 @@ msgstr "継続(&C)"
 
 #: gui/controls/DataGrid.cpp:1083
 msgid "Calculating the sum takes too long"
-msgstr ""
+msgstr "合計の計算に時間がかかりすぎる"
 
 #: gui/controls/DataGrid.cpp:1084
 msgid ""
@@ -3191,6 +3255,8 @@ msgid ""
 "However, the current calculation seems to be taking too long. Would you like "
 "to abort it?"
 msgstr ""
+"FlameRobin は、選択された数値の合計を自動的に計算します。 ただし、現在の計算"
+"には時間がかかりすぎるようです。 中止しますか?"
 
 #: gui/controls/DataGrid.cpp:1086
 msgid "Do not ask this question again"
@@ -3204,79 +3270,71 @@ msgstr "無効な整数値"
 msgid "Invalid 64bit numeric value"
 msgstr "無効な64bit数値"
 
-#: gui/controls/DataGridRows.cpp:731
-msgid "Invalid int128 numeric value"
-msgstr "無効な128bit数値"
-
-#: gui/controls/DataGridRows.cpp:1353 gui/controls/DataGridRows.cpp:1414
-msgid "Invalid decimal34 numeric value"
-msgstr ""
-
-#: gui/controls/DataGridRows.cpp:1482
+#: gui/controls/DataGridRows.cpp:1522
 msgid "[BLOB]"
 msgstr "[BLOB]"
 
-#: gui/controls/DataGridRows.cpp:1484
+#: gui/controls/DataGridRows.cpp:1524
 msgid "[BINARY]"
 msgstr "[BINARY]"
 
-#: gui/controls/DataGridRows.cpp:1496
+#: gui/controls/DataGridRows.cpp:1536
 msgid "[ERROR]"
 msgstr "[エラー]"
 
-#: gui/controls/DataGridRows.cpp:2235
+#: gui/controls/DataGridRows.cpp:2275
 msgid "N/A value in key column."
-msgstr ""
+msgstr "キー列の N/A 値。"
 
-#: gui/controls/DataGridRows.cpp:2266
+#: gui/controls/DataGridRows.cpp:2306
 msgid "Invalid Column"
 msgstr "無効な列"
 
-#: gui/controls/DataGridRows.cpp:2268
+#: gui/controls/DataGridRows.cpp:2308
 msgid "N/A value in DB_KEY column."
-msgstr ""
+msgstr "DB_KEY 列の N/A 値。"
 
-#: gui/controls/DataGridRows.cpp:2290
+#: gui/controls/DataGridRows.cpp:2330
 msgid "Invalid row index."
-msgstr ""
+msgstr "行インデックスが無効です。"
 
-#: gui/controls/DataGridRows.cpp:2292
+#: gui/controls/DataGridRows.cpp:2332
 msgid "Invalid col index."
-msgstr ""
+msgstr "無効な列インデックスです。"
 
-#: gui/controls/DataGridRows.cpp:2295
+#: gui/controls/DataGridRows.cpp:2335
 msgid "BLOB data not valid"
 msgstr "BLOBデータが不正です"
 
-#: gui/controls/DataGridRows.cpp:2317
+#: gui/controls/DataGridRows.cpp:2357
 msgid "Blob table not found."
 msgstr "BLOBテーブルが見つかりません。"
 
-#: gui/controls/DataGridRows.cpp:2340
+#: gui/controls/DataGridRows.cpp:2380
 msgid "Not a BLOB column."
 msgstr "BLOB列ではありません。"
 
-#: gui/controls/DataGridRows.cpp:2349
+#: gui/controls/DataGridRows.cpp:2389
 msgid "Cannot open destination file."
 msgstr "対象のファイルを開けません。"
 
-#: gui/controls/DataGridRows.cpp:2358
+#: gui/controls/DataGridRows.cpp:2398
 msgid "Saving..."
 msgstr "保存中..."
 
-#: gui/controls/DataGridRows.cpp:2381
+#: gui/controls/DataGridRows.cpp:2421
 msgid "Loading..."
 msgstr "ロード中..."
 
-#: gui/controls/DataGridRows.cpp:2427
+#: gui/controls/DataGridRows.cpp:2467
 msgid "This column is not editable."
 msgstr "この列は編集可能ではありません。"
 
-#: gui/controls/DataGridRows.cpp:2434
+#: gui/controls/DataGridRows.cpp:2474
 msgid "This column does not accept NULLs."
 msgstr "この列にNULL値は設定出来ません。"
 
-#: gui/controls/DataGridRows.cpp:2487
+#: gui/controls/DataGridRows.cpp:2527
 msgid "This column should not be editable"
 msgstr "この列は編集可能であってはならない"
 
@@ -3322,7 +3380,7 @@ msgstr "リンクを新規タブで開く(&T)"
 
 #: gui/controls/PrintableHtmlWindow.cpp:96
 msgid "Copy &HTML code"
-msgstr ""
+msgstr "HTML コードをコピー(&H)"
 
 #: gui/controls/PrintableHtmlWindow.cpp:99
 msgid "&Save as HTML file..."
@@ -4159,6 +4217,9 @@ msgid ""
 "/* Logged by FlameRobin %d.%d.%d at %s\n"
 "   User: %s    Database: %s */\n"
 msgstr ""
+"\n"
+"/* FlameRobin %d.%d.%d によって %s に記録されました\n"
+"    ユーザー: %s データベース: %s */\n"
 
 #: logger.cpp:238 logger.cpp:243
 msgid "Creation of logging objects failed"
@@ -4259,7 +4320,7 @@ msgstr "システムインデックス"
 
 #: metadata/MetadataTemplateCmdHandler.cpp:502
 msgid "No description"
-msgstr ""
+msgstr "説明なし"
 
 #: metadata/MetadataTemplateManager.cpp:115
 #: metadata/MetadataTemplateManager.cpp:120
@@ -4275,100 +4336,100 @@ msgstr ""
 msgid "Character set ID %d not found."
 msgstr "文字セットID %d は見つかりませんでした。"
 
-#: metadata/database.cpp:1202
+#: metadata/database.cpp:1204
 msgid "Complete"
 msgstr "完了"
 
-#: metadata/database.cpp:1239
+#: metadata/database.cpp:1241
 #, c-format
 msgid "Loading %s..."
 msgstr "%s をロード中..."
 
-#: metadata/database.cpp:1254
+#: metadata/database.cpp:1256
 msgid "tables"
 msgstr "テーブル"
 
-#: metadata/database.cpp:1257
+#: metadata/database.cpp:1259
 msgid "system tables"
 msgstr "システムテーブル"
 
-#: metadata/database.cpp:1261
+#: metadata/database.cpp:1263
 msgid "global temporary table"
 msgstr "グローバル一時テーブル"
 
-#: metadata/database.cpp:1265
+#: metadata/database.cpp:1267
 msgid "views"
 msgstr "ビュー"
 
-#: metadata/database.cpp:1268
+#: metadata/database.cpp:1270
 msgid "procedures"
 msgstr "プロシージャ"
 
-#: metadata/database.cpp:1271
+#: metadata/database.cpp:1273
 msgid "DML triggers"
 msgstr "DMLトリガー"
 
-#: metadata/database.cpp:1274
+#: metadata/database.cpp:1276
 msgid "roles"
 msgstr "ロール"
 
-#: metadata/database.cpp:1277
+#: metadata/database.cpp:1279
 msgid "system roles"
 msgstr "システムロール"
 
-#: metadata/database.cpp:1280
+#: metadata/database.cpp:1282
 msgid "domains"
 msgstr "ドメイン"
 
-#: metadata/database.cpp:1284
+#: metadata/database.cpp:1286
 msgid "functions SQL"
 msgstr "関数(SQL)"
 
-#: metadata/database.cpp:1288
+#: metadata/database.cpp:1290
 msgid "functions UDF"
 msgstr "関数(UDF)"
 
-#: metadata/database.cpp:1291
+#: metadata/database.cpp:1293
 msgid "generators"
 msgstr "ジェネレータ"
 
-#: metadata/database.cpp:1294
+#: metadata/database.cpp:1296
 msgid "exceptions"
 msgstr "例外"
 
-#: metadata/database.cpp:1298
+#: metadata/database.cpp:1300
 msgid "packages"
 msgstr "パッケージ"
 
-#: metadata/database.cpp:1301
+#: metadata/database.cpp:1303
 msgid "system packages"
 msgstr "システムパッケージ"
 
-#: metadata/database.cpp:1306
+#: metadata/database.cpp:1308
 msgid "DBTriggers"
 msgstr "DBトリガー"
 
-#: metadata/database.cpp:1311
+#: metadata/database.cpp:1313
 msgid "DDLTriggers"
 msgstr "DDLトリガー"
 
-#: metadata/database.cpp:1315
+#: metadata/database.cpp:1317
 msgid "system domains"
 msgstr "システムドメイン"
 
-#: metadata/database.cpp:1318 metadata/database.cpp:1324
+#: metadata/database.cpp:1320 metadata/database.cpp:1326
 msgid "indices"
 msgstr "インデックス"
 
-#: metadata/database.cpp:1321
+#: metadata/database.cpp:1323
 msgid "system indices"
 msgstr "システムインデックス"
 
-#: metadata/database.cpp:1765
+#: metadata/database.cpp:1767
 msgid "[Trusted user]"
 msgstr "[信頼されたユーザー]"
 
-#: metadata/database.cpp:2150
+#: metadata/database.cpp:2152
 #, c-format
 msgid "Operation \"%s\" not allowed on a disconnected database."
 msgstr "切断済みデータベースに対する操作 \"%s\" は許可されていません。"
@@ -4377,11 +4438,11 @@ msgstr "切断済みデータベースに対する操作 \"%s\" は許可され�
 msgid "Domain not found: "
 msgstr "ドメインが見つかりません： "
 
-#: metadata/domain.cpp:465
+#: metadata/domain.cpp:497
 msgid "Domains"
 msgstr "ドメイン"
 
-#: metadata/domain.cpp:494
+#: metadata/domain.cpp:526
 msgid "System Domains"
 msgstr "システムドメイン"
 
@@ -4412,7 +4473,7 @@ msgstr "依存関係が壊れています"
 #: metadata/function.cpp:468
 #, c-format
 msgid "Some other functions depend on %s:%s%s%s"
-msgstr ""
+msgstr "他の一部の関数は %s:%s%s%s に依存しています"
 
 #: metadata/function.cpp:668
 msgid "Functions"
@@ -4443,7 +4504,7 @@ msgstr "パッケージ %s はパラメータ %s.%s に依存しています"
 #: metadata/package.cpp:405
 #, c-format
 msgid "Some other packages depend on %s:%s%s%s"
-msgstr ""
+msgstr "他のいくつかのパッケージは %s:%s%s%s に依存しています"
 
 #: metadata/package.cpp:480
 msgid "Packages"
@@ -4461,7 +4522,7 @@ msgstr "プロシージャ %s はパラメータ %s.%s に依存しています"
 #: metadata/procedure.cpp:490
 #, c-format
 msgid "Some other procedures depend on %s:%s%s%s"
-msgstr ""
+msgstr "他の一部のプロシージャは %s:%s%s%s に依存しています"
 
 #: metadata/procedure.cpp:573
 msgid "Procedures"
@@ -4532,3 +4593,6 @@ msgstr "ビュー"
 #, c-format
 msgid "Description of %s"
 msgstr "%sの説明"
+
+#~ msgid "Invalid int128 numeric value"
+#~ msgstr "無効な128bit数値"
