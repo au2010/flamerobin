@@ -80,6 +80,9 @@ bool Application::OnInit()
     checkEnvironment();
     parseCommandLine();
 
+#if defined(__WXOSX_COCOA__)
+    std::locale::global(std::locale(""));
+#endif
     // don't use wxLOCALE_LOAD_DEFAULT flag so that Init() doesn't return
     // false just because it failed to load wxstd catalog
     if ( !m_locale.Init(wxLocale::GetSystemLanguage(), wxLOCALE_DONT_LOAD_DEFAULT) )
