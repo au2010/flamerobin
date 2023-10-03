@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: flamerobin\n"
-"POT-Creation-Date: 2023-06-16 11:19+0900\n"
-"PO-Revision-Date: 2023-06-16 11:46+0900\n"
+"POT-Creation-Date: 2023-10-03 09:18+0900\n"
+"PO-Revision-Date: 2023-10-03 09:27+0900\n"
 "Last-Translator: akira uemura <git@arumeu.sakura.ne.jp>\n"
 "Language-Team: a.uemura\n"
 "Language: ja\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.4\n"
 "X-Poedit-Basepath: ../src\n"
 "X-Poedit-KeywordsList: _;wxGetTranslation\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -161,11 +161,11 @@ msgstr ""
 
 #: core/FRInt128.cpp:128 core/FRInt128.cpp:254 core/FRInt128.cpp:275
 msgid "Int128: Value to big."
-msgstr ""
+msgstr "Int128：値を大きくする。"
 
 #: core/FRInt128.cpp:266
 msgid "Int128: Value to small."
-msgstr ""
+msgstr "Int128：値を小さくする。"
 
 #: core/StringUtils.cpp:174
 #, c-format
@@ -407,11 +407,11 @@ msgstr "型"
 
 #: gui/AdvancedSearchFrame.h:58
 msgid "Has field"
-msgstr ""
+msgstr "フィールド"
 
 #: gui/AdvancedSearchFrame.h:59
 msgid "In database"
-msgstr ""
+msgstr "検索データベース"
 
 #: gui/BackupFrame.cpp:59
 #, c-format
@@ -528,7 +528,7 @@ msgstr "プラグイン名"
 
 #: gui/BackupRestoreBaseFrame.cpp:341
 msgid "Key plugin "
-msgstr ""
+msgstr "キー・プラグイン"
 
 #: gui/BackupRestoreBaseFrame.cpp:351
 msgid "Key for encryption"
@@ -1931,7 +1931,7 @@ msgstr "%d 行挿入, %d 行更新, %d 行削除, %d index, %d seq."
 #: gui/ExecuteSqlFrame.cpp:2499
 #, c-format
 msgid "Delta memory: %d bytes."
-msgstr ""
+msgstr "デルタメモリ：%dバイト"
 
 #: gui/ExecuteSqlFrame.cpp:2519
 #, c-format
@@ -2106,7 +2106,7 @@ msgstr "Not null"
 
 #: gui/FieldPropertiesDialog.cpp:145
 msgid "Identity"
-msgstr ""
+msgstr "アイデンティティ"
 
 #: gui/FieldPropertiesDialog.cpp:146
 msgid "Initial Value:"
@@ -3787,7 +3787,7 @@ msgstr "メッセージ： "
 
 #: ibpp/exception.cpp:277
 msgid " and "
-msgstr ""
+msgstr " and "
 
 #: ibpp/row.cpp:43 ibpp/row.cpp:58 ibpp/row.cpp:67 ibpp/row.cpp:78
 #: ibpp/row.cpp:91 ibpp/row.cpp:100 ibpp/row.cpp:109 ibpp/row.cpp:118
@@ -4593,6 +4593,3 @@ msgstr "ビュー"
 #, c-format
 msgid "Description of %s"
 msgstr "%sの説明"
-
-#~ msgid "Invalid int128 numeric value"
-#~ msgstr "無効な128bit数値"
