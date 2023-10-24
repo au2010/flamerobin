@@ -735,10 +735,9 @@ void Int128ColumnDef::setFromString(DataGridRowBuffer* buffer,
 {
     wxASSERT(buffer);
     int128_t v128 = 0;
-    int i1, decimalSeparatorIdx, localSourceScale;
+    int decimalSeparatorIdx, localSourceScale;
     wxString errMsg;
     wxString localSource = source;
-    wxChar ch;
     wxChar decimalSeparator;
 
     if (scaleM > 0)
@@ -2514,7 +2513,10 @@ wxString DataGridRows::setFieldValue(unsigned row, unsigned col,
                 stm += " = x'";
             else
                 stm += " = '";
-            stm += columnDefsM[col]->getAsFirebirdString(buffersM[row])
+            wxString lval = columnDefsM[col]->getAsFirebirdString(buffersM[row]);
+            if (IBPP::isRationalNumber(statementM->ColumnType(col + 1))) //Fix locale problem for "," as decimal separator
+                lval.Replace(",", ".");
+            stm += lval
                 + "' WHERE ";
         }
 
