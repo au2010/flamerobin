@@ -86,6 +86,7 @@ enum {
     Menu_URLBugReport,
     Menu_NewObject,
     Menu_DatabaseRegistrationInfo,
+    Menu_NewVolatileSQLEditor,
     Menu_RegisterDatabase,
     Menu_CreateDatabase,
     Menu_ManageUsers,
@@ -135,6 +136,7 @@ enum {
         Menu_ToggleDisconnected,
 
         // create new ... (stuff)
+        Menu_CreateCollation,
         Menu_CreateDBTrigger,
         Menu_CreateDDLTrigger,
         Menu_CreateDMLTrigger,
