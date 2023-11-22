@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flamerobin\n"
 "POT-Creation-Date: 2023-11-21 10:09+0900\n"
-"PO-Revision-Date: 2023-11-21 10:15+0900\n"
+"PO-Revision-Date: 2023-11-22 14:00+0900\n"
 "Last-Translator: akira uemura <git@arumeu.sakura.ne.jp>\n"
 "Language-Team: a.uemura\n"
 "Language: ja\n"
@@ -1953,7 +1953,7 @@ msgstr "%d 行挿入, %d 行更新, %d 行削除, %d index, %d seq."
 #: gui/ExecuteSqlFrame.cpp:2568
 #, c-format
 msgid "Delta memory: %d bytes."
-msgstr "デルタメモリ：%dバイト"
+msgstr "デルタメモリ：%dバイト."
 
 #: gui/ExecuteSqlFrame.cpp:2588
 #, c-format
@@ -4344,11 +4344,11 @@ msgstr "CharacterSets"
 
 #: metadata/Collation.cpp:219
 msgid "SysCollation"
-msgstr "SysCollation："
+msgstr "システム照合順序"
 
 #: metadata/Collation.cpp:249
 msgid "Collation"
-msgstr "照合："
+msgstr "照合順序"
 
 #: metadata/CreateDDLVisitor.cpp:186 metadata/CreateDDLVisitor.cpp:197
 msgid "Extracting "
