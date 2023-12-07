@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: flamerobin\n"
-"POT-Creation-Date: 2023-11-21 10:09+0900\n"
-"PO-Revision-Date: 2023-11-22 14:00+0900\n"
+"POT-Creation-Date: 2023-12-06 10:27+0900\n"
+"PO-Revision-Date: 2023-12-06 10:27+0900\n"
 "Last-Translator: akira uemura <git@arumeu.sakura.ne.jp>\n"
 "Language-Team: a.uemura\n"
 "Language: ja\n"
@@ -42,7 +42,7 @@ msgstr "マスターパスワード機能の詳細については、マニュア
 msgid "Master Password is required."
 msgstr "マスターパスワードが必要です。"
 
-#: MasterPassword.cpp:78 gui/UserDialog.cpp:261 gui/controls/DataGrid.cpp:209
+#: MasterPassword.cpp:78 gui/UserDialog.cpp:261 gui/controls/DataGrid.cpp:180
 msgid "Do not show this information again"
 msgstr "この情報は今後表示しないでください"
 
@@ -237,8 +237,8 @@ msgstr "管理者権限のある接続認証情報を入力してください。
 #: gui/FieldPropertiesDialog.cpp:396 gui/MainFrame.cpp:1182
 #: gui/MetadataItemPropertiesFrame.cpp:708 gui/ServiceBaseFrame.cpp:127
 #: gui/ServiceBaseFrame.cpp:133 gui/UserDialog.cpp:291 gui/UserDialog.cpp:341
-#: gui/controls/DataGrid.cpp:110 gui/controls/DataGrid.cpp:115
-#: gui/controls/DataGrid.cpp:543 gui/controls/DataGrid.cpp:645
+#: gui/controls/DataGrid.cpp:81 gui/controls/DataGrid.cpp:86
+#: gui/controls/DataGrid.cpp:501 gui/controls/DataGrid.cpp:603
 #: gui/controls/DataGridTable.cpp:150 gui/controls/DataGridTable.cpp:468
 msgid "Error"
 msgstr "エラー"
@@ -376,8 +376,8 @@ msgstr "選択オブジェクトのDDL"
 msgid "That criteria already exists"
 msgstr "条件は既に存在します"
 
-#: gui/AdvancedSearchFrame.cpp:277 gui/ExecuteSqlFrame.cpp:2233
-#: gui/ExecuteSqlFrame.cpp:2248 gui/MainFrame.cpp:1333
+#: gui/AdvancedSearchFrame.cpp:277 gui/ExecuteSqlFrame.cpp:2236
+#: gui/ExecuteSqlFrame.cpp:2251 gui/MainFrame.cpp:1333
 msgid "Warning"
 msgstr "警告"
 
@@ -454,7 +454,7 @@ msgstr "データベーストリガーを実行しない（FB2.5+）"
 msgid "Zip compressed format (FB4.0+)"
 msgstr "Zip圧縮形式（FB4.0+）"
 
-#: gui/BackupFrame.cpp:259 gui/RestoreFrame.cpp:328
+#: gui/BackupFrame.cpp:259 gui/RestoreFrame.cpp:330
 msgid "Select Backup File"
 msgstr "バックアップファイルを選択"
 
@@ -626,7 +626,7 @@ msgstr "プロパティ(&R)"
 #: gui/ContextMenuMetadataItemVisitor.cpp:159
 #: gui/ContextMenuMetadataItemVisitor.cpp:286
 #: gui/ContextMenuMetadataItemVisitor.cpp:549
-#: gui/ContextMenuMetadataItemVisitor.cpp:551 gui/ExecuteSqlFrame.cpp:737
+#: gui/ContextMenuMetadataItemVisitor.cpp:551 gui/ExecuteSqlFrame.cpp:742
 msgid "&Execute"
 msgstr "実行(&E)"
 
@@ -994,7 +994,7 @@ msgstr "文字セット："
 msgid "Role:"
 msgstr "ロール："
 
-#: gui/DatabaseRegistrationDialog.cpp:111 gui/RestoreFrame.cpp:106
+#: gui/DatabaseRegistrationDialog.cpp:111 gui/RestoreFrame.cpp:108
 msgid "Page size:"
 msgstr "ページサイズ："
 
@@ -1002,9 +1002,9 @@ msgstr "ページサイズ："
 msgid "SQL dialect:"
 msgstr "SQLダイアレクト："
 
-#: gui/DatabaseRegistrationDialog.cpp:121 gui/ExecuteSqlFrame.cpp:620
-#: gui/MultilineEnterDialog.cpp:59 gui/PreferencesDialog.h:105
-#: gui/PreferencesDialog.h:109 gui/ServerRegistrationDialog.cpp:96
+#: gui/DatabaseRegistrationDialog.cpp:121 gui/ExecuteSqlFrame.cpp:627
+#: gui/MultilineEnterDialog.cpp:59 gui/PreferencesDialog.h:107
+#: gui/PreferencesDialog.h:111 gui/ServerRegistrationDialog.cpp:96
 #: gui/UserDialog.cpp:92
 msgid "Save"
 msgstr "保存"
@@ -1029,7 +1029,7 @@ msgstr "保存されたユーザー名を使用し、パスワードは常に入
 msgid "Use trusted user authentication"
 msgstr "信頼されたユーザー認証を使用する"
 
-#: gui/DatabaseRegistrationDialog.cpp:188 gui/RestoreFrame.cpp:108
+#: gui/DatabaseRegistrationDialog.cpp:188 gui/RestoreFrame.cpp:110
 msgid "Default"
 msgstr "標準"
 
@@ -1047,46 +1047,46 @@ msgstr ""
 "Firebirdデータベースファイル (*.fdb, *.gdb)|*.fdb;*.gdb|全てのファイル (*.*)|"
 "*.*"
 
-#: gui/DatabaseRegistrationDialog.cpp:509 gui/ExecuteSqlFrame.cpp:2625
+#: gui/DatabaseRegistrationDialog.cpp:509 gui/ExecuteSqlFrame.cpp:2628
 msgid "SYSTEM ERROR!"
 msgstr "システムエラー！"
 
-#: gui/EditBlobDialog.cpp:193 gui/ExecuteSqlFrame.cpp:370
-#: gui/ExecuteSqlFrame.cpp:688 gui/controls/TextControl.cpp:158
+#: gui/EditBlobDialog.cpp:193 gui/ExecuteSqlFrame.cpp:365
+#: gui/ExecuteSqlFrame.cpp:695 gui/controls/TextControl.cpp:158
 msgid "&Undo"
 msgstr "元に戻す(&U)"
 
-#: gui/EditBlobDialog.cpp:194 gui/ExecuteSqlFrame.cpp:371
-#: gui/ExecuteSqlFrame.cpp:690 gui/controls/TextControl.cpp:159
+#: gui/EditBlobDialog.cpp:194 gui/ExecuteSqlFrame.cpp:366
+#: gui/ExecuteSqlFrame.cpp:697 gui/controls/TextControl.cpp:159
 msgid "&Redo"
 msgstr "やり直し(&R)"
 
-#: gui/EditBlobDialog.cpp:196 gui/ExecuteSqlFrame.cpp:373
-#: gui/ExecuteSqlFrame.cpp:693 gui/MainFrame.cpp:202
+#: gui/EditBlobDialog.cpp:196 gui/ExecuteSqlFrame.cpp:368
+#: gui/ExecuteSqlFrame.cpp:700 gui/MainFrame.cpp:202
 #: gui/controls/TextControl.cpp:161
 msgid "Cu&t"
 msgstr "切り取り(&T)"
 
-#: gui/EditBlobDialog.cpp:197 gui/ExecuteSqlFrame.cpp:374
-#: gui/ExecuteSqlFrame.cpp:695 gui/ExecuteSqlFrame.cpp:776
+#: gui/EditBlobDialog.cpp:197 gui/ExecuteSqlFrame.cpp:369
+#: gui/ExecuteSqlFrame.cpp:702 gui/ExecuteSqlFrame.cpp:781
 #: gui/MainFrame.cpp:203 gui/controls/LogTextControl.cpp:118
 #: gui/controls/PrintableHtmlWindow.cpp:93 gui/controls/TextControl.cpp:162
 msgid "&Copy"
 msgstr "コピー(&C)"
 
-#: gui/EditBlobDialog.cpp:198 gui/ExecuteSqlFrame.cpp:375
-#: gui/ExecuteSqlFrame.cpp:697 gui/MainFrame.cpp:204
+#: gui/EditBlobDialog.cpp:198 gui/ExecuteSqlFrame.cpp:370
+#: gui/ExecuteSqlFrame.cpp:704 gui/MainFrame.cpp:204
 #: gui/controls/TextControl.cpp:163
 msgid "&Paste"
 msgstr "貼付(&P)"
 
-#: gui/EditBlobDialog.cpp:199 gui/ExecuteSqlFrame.cpp:376
-#: gui/ExecuteSqlFrame.cpp:699 gui/MainFrame.cpp:205
+#: gui/EditBlobDialog.cpp:199 gui/ExecuteSqlFrame.cpp:371
+#: gui/ExecuteSqlFrame.cpp:706 gui/MainFrame.cpp:205
 #: gui/controls/TextControl.cpp:164
 msgid "&Delete"
 msgstr "削除(&D)削除"
 
-#: gui/EditBlobDialog.cpp:201 gui/ExecuteSqlFrame.cpp:378
+#: gui/EditBlobDialog.cpp:201 gui/ExecuteSqlFrame.cpp:373
 msgid "Select &All"
 msgstr "全て選択(&A)"
 
@@ -1104,8 +1104,8 @@ msgid "&Reset"
 msgstr "リセット(&R)"
 
 #: gui/EditBlobDialog.cpp:414 gui/EventWatcherFrame.cpp:115
-#: gui/ExecuteSqlFrame.cpp:678 gui/ExecuteSqlFrame.cpp:858
-#: gui/ExecuteSqlFrame.cpp:2060 gui/ExecuteSqlFrame.cpp:2097
+#: gui/ExecuteSqlFrame.cpp:685 gui/ExecuteSqlFrame.cpp:860
+#: gui/ExecuteSqlFrame.cpp:2045 gui/ExecuteSqlFrame.cpp:2082
 msgid "&Save"
 msgstr "保存(&S)"
 
@@ -1194,17 +1194,17 @@ msgid "An error occurred while switching editor-mode. (Loading)"
 msgstr "エディタモード切替時にエラーが発生しました。(読込中)"
 
 #: gui/EditBlobDialog.cpp:1195 gui/EditBlobDialog.cpp:1223
-#: gui/ExecuteSqlFrame.cpp:1736 gui/ExecuteSqlFrame.cpp:1755
+#: gui/ExecuteSqlFrame.cpp:1730 gui/ExecuteSqlFrame.cpp:1749
 msgid "Not a BLOB column"
 msgstr "BLOB列ではありません"
 
 #: gui/EditBlobDialog.cpp:1196 gui/EditBlobDialog.cpp:1224
-#: gui/ExecuteSqlFrame.cpp:1737 gui/ExecuteSqlFrame.cpp:1756
+#: gui/ExecuteSqlFrame.cpp:1731 gui/ExecuteSqlFrame.cpp:1750
 #: gui/InsertDialog.cpp:681 gui/InsertParametersDialog.cpp:961
 msgid "Select a file"
 msgstr "ファイル選択"
 
-#: gui/EditBlobDialog.cpp:1236 gui/ExecuteSqlFrame.cpp:1762
+#: gui/EditBlobDialog.cpp:1236 gui/ExecuteSqlFrame.cpp:1756
 msgid "Importing BLOB from file"
 msgstr "ファイルからBLOBにインポート"
 
@@ -1269,363 +1269,351 @@ msgstr "1行ごとに複数のイベントを追加できます。"
 msgid "Add Events"
 msgstr "イベントの追加"
 
-#: gui/ExecuteSqlFrame.cpp:164
+#: gui/ExecuteSqlFrame.cpp:165
 msgid "Cannot use objects from different databases."
 msgstr "異なるデータベースのオブジェクトを使用することは出来ません。"
 
-#: gui/ExecuteSqlFrame.cpp:165
+#: gui/ExecuteSqlFrame.cpp:166
 msgid "Wrong database."
 msgstr "誤ったデータベースです。"
 
-#: gui/ExecuteSqlFrame.cpp:178
+#: gui/ExecuteSqlFrame.cpp:179
 msgid "Only tables and table columns can be dropped."
 msgstr "テーブルとテーブルのフィールドのみ削除出来ます。"
 
-#: gui/ExecuteSqlFrame.cpp:179
+#: gui/ExecuteSqlFrame.cpp:180
 msgid "Object type not supported."
 msgstr "オブジェクトタイプがサポートされていません。"
 
-#: gui/ExecuteSqlFrame.cpp:230
+#: gui/ExecuteSqlFrame.cpp:231
 msgid "Multiple foreign keys found"
 msgstr "複数の外部キーがあります"
 
-#: gui/ExecuteSqlFrame.cpp:231
+#: gui/ExecuteSqlFrame.cpp:232
 msgid "Select the desired table"
 msgstr "指定したテーブルを選択しています"
 
-#: gui/ExecuteSqlFrame.cpp:380
+#: gui/ExecuteSqlFrame.cpp:375
 msgid "E&xecute selected"
 msgstr "選択実行(&X)"
 
-#: gui/ExecuteSqlFrame.cpp:390
+#: gui/ExecuteSqlFrame.cpp:385
 msgid "S&how properties for "
 msgstr "プロパティの表示(&H) "
 
-#: gui/ExecuteSqlFrame.cpp:568
+#: gui/ExecuteSqlFrame.cpp:575
 msgid "Statistics"
 msgstr "統計"
 
-#: gui/ExecuteSqlFrame.cpp:572
+#: gui/ExecuteSqlFrame.cpp:579
 msgid "Data"
 msgstr "データ"
 
-#: gui/ExecuteSqlFrame.cpp:614 gui/MainFrame.cpp:249
+#: gui/ExecuteSqlFrame.cpp:621 gui/MainFrame.cpp:249
 msgid "New"
 msgstr "新規作成"
 
-#: gui/ExecuteSqlFrame.cpp:616
+#: gui/ExecuteSqlFrame.cpp:623
 msgid "New window"
 msgstr "新規ウィンドウ"
 
-#: gui/ExecuteSqlFrame.cpp:617
+#: gui/ExecuteSqlFrame.cpp:624
 msgid "Open"
 msgstr "開く"
 
-#: gui/ExecuteSqlFrame.cpp:619
+#: gui/ExecuteSqlFrame.cpp:626
 msgid "Load a file"
 msgstr "ファイルを読込"
 
-#: gui/ExecuteSqlFrame.cpp:622
+#: gui/ExecuteSqlFrame.cpp:629
 msgid "Save to file"
 msgstr "ファイルへ保存"
 
-#: gui/ExecuteSqlFrame.cpp:623
+#: gui/ExecuteSqlFrame.cpp:630
 msgid "Save as"
 msgstr "名前を付けて保存"
 
-#: gui/ExecuteSqlFrame.cpp:625
+#: gui/ExecuteSqlFrame.cpp:632
 msgid "Save under different name"
 msgstr "別の名前で保存する"
 
-#: gui/ExecuteSqlFrame.cpp:628
+#: gui/ExecuteSqlFrame.cpp:635
 msgid "Back"
 msgstr "戻る"
 
-#: gui/ExecuteSqlFrame.cpp:630
+#: gui/ExecuteSqlFrame.cpp:637
 msgid "Go to previous statement"
 msgstr "前のSQL文へ移動"
 
-#: gui/ExecuteSqlFrame.cpp:631
+#: gui/ExecuteSqlFrame.cpp:638
 msgid "Next"
 msgstr "次へ"
 
-#: gui/ExecuteSqlFrame.cpp:633
+#: gui/ExecuteSqlFrame.cpp:640
 msgid "Go to next statement"
 msgstr "次のSQL文へ移動"
 
-#: gui/ExecuteSqlFrame.cpp:634
+#: gui/ExecuteSqlFrame.cpp:641
 msgid "History"
 msgstr "SQLの履歴"
 
-#: gui/ExecuteSqlFrame.cpp:636
+#: gui/ExecuteSqlFrame.cpp:643
 msgid "Browse and search statement history"
 msgstr "SQL文履歴の閲覧と検索"
 
-#: gui/ExecuteSqlFrame.cpp:639 gui/FieldPropertiesDialog.cpp:170
+#: gui/ExecuteSqlFrame.cpp:646 gui/FieldPropertiesDialog.cpp:170
 msgid "Execute"
 msgstr "実行"
 
-#: gui/ExecuteSqlFrame.cpp:641
+#: gui/ExecuteSqlFrame.cpp:648
 msgid "Execute statement(s)"
 msgstr "SQL文を実行する"
 
-#: gui/ExecuteSqlFrame.cpp:642
+#: gui/ExecuteSqlFrame.cpp:649
 msgid "Show plan"
 msgstr "プラン表示"
 
-#: gui/ExecuteSqlFrame.cpp:644
+#: gui/ExecuteSqlFrame.cpp:651
 msgid "Show query execution plan"
 msgstr "問い合わせの実行プランの表示"
 
-#: gui/ExecuteSqlFrame.cpp:645
+#: gui/ExecuteSqlFrame.cpp:652
 msgid "Commit"
 msgstr "コミット"
 
-#: gui/ExecuteSqlFrame.cpp:647
+#: gui/ExecuteSqlFrame.cpp:654
 msgid "Commit transaction"
 msgstr "トランザクションをコミットする"
 
-#: gui/ExecuteSqlFrame.cpp:648
+#: gui/ExecuteSqlFrame.cpp:655
 msgid "Rollback"
 msgstr "ロールバック"
 
-#: gui/ExecuteSqlFrame.cpp:650
+#: gui/ExecuteSqlFrame.cpp:657
 msgid "Rollback transaction"
 msgstr "トランザクションをロールバックする"
 
-#: gui/ExecuteSqlFrame.cpp:653
+#: gui/ExecuteSqlFrame.cpp:660
 msgid "Insert row(s)"
 msgstr "行の挿入"
 
-#: gui/ExecuteSqlFrame.cpp:655
+#: gui/ExecuteSqlFrame.cpp:662
 msgid "Insert row(s) into recordset"
 msgstr "レコードセットに新しいレコードを挿入"
 
-#: gui/ExecuteSqlFrame.cpp:656
+#: gui/ExecuteSqlFrame.cpp:663
 msgid "Delete row(s)"
 msgstr "行を削除"
 
-#: gui/ExecuteSqlFrame.cpp:658
+#: gui/ExecuteSqlFrame.cpp:665
 msgid "Delete row(s) from recordset"
 msgstr "レコードセットから行を削除"
 
-#: gui/ExecuteSqlFrame.cpp:661 gui/ExecuteSqlFrame.cpp:663
+#: gui/ExecuteSqlFrame.cpp:668 gui/ExecuteSqlFrame.cpp:670
 msgid "Toggle split view"
 msgstr "表示切り替え"
 
-#: gui/ExecuteSqlFrame.cpp:674
+#: gui/ExecuteSqlFrame.cpp:681
 msgid "&New..."
 msgstr "新規作成(&N)..."
 
-#: gui/ExecuteSqlFrame.cpp:676
+#: gui/ExecuteSqlFrame.cpp:683
 msgid "&Open..."
 msgstr "開く(&O)"
 
-#: gui/ExecuteSqlFrame.cpp:680
+#: gui/ExecuteSqlFrame.cpp:687
 msgid "Save &As..."
 msgstr "名前を付けて保存(&A)..."
 
-#: gui/ExecuteSqlFrame.cpp:683 gui/FindDialog.cpp:339
+#: gui/ExecuteSqlFrame.cpp:690 gui/FindDialog.cpp:339
 #: gui/PrivilegesDialog.cpp:326
 msgid "&Close"
 msgstr "閉じる(&C)"
 
-#: gui/ExecuteSqlFrame.cpp:684
+#: gui/ExecuteSqlFrame.cpp:691
 msgid "&File"
 msgstr "ファイル(&F)"
 
-#: gui/ExecuteSqlFrame.cpp:702 gui/controls/LogTextControl.cpp:124
+#: gui/ExecuteSqlFrame.cpp:709 gui/controls/LogTextControl.cpp:124
 #: gui/controls/TextControl.cpp:167
 msgid "Select &all"
 msgstr "全て選択(&A)"
 
-#: gui/ExecuteSqlFrame.cpp:705
+#: gui/ExecuteSqlFrame.cpp:712
 msgid "Fi&nd and replace"
 msgstr "検索と置換(&N)"
 
-#: gui/ExecuteSqlFrame.cpp:706 gui/MainFrame.cpp:206
+#: gui/ExecuteSqlFrame.cpp:713 gui/MainFrame.cpp:206
 msgid "&Edit"
 msgstr "編集(&E)"
 
-#: gui/ExecuteSqlFrame.cpp:710
+#: gui/ExecuteSqlFrame.cpp:717
 msgid "Sql &editor"
 msgstr "SQL エディタ(&E)"
 
-#: gui/ExecuteSqlFrame.cpp:712
+#: gui/ExecuteSqlFrame.cpp:719
 msgid "&Log view"
 msgstr "ログビュー(&L)"
 
-#: gui/ExecuteSqlFrame.cpp:714
+#: gui/ExecuteSqlFrame.cpp:721
 msgid "&Data grid"
 msgstr "データグリッド(&D)"
 
-#: gui/ExecuteSqlFrame.cpp:717
+#: gui/ExecuteSqlFrame.cpp:724
 msgid "&Split view"
 msgstr "ビューの分割(&V)"
 
-#: gui/ExecuteSqlFrame.cpp:719
-msgid "Set editor &font"
-msgstr "エディタフォントの設定(&F)"
-
-#: gui/ExecuteSqlFrame.cpp:722
+#: gui/ExecuteSqlFrame.cpp:727
 msgid "&Wrap long lines"
 msgstr "長い行を折り返す(&W)"
 
-#: gui/ExecuteSqlFrame.cpp:723 gui/MainFrame.cpp:215 gui/MainFrame.cpp:246
+#: gui/ExecuteSqlFrame.cpp:728 gui/MainFrame.cpp:215 gui/MainFrame.cpp:246
 msgid "&View"
 msgstr "ビュー(&V)"
 
-#: gui/ExecuteSqlFrame.cpp:726
+#: gui/ExecuteSqlFrame.cpp:731
 msgid "&Next"
 msgstr "次のSQL文へ(&N)"
 
-#: gui/ExecuteSqlFrame.cpp:727
+#: gui/ExecuteSqlFrame.cpp:732
 msgid "&Previous"
 msgstr "前のSQL文へ(&P)"
 
-#: gui/ExecuteSqlFrame.cpp:729 gui/StatementHistoryDialog.cpp:52
+#: gui/ExecuteSqlFrame.cpp:734 gui/StatementHistoryDialog.cpp:52
 #: gui/StatementHistoryDialog.cpp:142
 msgid "&Search"
 msgstr "検索(&S)"
 
-#: gui/ExecuteSqlFrame.cpp:732
+#: gui/ExecuteSqlFrame.cpp:737
 msgid "&Enable logging"
 msgstr "ロギングを有効化(&E)"
 
-#: gui/ExecuteSqlFrame.cpp:733
+#: gui/ExecuteSqlFrame.cpp:738
 msgid "&History"
 msgstr "SQLの履歴(&H)"
 
-#: gui/ExecuteSqlFrame.cpp:739
+#: gui/ExecuteSqlFrame.cpp:744
 msgid "Show execution &plan"
 msgstr "問い合わせの実行プランの表示(&P)"
 
-#: gui/ExecuteSqlFrame.cpp:741
+#: gui/ExecuteSqlFrame.cpp:746
 msgid "Display detailed query statistics"
 msgstr "Display detailed query statistics"
 
-#: gui/ExecuteSqlFrame.cpp:743
+#: gui/ExecuteSqlFrame.cpp:748
 msgid "Execute &selection"
 msgstr "選択範囲を実行(&S)"
 
-#: gui/ExecuteSqlFrame.cpp:745
+#: gui/ExecuteSqlFrame.cpp:750
 msgid "Exec&ute from cursor"
 msgstr "カーソル位置から実行(&U)"
 
-#: gui/ExecuteSqlFrame.cpp:750
+#: gui/ExecuteSqlFrame.cpp:755
 msgid "Concurrency isolation mode"
 msgstr "Concurrency isolation mode"
 
-#: gui/ExecuteSqlFrame.cpp:752
+#: gui/ExecuteSqlFrame.cpp:757
 msgid "Dirty read isolation mode"
 msgstr "Dirty read isolation mode"
 
-#: gui/ExecuteSqlFrame.cpp:754
+#: gui/ExecuteSqlFrame.cpp:759
 msgid "Read committed isolation mode"
 msgstr "Read committed isolation mode"
 
-#: gui/ExecuteSqlFrame.cpp:756
+#: gui/ExecuteSqlFrame.cpp:761
 msgid "Consistency isolation mode"
 msgstr "Consistency isolation mode"
 
-#: gui/ExecuteSqlFrame.cpp:759
+#: gui/ExecuteSqlFrame.cpp:764
 msgid "Wait for lock resolution"
 msgstr "Wait for lock resolution"
 
-#: gui/ExecuteSqlFrame.cpp:762
+#: gui/ExecuteSqlFrame.cpp:767
 msgid "Read only transaction"
 msgstr "読み込み専用トランザクション"
 
-#: gui/ExecuteSqlFrame.cpp:763
+#: gui/ExecuteSqlFrame.cpp:768
 msgid "Transaction settings"
 msgstr "トランザクション設定"
 
-#: gui/ExecuteSqlFrame.cpp:767
+#: gui/ExecuteSqlFrame.cpp:772
 msgid "&Commit transaction"
 msgstr "コミット(&C)"
 
-#: gui/ExecuteSqlFrame.cpp:769
+#: gui/ExecuteSqlFrame.cpp:774
 msgid "&Rollback transaction"
 msgstr "ロールバック(&R)"
 
-#: gui/ExecuteSqlFrame.cpp:770
+#: gui/ExecuteSqlFrame.cpp:775
 msgid "&Statement"
 msgstr "SQL文(&S)"
 
-#: gui/ExecuteSqlFrame.cpp:773
+#: gui/ExecuteSqlFrame.cpp:778
 msgid "I&nsert row"
 msgstr "行の挿入(&N)"
 
-#: gui/ExecuteSqlFrame.cpp:774
+#: gui/ExecuteSqlFrame.cpp:779
 msgid "&Delete row"
 msgstr "行の削除(&D)"
 
-#: gui/ExecuteSqlFrame.cpp:777
+#: gui/ExecuteSqlFrame.cpp:782
 msgid "Copy &as insert statements"
 msgstr "INSERT文としてコピー(&A)"
 
-#: gui/ExecuteSqlFrame.cpp:778
+#: gui/ExecuteSqlFrame.cpp:783
 msgid "Copy as &update statements"
 msgstr "UPDATE文としてコピー(&U)"
 
-#: gui/ExecuteSqlFrame.cpp:779
+#: gui/ExecuteSqlFrame.cpp:784
 msgid "Copy as update insert statements"
 msgstr "UPDATE INSERT文としてコピー(&A)"
 
-#: gui/ExecuteSqlFrame.cpp:781 gui/controls/DataGrid.cpp:233
+#: gui/ExecuteSqlFrame.cpp:786 gui/controls/DataGrid.cpp:204
 msgid "Edit BLOB..."
 msgstr "BLOBの編集..."
 
-#: gui/ExecuteSqlFrame.cpp:782 gui/controls/DataGrid.cpp:234
+#: gui/ExecuteSqlFrame.cpp:787 gui/controls/DataGrid.cpp:205
 msgid "Import BLOB from file..."
 msgstr "ファイルからBLOBをインポートする..."
 
-#: gui/ExecuteSqlFrame.cpp:783 gui/controls/DataGrid.cpp:235
+#: gui/ExecuteSqlFrame.cpp:788 gui/controls/DataGrid.cpp:206
 msgid "Save BLOB to file..."
 msgstr "ファイルにBLOBを保存する..."
 
-#: gui/ExecuteSqlFrame.cpp:785
+#: gui/ExecuteSqlFrame.cpp:790
 msgid "Set field to &NULL"
 msgstr "NULLに設定する(&N)"
 
-#: gui/ExecuteSqlFrame.cpp:787
+#: gui/ExecuteSqlFrame.cpp:792
 msgid "&Fetch all records"
 msgstr "全レコードを取得(&F)"
 
-#: gui/ExecuteSqlFrame.cpp:788
+#: gui/ExecuteSqlFrame.cpp:793
 msgid "&Stop fetching all records"
 msgstr "全レコードの取得を中止(&S)"
 
-#: gui/ExecuteSqlFrame.cpp:790
+#: gui/ExecuteSqlFrame.cpp:795
 msgid "Save as &html"
 msgstr "HTMLとして保存(&H)"
 
-#: gui/ExecuteSqlFrame.cpp:791
+#: gui/ExecuteSqlFrame.cpp:796
 msgid "Save as cs&v"
 msgstr "CSVとして保存(&V)"
 
-#: gui/ExecuteSqlFrame.cpp:793
-msgid "Set h&eader font"
-msgstr "ヘッダのフォント設定(&E)"
-
-#: gui/ExecuteSqlFrame.cpp:794
-msgid "Set cell f&ont"
-msgstr "セルのフォント設定(&O)"
-
-#: gui/ExecuteSqlFrame.cpp:796
+#: gui/ExecuteSqlFrame.cpp:798
 msgid "&Log data changes"
 msgstr "データの変更を記録(&L)"
 
-#: gui/ExecuteSqlFrame.cpp:797
+#: gui/ExecuteSqlFrame.cpp:799
 msgid "&Grid"
 msgstr "グリッド(&G)"
 
-#: gui/ExecuteSqlFrame.cpp:855 gui/ExecuteSqlFrame.cpp:2057
-#: gui/ExecuteSqlFrame.cpp:2094
+#: gui/ExecuteSqlFrame.cpp:857 gui/ExecuteSqlFrame.cpp:2042
+#: gui/ExecuteSqlFrame.cpp:2079
 msgid "Do you want to save changes to the file?"
 msgstr "変更をファイルに保存しますか？"
 
-#: gui/ExecuteSqlFrame.cpp:856
+#: gui/ExecuteSqlFrame.cpp:858
 #, c-format
 msgid ""
 "You have made changes to the file\n"
@@ -1641,16 +1629,16 @@ msgstr ""
 "\n"
 "保存せずに閉じると失われます。"
 
-#: gui/ExecuteSqlFrame.cpp:858 gui/ExecuteSqlFrame.cpp:2060
-#: gui/ExecuteSqlFrame.cpp:2097
+#: gui/ExecuteSqlFrame.cpp:860 gui/ExecuteSqlFrame.cpp:2045
+#: gui/ExecuteSqlFrame.cpp:2082
 msgid "Do&n't Save"
 msgstr "保存しない(&N)"
 
-#: gui/ExecuteSqlFrame.cpp:867
+#: gui/ExecuteSqlFrame.cpp:869
 msgid "Do you want to commit the active transaction?"
 msgstr "アクティブなトランザクションをコミットしますか？"
 
-#: gui/ExecuteSqlFrame.cpp:868
+#: gui/ExecuteSqlFrame.cpp:870
 msgid ""
 "If you don't commit the transaction then it will be automatically rolled "
 "back, and all changes made by statements executed in this transaction will "
@@ -1660,32 +1648,32 @@ msgstr ""
 "され、このトランザクションで実行されたステートメントによるすべての変更が失わ"
 "れます。"
 
-#: gui/ExecuteSqlFrame.cpp:869
+#: gui/ExecuteSqlFrame.cpp:871
 msgid "&Commit Transaction"
 msgstr "トランザクションをコミットする(&C)"
 
-#: gui/ExecuteSqlFrame.cpp:869
+#: gui/ExecuteSqlFrame.cpp:871
 msgid "&Rollback Transaction"
 msgstr "トランザクションをロールバックする(&R)"
 
-#: gui/ExecuteSqlFrame.cpp:870
+#: gui/ExecuteSqlFrame.cpp:872
 msgid "Don't ask again, &always commit/rollback"
 msgstr "再質問をしない、常にコミット/ロールバックする(&A)"
 
-#: gui/ExecuteSqlFrame.cpp:908
+#: gui/ExecuteSqlFrame.cpp:910
 #, c-format
 msgid "Object %s has not been found in this database."
 msgstr "このデータベースには オブジェクト %s はありませんでした。"
 
-#: gui/ExecuteSqlFrame.cpp:910
+#: gui/ExecuteSqlFrame.cpp:912
 msgid "Search failed."
 msgstr "検索失敗。"
 
-#: gui/ExecuteSqlFrame.cpp:1347
+#: gui/ExecuteSqlFrame.cpp:1346
 msgid "Do you want to load external modifications to this file?"
 msgstr "このファイルに外部からの修正を読み込むか？"
 
-#: gui/ExecuteSqlFrame.cpp:1348
+#: gui/ExecuteSqlFrame.cpp:1347
 #, c-format
 msgid ""
 "The file\n"
@@ -1702,77 +1690,77 @@ msgstr ""
 "別のプログラムによって変更されました。 リロードしますか?\n"
 "ここでファイルを再ロードすると、自分で行った変更は失われます。"
 
-#: gui/ExecuteSqlFrame.cpp:1350
+#: gui/ExecuteSqlFrame.cpp:1349
 msgid "&Reload"
 msgstr "再読込(&R)"
 
-#: gui/ExecuteSqlFrame.cpp:1350
+#: gui/ExecuteSqlFrame.cpp:1349
 msgid "Do&n't Reload"
 msgstr "再読込しない(&N)"
 
-#: gui/ExecuteSqlFrame.cpp:1361 gui/MainFrame.cpp:1838 gui/MainFrame.cpp:1976
+#: gui/ExecuteSqlFrame.cpp:1360 gui/MainFrame.cpp:1838 gui/MainFrame.cpp:1976
 #: gui/MainFrame.cpp:1979
 msgid "Execute SQL statements"
 msgstr "SQL文の実行"
 
-#: gui/ExecuteSqlFrame.cpp:1368
+#: gui/ExecuteSqlFrame.cpp:1367
 msgid "Open File"
 msgstr "ファイルを開く"
 
-#: gui/ExecuteSqlFrame.cpp:1370 gui/ExecuteSqlFrame.cpp:1383
+#: gui/ExecuteSqlFrame.cpp:1369 gui/ExecuteSqlFrame.cpp:1382
 msgid "SQL script files (*.sql)|*.sql|All files (*.*)|*.*"
 msgstr "SQL スクリプト (*.sql)|*.sql|全てのファイル (*.*)|*.*"
 
-#: gui/ExecuteSqlFrame.cpp:1381
+#: gui/ExecuteSqlFrame.cpp:1380
 msgid "Save File As"
 msgstr "名前を付けて保存"
 
-#: gui/ExecuteSqlFrame.cpp:1421
+#: gui/ExecuteSqlFrame.cpp:1420
 msgid "File saved"
 msgstr "ファイルが保存されました"
 
-#: gui/ExecuteSqlFrame.cpp:1425
+#: gui/ExecuteSqlFrame.cpp:1424
 #, c-format
 msgid ""
 "Error saving the file, attention for not losing your SQL. Error code: %d"
 msgstr "ファイル保存のエラー、SQLを失わないための注意。エラー・コード ：%d"
 
-#: gui/ExecuteSqlFrame.cpp:1743
+#: gui/ExecuteSqlFrame.cpp:1737
 msgid "Saving BLOB to file"
 msgstr "BLOBをファイルに保存"
 
-#: gui/ExecuteSqlFrame.cpp:1777
+#: gui/ExecuteSqlFrame.cpp:1771
 msgid "No valid tables found."
 msgstr "デーブルにレコードが見つかりません。"
 
-#: gui/ExecuteSqlFrame.cpp:1782 gui/controls/DataGridRows.cpp:1863
+#: gui/ExecuteSqlFrame.cpp:1776 gui/controls/DataGridRows.cpp:1863
 msgid "Select a table"
 msgstr "テーブルの選択"
 
-#: gui/ExecuteSqlFrame.cpp:1783 gui/controls/DataGridRows.cpp:1864
+#: gui/ExecuteSqlFrame.cpp:1777 gui/controls/DataGridRows.cpp:1864
 msgid "Multiple tables found"
 msgstr "Multiple tables found"
 
-#: gui/ExecuteSqlFrame.cpp:1844
+#: gui/ExecuteSqlFrame.cpp:1838
 msgid "Do you really want to delete multiple rows?"
 msgstr "複数行削除しようとしています。よろしいですか？"
 
-#: gui/ExecuteSqlFrame.cpp:1845
+#: gui/ExecuteSqlFrame.cpp:1839
 #, c-format
 msgid ""
 "You have more than one row selected. Are you sure you wish to delete all %d "
 "selected rows?"
 msgstr "複数行選択しています。選択されている %d 行全て削除しますか？"
 
-#: gui/ExecuteSqlFrame.cpp:1846
+#: gui/ExecuteSqlFrame.cpp:1840
 msgid "Delete"
 msgstr "削除"
 
-#: gui/ExecuteSqlFrame.cpp:1884
+#: gui/ExecuteSqlFrame.cpp:1878
 msgid "Do you really want to set multiple fields to NULL?"
 msgstr "複数のフィールドにNULLを設定することが本当に必要ですか？"
 
-#: gui/ExecuteSqlFrame.cpp:1885
+#: gui/ExecuteSqlFrame.cpp:1879
 #, c-format
 msgid ""
 "You have more than one data field selected. Are you sure you wish to set all "
@@ -1781,15 +1769,15 @@ msgstr ""
 "複数のデータフィールドが選択されています。選択された %d 個のフィールドをすべ"
 "て NULL に設定してもよろしいですか?"
 
-#: gui/ExecuteSqlFrame.cpp:1886
+#: gui/ExecuteSqlFrame.cpp:1880
 msgid "Set to NULL"
 msgstr "NULLに設定する(&N)"
 
-#: gui/ExecuteSqlFrame.cpp:1917
+#: gui/ExecuteSqlFrame.cpp:1911
 msgid "You have read-only or not nullable fields selected!"
 msgstr "読み取り専用、またはNULL不可のフィールドが選択されている!"
 
-#: gui/ExecuteSqlFrame.cpp:1918
+#: gui/ExecuteSqlFrame.cpp:1912
 #, c-format
 msgid ""
 "The following fields are read-only or not nullable:\n"
@@ -1802,7 +1790,7 @@ msgstr ""
 "\n"
 "NULL に設定することはできません!"
 
-#: gui/ExecuteSqlFrame.cpp:2058
+#: gui/ExecuteSqlFrame.cpp:2043
 #, c-format
 msgid ""
 "You have made changes to the file\n"
@@ -1817,11 +1805,11 @@ msgstr ""
 "\n"
 "別のファイルをロードすると失われます。"
 
-#: gui/ExecuteSqlFrame.cpp:2081
+#: gui/ExecuteSqlFrame.cpp:2066
 msgid "Transaction started"
 msgstr "トランザクションの開始"
 
-#: gui/ExecuteSqlFrame.cpp:2095
+#: gui/ExecuteSqlFrame.cpp:2080
 #, c-format
 msgid ""
 "You have made changes to the file\n"
@@ -1836,7 +1824,7 @@ msgstr ""
 "\n"
 "別のSQL文を設定すると失われます。"
 
-#: gui/ExecuteSqlFrame.cpp:2232
+#: gui/ExecuteSqlFrame.cpp:2235
 msgid ""
 "SET TERM command found without terminator.\n"
 "Stopping further execution."
@@ -1844,7 +1832,7 @@ msgstr ""
 "ターミネータなしのSET TERMコマンドが見つかりました。\n"
 "実行を停止します。"
 
-#: gui/ExecuteSqlFrame.cpp:2247
+#: gui/ExecuteSqlFrame.cpp:2250
 msgid ""
 "SET AUTODDL command found with invalid parameter (has to be \"ON\" or "
 "\"OFF\").\n"
@@ -1854,152 +1842,152 @@ msgstr ""
 "である必要があります)。\n"
 "これ以上の実行を停止します。"
 
-#: gui/ExecuteSqlFrame.cpp:2274
+#: gui/ExecuteSqlFrame.cpp:2277
 msgid "Script execution finished."
 msgstr "スクリプト実行完了。"
 
-#: gui/ExecuteSqlFrame.cpp:2297
+#: gui/ExecuteSqlFrame.cpp:2300
 #, c-format
 msgid "%d inserts. "
 msgstr "%d 行挿入。 "
 
-#: gui/ExecuteSqlFrame.cpp:2299
+#: gui/ExecuteSqlFrame.cpp:2302
 #, c-format
 msgid "%d updates. "
 msgstr "%d 行更新。 "
 
-#: gui/ExecuteSqlFrame.cpp:2301
+#: gui/ExecuteSqlFrame.cpp:2304
 #, c-format
 msgid "%d deletes. "
 msgstr "%d 行削除。 "
 
-#: gui/ExecuteSqlFrame.cpp:2303
+#: gui/ExecuteSqlFrame.cpp:2306
 #, c-format
 msgid "%d reads index. "
 msgstr "%d reads index. "
 
-#: gui/ExecuteSqlFrame.cpp:2305
+#: gui/ExecuteSqlFrame.cpp:2308
 #, c-format
 msgid "%d reads sequence. "
 msgstr "%d reads sequence. "
 
-#: gui/ExecuteSqlFrame.cpp:2329
+#: gui/ExecuteSqlFrame.cpp:2332
 #, c-format
 msgid "Relation #%d"
 msgstr "リレーション #%d"
 
-#: gui/ExecuteSqlFrame.cpp:2372
+#: gui/ExecuteSqlFrame.cpp:2375
 msgid "Parsed statement: "
 msgstr "パースした問い合わせ： "
 
-#: gui/ExecuteSqlFrame.cpp:2373
+#: gui/ExecuteSqlFrame.cpp:2376
 msgid "Empty statement detected, bailing out..."
 msgstr "空の文を見つけました。復旧中..."
 
-#: gui/ExecuteSqlFrame.cpp:2384
+#: gui/ExecuteSqlFrame.cpp:2387
 msgid "Cannot use 'connect' or 'create' statement in a regular SQL Script"
 msgstr "Cannot use 'connect' or 'create' statement in a regular SQL Script"
 
-#: gui/ExecuteSqlFrame.cpp:2407
+#: gui/ExecuteSqlFrame.cpp:2410
 msgid "Cannot use 'disconnect' statement in a regular SQL Script"
 msgstr "Cannot use 'disconnect' statement in a regular SQL Script"
 
-#: gui/ExecuteSqlFrame.cpp:2425
+#: gui/ExecuteSqlFrame.cpp:2428
 msgid "Starting transaction..."
 msgstr "トランザクションの開始..."
 
-#: gui/ExecuteSqlFrame.cpp:2469
+#: gui/ExecuteSqlFrame.cpp:2472
 msgid "Preparing statement: "
 msgstr "問い合わせの準備： "
 
-#: gui/ExecuteSqlFrame.cpp:2474
+#: gui/ExecuteSqlFrame.cpp:2477
 #, c-format
 msgid "Statement prepared (elapsed time: %s)."
 msgstr "ステートメントが準備されました (経過時間: %s)。"
 
-#: gui/ExecuteSqlFrame.cpp:2495
+#: gui/ExecuteSqlFrame.cpp:2498
 #, c-format
 msgid "Field #%02d: %s.%s Alias:%s Type:%s"
 msgstr "列 #%02d： %s.%s Alias:%s Type:%s"
 
-#: gui/ExecuteSqlFrame.cpp:2522
+#: gui/ExecuteSqlFrame.cpp:2525
 msgid "Plan not available."
 msgstr "プランがありません。"
 
-#: gui/ExecuteSqlFrame.cpp:2528
+#: gui/ExecuteSqlFrame.cpp:2531
 #, c-format
 msgid "Parameters: %zu"
 msgstr "パラメータ：%zu"
 
-#: gui/ExecuteSqlFrame.cpp:2541
+#: gui/ExecuteSqlFrame.cpp:2544
 msgid "Executing statement..."
 msgstr "文の実行中..."
 
-#: gui/ExecuteSqlFrame.cpp:2546
+#: gui/ExecuteSqlFrame.cpp:2549
 #, c-format
 msgid "Statement executed (elapsed time: %s)."
 msgstr "文が実行されました (経過時間: %s)。"
 
-#: gui/ExecuteSqlFrame.cpp:2563
+#: gui/ExecuteSqlFrame.cpp:2566
 #, c-format
 msgid "%d fetches, %d marks, %d reads, %d writes."
 msgstr "%d 行取得, %d 行マーク, %d 行読込, %d 行書込。"
 
-#: gui/ExecuteSqlFrame.cpp:2566
+#: gui/ExecuteSqlFrame.cpp:2569
 #, c-format
 msgid "%d inserts, %d updates, %d deletes, %d index, %d seq."
 msgstr "%d 行挿入, %d 行更新, %d 行削除, %d index, %d seq."
 
-#: gui/ExecuteSqlFrame.cpp:2568
+#: gui/ExecuteSqlFrame.cpp:2571
 #, c-format
 msgid "Delta memory: %d bytes."
 msgstr "デルタメモリ：%dバイト."
 
-#: gui/ExecuteSqlFrame.cpp:2588
+#: gui/ExecuteSqlFrame.cpp:2591
 #, c-format
 msgid "%d row%s affected directly."
 msgstr "%d 行 %s 直接処理されました。"
 
-#: gui/ExecuteSqlFrame.cpp:2613 gui/ExecuteSqlFrame.cpp:2619
+#: gui/ExecuteSqlFrame.cpp:2616 gui/ExecuteSqlFrame.cpp:2622
 msgid "Error: "
 msgstr "エラー： "
 
-#: gui/ExecuteSqlFrame.cpp:2629
+#: gui/ExecuteSqlFrame.cpp:2632
 #, c-format
 msgid "Total execution time: %s"
 msgstr "総実行時間: %s"
 
-#: gui/ExecuteSqlFrame.cpp:2731
+#: gui/ExecuteSqlFrame.cpp:2734
 msgid "Committing transaction..."
 msgstr "コミット中..."
 
-#: gui/ExecuteSqlFrame.cpp:2737
+#: gui/ExecuteSqlFrame.cpp:2740
 #, c-format
 msgid "Transaction committed (elapsed time: %s)."
 msgstr "コミットされました (経過時間: %s)。"
 
-#: gui/ExecuteSqlFrame.cpp:2740
+#: gui/ExecuteSqlFrame.cpp:2743
 msgid "Transaction committed"
 msgstr "コミットされました"
 
-#: gui/ExecuteSqlFrame.cpp:2791
+#: gui/ExecuteSqlFrame.cpp:2794
 msgid "ERROR!\n"
 msgstr "エラー!\n"
 
-#: gui/ExecuteSqlFrame.cpp:2826
+#: gui/ExecuteSqlFrame.cpp:2829
 msgid "Rolling back the transaction..."
 msgstr "トランザクションのロールバック中..."
 
-#: gui/ExecuteSqlFrame.cpp:2832
+#: gui/ExecuteSqlFrame.cpp:2835
 #, c-format
 msgid "Transaction rolled back (elapsed time: %s)."
 msgstr "ロールバックされました (経過時間: %s)。"
 
-#: gui/ExecuteSqlFrame.cpp:2835
+#: gui/ExecuteSqlFrame.cpp:2838
 msgid "Transaction rolled back"
 msgstr "トランザクションのロールバック完了"
 
-#: gui/ExecuteSqlFrame.cpp:2856
+#: gui/ExecuteSqlFrame.cpp:2859
 msgid ""
 "ERROR!\n"
 "A non-IBPP C++ runtime exception occurred !"
@@ -2007,94 +1995,94 @@ msgstr ""
 "エラー!\n"
 "IBPP C++ランタイム以外の例外が発生しました!"
 
-#: gui/ExecuteSqlFrame.cpp:2924
+#: gui/ExecuteSqlFrame.cpp:2927
 #, c-format
 msgid "%ld row(s) fetched"
 msgstr "%ld 行がフェッチされました"
 
-#: gui/ExecuteSqlFrame.cpp:3204
+#: gui/ExecuteSqlFrame.cpp:3208
 msgid "Execute SQL Statements"
 msgstr "SQL文の実行"
 
-#: gui/ExecuteSqlFrame.cpp:3335 gui/ExecuteSqlFrame.cpp:3413
+#: gui/ExecuteSqlFrame.cpp:3339 gui/ExecuteSqlFrame.cpp:3417
 #: gui/MainFrame.cpp:1892
 #, c-format
 msgid "Are you sure you wish to drop the %s %s?"
 msgstr "%s %sを削除してよろしいですか?"
 
-#: gui/ExecuteSqlFrame.cpp:3339 gui/ExecuteSqlFrame.cpp:3417
-#: gui/ExecuteSqlFrame.cpp:3705 gui/MainFrame.cpp:1896
+#: gui/ExecuteSqlFrame.cpp:3343 gui/ExecuteSqlFrame.cpp:3421
+#: gui/ExecuteSqlFrame.cpp:3709 gui/MainFrame.cpp:1896
 msgid "Once you drop the object it is permanently removed from database."
 msgstr "データベースから完全にオブジェクトを削除します。"
 
-#: gui/ExecuteSqlFrame.cpp:3340 gui/ExecuteSqlFrame.cpp:3418
-#: gui/ExecuteSqlFrame.cpp:3706 gui/MainFrame.cpp:1897 gui/MainFrame.cpp:1908
+#: gui/ExecuteSqlFrame.cpp:3344 gui/ExecuteSqlFrame.cpp:3422
+#: gui/ExecuteSqlFrame.cpp:3710 gui/MainFrame.cpp:1897 gui/MainFrame.cpp:1908
 msgid "&Drop"
 msgstr "削除(&D)"
 
-#: gui/ExecuteSqlFrame.cpp:3341 gui/ExecuteSqlFrame.cpp:3419
-#: gui/ExecuteSqlFrame.cpp:3707 gui/MainFrame.cpp:1898
+#: gui/ExecuteSqlFrame.cpp:3345 gui/ExecuteSqlFrame.cpp:3423
+#: gui/ExecuteSqlFrame.cpp:3711 gui/MainFrame.cpp:1898
 msgid "Always drop without asking"
 msgstr "常に確認せず削除"
 
-#: gui/ExecuteSqlFrame.cpp:3345
+#: gui/ExecuteSqlFrame.cpp:3349
 msgid "Dropping field"
 msgstr "フィールド削除中"
 
-#: gui/ExecuteSqlFrame.cpp:3384
+#: gui/ExecuteSqlFrame.cpp:3388
 msgid "Dropping fields"
 msgstr "フィールド削除中"
 
-#: gui/ExecuteSqlFrame.cpp:3423
+#: gui/ExecuteSqlFrame.cpp:3427
 msgid "DROP"
 msgstr "削除"
 
-#: gui/ExecuteSqlFrame.cpp:3454 metadata/MetadataTemplateCmdHandler.cpp:818
+#: gui/ExecuteSqlFrame.cpp:3458 metadata/MetadataTemplateCmdHandler.cpp:818
 msgid "Extracting DDL Definitions"
 msgstr "DDL定義を抽出中"
 
-#: gui/ExecuteSqlFrame.cpp:3497
+#: gui/ExecuteSqlFrame.cpp:3501
 msgid "Editing stored procedure"
 msgstr "ストアドプロシージャの編集中"
 
-#: gui/ExecuteSqlFrame.cpp:3527
+#: gui/ExecuteSqlFrame.cpp:3531
 msgid "Editing stored function"
 msgstr "ストアドプロシージャの編集中"
 
-#: gui/ExecuteSqlFrame.cpp:3567
+#: gui/ExecuteSqlFrame.cpp:3571
 msgid "Altering dependent objects"
 msgstr "依存オブジェクトの変更"
 
-#: gui/ExecuteSqlFrame.cpp:3595
+#: gui/ExecuteSqlFrame.cpp:3599
 msgid "Editing trigger"
 msgstr "トリガーの編集中"
 
-#: gui/ExecuteSqlFrame.cpp:3627
+#: gui/ExecuteSqlFrame.cpp:3631
 msgid "Changing generator value"
 msgstr "ジェネレータの値の変更中"
 
-#: gui/ExecuteSqlFrame.cpp:3628
+#: gui/ExecuteSqlFrame.cpp:3632
 msgid "Enter new value"
 msgstr "新しい値の入力"
 
-#: gui/ExecuteSqlFrame.cpp:3669
+#: gui/ExecuteSqlFrame.cpp:3673
 msgid "Editing exception"
 msgstr "例外の編集中"
 
-#: gui/ExecuteSqlFrame.cpp:3702
+#: gui/ExecuteSqlFrame.cpp:3706
 #, c-format
 msgid "Are you sure you wish to drop the index %s?"
 msgstr "インデックス%s を削除してよろしいですか?"
 
-#: gui/ExecuteSqlFrame.cpp:3831
+#: gui/ExecuteSqlFrame.cpp:3835
 msgid "Editing Package Header"
 msgstr "パッケージヘッダーの編集"
 
-#: gui/ExecuteSqlFrame.cpp:3861
+#: gui/ExecuteSqlFrame.cpp:3865
 msgid "Editing Package Body"
 msgstr "パッケージ本体の編集"
 
-#: gui/ExecuteSqlFrame.cpp:3892
+#: gui/ExecuteSqlFrame.cpp:3896
 msgid "Editing Collation"
 msgstr "照合順序の編集"
 
@@ -2798,15 +2786,15 @@ msgstr "confdef のルート ノードが無効です。"
 msgid "Unknown config setting \"%s\" in description"
 msgstr "間違った設定 \"%s\" が書かれています"
 
-#: gui/PreferencesDialog.cpp:782
+#: gui/PreferencesDialog.cpp:805
 msgid "Code generation"
 msgstr "コード生成"
 
-#: gui/PreferencesDialog.cpp:786
+#: gui/PreferencesDialog.cpp:809
 msgid "Code template metadata"
 msgstr "コードテンプレートメタデータ"
 
-#: gui/PreferencesDialog.cpp:790
+#: gui/PreferencesDialog.cpp:813
 msgid "Continue"
 msgstr "継続"
 
@@ -2815,24 +2803,24 @@ msgstr "継続"
 msgid "Setting \"%s\" has no config setting key"
 msgstr "\"%s\"は環境設定のキーではありません"
 
-#: gui/PreferencesDialogSettings.cpp:413
+#: gui/PreferencesDialogSettings.cpp:398
 #, c-format
 msgid "Radiobox \"%s\" has no options"
 msgstr "ラジオボックス \"%s\"はオプションなしです"
 
-#: gui/PreferencesDialogSettings.cpp:859
+#: gui/PreferencesDialogSettings.cpp:850
 msgid "Select..."
 msgstr "選択..."
 
-#: gui/PreferencesDialogSettings.cpp:947
+#: gui/PreferencesDialogSettings.cpp:938
 msgid "All files (*.*)|*.*"
 msgstr "全てのファイル (*.*)|*.*"
 
-#: gui/PreferencesDialogSettings.cpp:955
+#: gui/PreferencesDialogSettings.cpp:946
 msgid "Select File"
 msgstr "ファイル選択"
 
-#: gui/PreferencesDialogSettings.cpp:1133
+#: gui/PreferencesDialogSettings.cpp:1126
 msgid "Select / deselect &all"
 msgstr "全て選択(&A)"
 
@@ -2933,63 +2921,69 @@ msgstr "再オーダ"
 msgid "Restore Database \"%s:%s\""
 msgstr "データベースの復元 \"%s:%s\""
 
-#: gui/RestoreFrame.cpp:73
+#: gui/RestoreFrame.cpp:72
+#, fuzzy
+#| msgid "Start search"
+msgid "&Start Restore"
+msgstr "検索開始"
+
+#: gui/RestoreFrame.cpp:75
 msgid "Replace existing database"
 msgstr "既存データベースに上書き"
 
-#: gui/RestoreFrame.cpp:75
+#: gui/RestoreFrame.cpp:77
 msgid "Don't restore shadow files"
 msgstr "シャドウファイルを再作成しない"
 
-#: gui/RestoreFrame.cpp:77
+#: gui/RestoreFrame.cpp:79
 msgid "Commit per table"
 msgstr "テーブルごとにコミット"
 
-#: gui/RestoreFrame.cpp:79
+#: gui/RestoreFrame.cpp:81
 msgid "Deactivate indices"
 msgstr "インデックスの無効化"
 
-#: gui/RestoreFrame.cpp:81
+#: gui/RestoreFrame.cpp:83
 msgid "Ignore validity constraints"
 msgstr "制約チェックの無効化"
 
-#: gui/RestoreFrame.cpp:83
+#: gui/RestoreFrame.cpp:85
 msgid "Use all space"
 msgstr "全てのスペースを使用"
 
-#: gui/RestoreFrame.cpp:86
+#: gui/RestoreFrame.cpp:88
 msgid "Fix malformed UNICODE_FSS data"
 msgstr "UNICODE_FSSデータの不正を修正"
 
-#: gui/RestoreFrame.cpp:90
+#: gui/RestoreFrame.cpp:92
 msgid "Fix malformed UNICODE_FSS metadata"
 msgstr "UNICODE_FSSメタデータの不正を修正"
 
-#: gui/RestoreFrame.cpp:94
+#: gui/RestoreFrame.cpp:96
 msgid "Read only access"
 msgstr "読み込み専用"
 
-#: gui/RestoreFrame.cpp:97
+#: gui/RestoreFrame.cpp:99
 msgid "None"
 msgstr "なし"
 
-#: gui/RestoreFrame.cpp:98
+#: gui/RestoreFrame.cpp:100
 msgid "Read only"
 msgstr "読み込み専用"
 
-#: gui/RestoreFrame.cpp:99
+#: gui/RestoreFrame.cpp:101
 msgid "Read write"
 msgstr "読み書き"
 
-#: gui/RestoreFrame.cpp:100
+#: gui/RestoreFrame.cpp:102
 msgid "Replica mode (FB4.0+)"
 msgstr "レプリカモード(FB4.0+)"
 
-#: gui/RestoreFrame.cpp:152
+#: gui/RestoreFrame.cpp:154
 msgid "Page buffers"
 msgstr "ページバッファー"
 
-#: gui/RestoreFrame.cpp:330
+#: gui/RestoreFrame.cpp:332
 msgid "Backup file (*.fbk, *.gbk)|*.fbk;*.gbk|All files (*.*)|*.*"
 msgstr ""
 "バックアップファイル (*.fbk, *.gbk)|*.fbk;*.gbk|全てのファイル (*.*)|*.*"
@@ -3184,19 +3178,19 @@ msgstr "パスワード(&P)："
 msgid "Connect as me (&trusted user authentication"
 msgstr "私として接続 (信頼されたユーザー認証(&T)"
 
-#: gui/controls/DataGrid.cpp:110
+#: gui/controls/DataGrid.cpp:81
 msgid "Cannot open clipboard"
 msgstr "クリップボードを開けません"
 
-#: gui/controls/DataGrid.cpp:115
+#: gui/controls/DataGrid.cpp:86
 msgid "Cannot write to clipboard"
 msgstr "クリップボードに書き込めません"
 
-#: gui/controls/DataGrid.cpp:206
+#: gui/controls/DataGrid.cpp:177
 msgid "Not all records in the result set are copied to the clipboard."
 msgstr "全てのデータがクリップボードにコピーされていません。"
 
-#: gui/controls/DataGrid.cpp:207
+#: gui/controls/DataGrid.cpp:178
 msgid ""
 "The result set has unfetched data. Only the records that have already been "
 "fetched will be copied. Use the \"Fetch all data\" command in the popup menu "
@@ -3206,88 +3200,80 @@ msgstr ""
 "全てのデータをコピーした場合は、右クリックメニューより \"全行を取得\" を実行"
 "して下さい。"
 
-#: gui/controls/DataGrid.cpp:219
+#: gui/controls/DataGrid.cpp:190
 msgid "Fetch all records"
 msgstr "全レコードを取得"
 
-#: gui/controls/DataGrid.cpp:220
+#: gui/controls/DataGrid.cpp:191
 msgid "Stop fetching all records"
 msgstr "全レコードの取得を中止"
 
-#: gui/controls/DataGrid.cpp:223
+#: gui/controls/DataGrid.cpp:194
 msgid "Copy"
 msgstr "コピー"
 
-#: gui/controls/DataGrid.cpp:224
+#: gui/controls/DataGrid.cpp:195
 msgid "Copy with headers"
 msgstr "ヘッダー付きコピー"
 
-#: gui/controls/DataGrid.cpp:225
+#: gui/controls/DataGrid.cpp:196
 msgid "Copy as INSERT statements"
 msgstr "INSERT文としてコピー"
 
-#: gui/controls/DataGrid.cpp:226
+#: gui/controls/DataGrid.cpp:197
 msgid "Copy as UPDATE statements"
 msgstr "UPDATE文としてコピー"
 
-#: gui/controls/DataGrid.cpp:227
+#: gui/controls/DataGrid.cpp:198
 msgid "Copy as UPDATE INSERT statements"
 msgstr "UPDATE INSERT文としてコピー"
 
-#: gui/controls/DataGrid.cpp:228
+#: gui/controls/DataGrid.cpp:199
 msgid "Copy as IN list"
 msgstr "INリストとしてコピー"
 
-#: gui/controls/DataGrid.cpp:229
+#: gui/controls/DataGrid.cpp:200
 msgid "Save as HTML file..."
 msgstr "HTMLファイルとして保存..."
 
-#: gui/controls/DataGrid.cpp:230
+#: gui/controls/DataGrid.cpp:201
 msgid "Save as CSV file..."
 msgstr "CSVファイルとして保存..."
 
-#: gui/controls/DataGrid.cpp:238
+#: gui/controls/DataGrid.cpp:209
 msgid "Set field to NULL"
 msgstr "NULLに設定する"
 
-#: gui/controls/DataGrid.cpp:241
-msgid "Set header font"
-msgstr "ヘッダのフォント設定"
-
-#: gui/controls/DataGrid.cpp:242
-msgid "Set cell font"
-msgstr "セルのフォント設定"
-
-#: gui/controls/DataGrid.cpp:541 gui/controls/DataGrid.cpp:643
+#: gui/controls/DataGrid.cpp:499 gui/controls/DataGrid.cpp:601
 #, c-format
 msgid "Table %s cannot be found in database."
 msgstr "テーブル %s がデータベースに見つかりません。"
 
-#: gui/controls/DataGrid.cpp:798
+#: gui/controls/DataGrid.cpp:743
 msgid "Save data in selected cells as"
 msgstr "選択したセルのデータを保存"
 
-#: gui/controls/DataGrid.cpp:800 gui/controls/PrintableHtmlWindow.cpp:181
+#: gui/controls/DataGrid.cpp:745 gui/controls/PrintableHtmlWindow.cpp:181
 msgid "HTML files (*.html)|*.html|All files (*.*)|*.*"
 msgstr "HTML ファイル (*.html)|*.html|全てのファイル (*.*)|*.*"
 
-#: gui/controls/DataGrid.cpp:1080
+#: gui/controls/DataGrid.cpp:1025
 msgid "&Abort"
 msgstr "中止(&A)"
 
-#: gui/controls/DataGrid.cpp:1081
+#: gui/controls/DataGrid.cpp:1026
 msgid "&Disable for this grid"
 msgstr "このグリッドを無効にする(&D)"
 
-#: gui/controls/DataGrid.cpp:1081
+#: gui/controls/DataGrid.cpp:1026
 msgid "&Continue"
 msgstr "継続(&C)"
 
-#: gui/controls/DataGrid.cpp:1083
+#: gui/controls/DataGrid.cpp:1028
 msgid "Calculating the sum takes too long"
 msgstr "合計の計算に時間がかかりすぎる"
 
-#: gui/controls/DataGrid.cpp:1084
+#: gui/controls/DataGrid.cpp:1029
 msgid ""
 "FlameRobin automatically calculates the sum of selected numeric values. "
 "However, the current calculation seems to be taking too long. Would you like "
@@ -3296,7 +3282,7 @@ msgstr ""
 "FlameRobin は、選択された数値の合計を自動的に計算します。 ただし、現在の計算"
 "には時間がかかりすぎるようです。 中止しますか?"
 
-#: gui/controls/DataGrid.cpp:1086
+#: gui/controls/DataGrid.cpp:1031
 msgid "Do not ask this question again"
 msgstr "この質問は今後表示しない"
 
@@ -4347,22 +4333,24 @@ msgid "SysCollation"
 msgstr "システム照合順序"
 
 #: metadata/Collation.cpp:249
-msgid "Collation"
+#, fuzzy
+#| msgid "Collation"
+msgid "Collations"
 msgstr "照合順序"
 
-#: metadata/CreateDDLVisitor.cpp:186 metadata/CreateDDLVisitor.cpp:197
+#: metadata/CreateDDLVisitor.cpp:194 metadata/CreateDDLVisitor.cpp:205
 msgid "Extracting "
 msgstr "DDL定義を抽出中 "
 
-#: metadata/CreateDDLVisitor.cpp:279
+#: metadata/CreateDDLVisitor.cpp:287
 msgid "Extraction canceled"
 msgstr "抽出の中止"
 
-#: metadata/CreateDDLVisitor.cpp:286
+#: metadata/CreateDDLVisitor.cpp:294
 msgid "Extraction complete."
 msgstr "抽出の完了。"
 
-#: metadata/CreateDDLVisitor.cpp:287
+#: metadata/CreateDDLVisitor.cpp:295
 msgid "Done."
 msgstr "完了。"
 
@@ -4648,6 +4636,21 @@ msgstr "ビュー"
 #, c-format
 msgid "Description of %s"
 msgstr "%sの説明"
+
+#~ msgid "Set editor &font"
+#~ msgstr "エディタフォントの設定(&F)"
+
+#~ msgid "Set h&eader font"
+#~ msgstr "ヘッダのフォント設定(&E)"
+
+#~ msgid "Set cell f&ont"
+#~ msgstr "セルのフォント設定(&O)"
+
+#~ msgid "Set header font"
+#~ msgstr "ヘッダのフォント設定"
+
+#~ msgid "Set cell font"
+#~ msgstr "セルのフォント設定"
 
 #, c-format
 #~ msgid "Character set ID %d not found."
