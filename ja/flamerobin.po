@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: flamerobin\n"
-"POT-Creation-Date: 2023-12-06 10:27+0900\n"
-"PO-Revision-Date: 2023-12-06 10:27+0900\n"
+"POT-Creation-Date: 2024-07-24 10:50+0900\n"
+"PO-Revision-Date: 2024-07-24 10:52+0900\n"
 "Last-Translator: akira uemura <git@arumeu.sakura.ne.jp>\n"
 "Language-Team: a.uemura\n"
 "Language: ja\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Poedit-Basepath: ../src\n"
 "X-Poedit-KeywordsList: _;wxGetTranslation\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -102,7 +102,7 @@ msgstr "テンプレート %s は見つかりませんでした。"
 
 #: core/FRDecimal.cpp:386 core/FRDecimal.cpp:435 core/FRDecimal.cpp:462
 #: core/FRDecimal.cpp:582 core/FRInt128.cpp:327
-#: gui/controls/DataGridRows.cpp:763
+#: gui/controls/DataGridRows.cpp:769
 msgid "0"
 msgstr "0"
 
@@ -1047,7 +1047,7 @@ msgstr ""
 "Firebirdデータベースファイル (*.fdb, *.gdb)|*.fdb;*.gdb|全てのファイル (*.*)|"
 "*.*"
 
-#: gui/DatabaseRegistrationDialog.cpp:509 gui/ExecuteSqlFrame.cpp:2628
+#: gui/DatabaseRegistrationDialog.cpp:509 gui/ExecuteSqlFrame.cpp:2632
 msgid "SYSTEM ERROR!"
 msgstr "システムエラー！"
 
@@ -1200,7 +1200,7 @@ msgstr "BLOB列ではありません"
 
 #: gui/EditBlobDialog.cpp:1196 gui/EditBlobDialog.cpp:1224
 #: gui/ExecuteSqlFrame.cpp:1731 gui/ExecuteSqlFrame.cpp:1750
-#: gui/InsertDialog.cpp:681 gui/InsertParametersDialog.cpp:961
+#: gui/InsertDialog.cpp:681 gui/InsertParametersDialog.cpp:970
 msgid "Select a file"
 msgstr "ファイル選択"
 
@@ -1733,11 +1733,11 @@ msgstr "BLOBをファイルに保存"
 msgid "No valid tables found."
 msgstr "デーブルにレコードが見つかりません。"
 
-#: gui/ExecuteSqlFrame.cpp:1776 gui/controls/DataGridRows.cpp:1863
+#: gui/ExecuteSqlFrame.cpp:1776 gui/controls/DataGridRows.cpp:1881
 msgid "Select a table"
 msgstr "テーブルの選択"
 
-#: gui/ExecuteSqlFrame.cpp:1777 gui/controls/DataGridRows.cpp:1864
+#: gui/ExecuteSqlFrame.cpp:1777 gui/controls/DataGridRows.cpp:1882
 msgid "Multiple tables found"
 msgstr "Multiple tables found"
 
@@ -1907,87 +1907,89 @@ msgstr "ステートメントが準備されました (経過時間: %s)。"
 
 #: gui/ExecuteSqlFrame.cpp:2498
 #, c-format
-msgid "Field #%02d: %s.%s Alias:%s Type:%s"
-msgstr "列 #%02d： %s.%s Alias:%s Type:%s"
+msgid ""
+"Field #%02d: %s.%s Alias:%s Type:%s sqlype: %d subtype: %d len: %d scale: %d"
+msgstr ""
+"列 #%02d： %s.%s Alias:%s Type:%s sqlype: %d subtype: %d len: %d scale: %d"
 
-#: gui/ExecuteSqlFrame.cpp:2525
+#: gui/ExecuteSqlFrame.cpp:2529
 msgid "Plan not available."
 msgstr "プランがありません。"
 
-#: gui/ExecuteSqlFrame.cpp:2531
+#: gui/ExecuteSqlFrame.cpp:2535
 #, c-format
 msgid "Parameters: %zu"
 msgstr "パラメータ：%zu"
 
-#: gui/ExecuteSqlFrame.cpp:2544
+#: gui/ExecuteSqlFrame.cpp:2548
 msgid "Executing statement..."
 msgstr "文の実行中..."
 
-#: gui/ExecuteSqlFrame.cpp:2549
+#: gui/ExecuteSqlFrame.cpp:2553
 #, c-format
 msgid "Statement executed (elapsed time: %s)."
 msgstr "文が実行されました (経過時間: %s)。"
 
-#: gui/ExecuteSqlFrame.cpp:2566
+#: gui/ExecuteSqlFrame.cpp:2570
 #, c-format
 msgid "%d fetches, %d marks, %d reads, %d writes."
 msgstr "%d 行取得, %d 行マーク, %d 行読込, %d 行書込。"
 
-#: gui/ExecuteSqlFrame.cpp:2569
+#: gui/ExecuteSqlFrame.cpp:2573
 #, c-format
 msgid "%d inserts, %d updates, %d deletes, %d index, %d seq."
 msgstr "%d 行挿入, %d 行更新, %d 行削除, %d index, %d seq."
 
-#: gui/ExecuteSqlFrame.cpp:2571
+#: gui/ExecuteSqlFrame.cpp:2575
 #, c-format
 msgid "Delta memory: %d bytes."
 msgstr "デルタメモリ：%dバイト."
 
-#: gui/ExecuteSqlFrame.cpp:2591
+#: gui/ExecuteSqlFrame.cpp:2595
 #, c-format
 msgid "%d row%s affected directly."
 msgstr "%d 行 %s 直接処理されました。"
 
-#: gui/ExecuteSqlFrame.cpp:2616 gui/ExecuteSqlFrame.cpp:2622
+#: gui/ExecuteSqlFrame.cpp:2620 gui/ExecuteSqlFrame.cpp:2626
 msgid "Error: "
 msgstr "エラー： "
 
-#: gui/ExecuteSqlFrame.cpp:2632
+#: gui/ExecuteSqlFrame.cpp:2636
 #, c-format
 msgid "Total execution time: %s"
 msgstr "総実行時間: %s"
 
-#: gui/ExecuteSqlFrame.cpp:2734
+#: gui/ExecuteSqlFrame.cpp:2738
 msgid "Committing transaction..."
 msgstr "コミット中..."
 
-#: gui/ExecuteSqlFrame.cpp:2740
+#: gui/ExecuteSqlFrame.cpp:2744
 #, c-format
 msgid "Transaction committed (elapsed time: %s)."
 msgstr "コミットされました (経過時間: %s)。"
 
-#: gui/ExecuteSqlFrame.cpp:2743
+#: gui/ExecuteSqlFrame.cpp:2747
 msgid "Transaction committed"
 msgstr "コミットされました"
 
-#: gui/ExecuteSqlFrame.cpp:2794
+#: gui/ExecuteSqlFrame.cpp:2798
 msgid "ERROR!\n"
 msgstr "エラー!\n"
 
-#: gui/ExecuteSqlFrame.cpp:2829
+#: gui/ExecuteSqlFrame.cpp:2833
 msgid "Rolling back the transaction..."
 msgstr "トランザクションのロールバック中..."
 
-#: gui/ExecuteSqlFrame.cpp:2835
+#: gui/ExecuteSqlFrame.cpp:2839
 #, c-format
 msgid "Transaction rolled back (elapsed time: %s)."
 msgstr "ロールバックされました (経過時間: %s)。"
 
-#: gui/ExecuteSqlFrame.cpp:2838
+#: gui/ExecuteSqlFrame.cpp:2842
 msgid "Transaction rolled back"
 msgstr "トランザクションのロールバック完了"
 
-#: gui/ExecuteSqlFrame.cpp:2859
+#: gui/ExecuteSqlFrame.cpp:2863
 msgid ""
 "ERROR!\n"
 "A non-IBPP C++ runtime exception occurred !"
@@ -1995,94 +1997,94 @@ msgstr ""
 "エラー!\n"
 "IBPP C++ランタイム以外の例外が発生しました!"
 
-#: gui/ExecuteSqlFrame.cpp:2927
+#: gui/ExecuteSqlFrame.cpp:2931
 #, c-format
 msgid "%ld row(s) fetched"
 msgstr "%ld 行がフェッチされました"
 
-#: gui/ExecuteSqlFrame.cpp:3208
+#: gui/ExecuteSqlFrame.cpp:3212
 msgid "Execute SQL Statements"
 msgstr "SQL文の実行"
 
-#: gui/ExecuteSqlFrame.cpp:3339 gui/ExecuteSqlFrame.cpp:3417
+#: gui/ExecuteSqlFrame.cpp:3343 gui/ExecuteSqlFrame.cpp:3421
 #: gui/MainFrame.cpp:1892
 #, c-format
 msgid "Are you sure you wish to drop the %s %s?"
 msgstr "%s %sを削除してよろしいですか?"
 
-#: gui/ExecuteSqlFrame.cpp:3343 gui/ExecuteSqlFrame.cpp:3421
-#: gui/ExecuteSqlFrame.cpp:3709 gui/MainFrame.cpp:1896
+#: gui/ExecuteSqlFrame.cpp:3347 gui/ExecuteSqlFrame.cpp:3425
+#: gui/ExecuteSqlFrame.cpp:3713 gui/MainFrame.cpp:1896
 msgid "Once you drop the object it is permanently removed from database."
 msgstr "データベースから完全にオブジェクトを削除します。"
 
-#: gui/ExecuteSqlFrame.cpp:3344 gui/ExecuteSqlFrame.cpp:3422
-#: gui/ExecuteSqlFrame.cpp:3710 gui/MainFrame.cpp:1897 gui/MainFrame.cpp:1908
+#: gui/ExecuteSqlFrame.cpp:3348 gui/ExecuteSqlFrame.cpp:3426
+#: gui/ExecuteSqlFrame.cpp:3714 gui/MainFrame.cpp:1897 gui/MainFrame.cpp:1908
 msgid "&Drop"
 msgstr "削除(&D)"
 
-#: gui/ExecuteSqlFrame.cpp:3345 gui/ExecuteSqlFrame.cpp:3423
-#: gui/ExecuteSqlFrame.cpp:3711 gui/MainFrame.cpp:1898
+#: gui/ExecuteSqlFrame.cpp:3349 gui/ExecuteSqlFrame.cpp:3427
+#: gui/ExecuteSqlFrame.cpp:3715 gui/MainFrame.cpp:1898
 msgid "Always drop without asking"
 msgstr "常に確認せず削除"
 
-#: gui/ExecuteSqlFrame.cpp:3349
+#: gui/ExecuteSqlFrame.cpp:3353
 msgid "Dropping field"
 msgstr "フィールド削除中"
 
-#: gui/ExecuteSqlFrame.cpp:3388
+#: gui/ExecuteSqlFrame.cpp:3392
 msgid "Dropping fields"
 msgstr "フィールド削除中"
 
-#: gui/ExecuteSqlFrame.cpp:3427
+#: gui/ExecuteSqlFrame.cpp:3431
 msgid "DROP"
 msgstr "削除"
 
-#: gui/ExecuteSqlFrame.cpp:3458 metadata/MetadataTemplateCmdHandler.cpp:818
+#: gui/ExecuteSqlFrame.cpp:3462 metadata/MetadataTemplateCmdHandler.cpp:818
 msgid "Extracting DDL Definitions"
 msgstr "DDL定義を抽出中"
 
-#: gui/ExecuteSqlFrame.cpp:3501
+#: gui/ExecuteSqlFrame.cpp:3505
 msgid "Editing stored procedure"
 msgstr "ストアドプロシージャの編集中"
 
-#: gui/ExecuteSqlFrame.cpp:3531
+#: gui/ExecuteSqlFrame.cpp:3535
 msgid "Editing stored function"
 msgstr "ストアドプロシージャの編集中"
 
-#: gui/ExecuteSqlFrame.cpp:3571
+#: gui/ExecuteSqlFrame.cpp:3575
 msgid "Altering dependent objects"
 msgstr "依存オブジェクトの変更"
 
-#: gui/ExecuteSqlFrame.cpp:3599
+#: gui/ExecuteSqlFrame.cpp:3603
 msgid "Editing trigger"
 msgstr "トリガーの編集中"
 
-#: gui/ExecuteSqlFrame.cpp:3631
+#: gui/ExecuteSqlFrame.cpp:3635
 msgid "Changing generator value"
 msgstr "ジェネレータの値の変更中"
 
-#: gui/ExecuteSqlFrame.cpp:3632
+#: gui/ExecuteSqlFrame.cpp:3636
 msgid "Enter new value"
 msgstr "新しい値の入力"
 
-#: gui/ExecuteSqlFrame.cpp:3673
+#: gui/ExecuteSqlFrame.cpp:3677
 msgid "Editing exception"
 msgstr "例外の編集中"
 
-#: gui/ExecuteSqlFrame.cpp:3706
+#: gui/ExecuteSqlFrame.cpp:3710
 #, c-format
 msgid "Are you sure you wish to drop the index %s?"
 msgstr "インデックス%s を削除してよろしいですか?"
 
-#: gui/ExecuteSqlFrame.cpp:3835
+#: gui/ExecuteSqlFrame.cpp:3839
 msgid "Editing Package Header"
 msgstr "パッケージヘッダーの編集"
 
-#: gui/ExecuteSqlFrame.cpp:3865
+#: gui/ExecuteSqlFrame.cpp:3869
 msgid "Editing Package Body"
 msgstr "パッケージ本体の編集"
 
-#: gui/ExecuteSqlFrame.cpp:3896
+#: gui/ExecuteSqlFrame.cpp:3900
 msgid "Editing Collation"
 msgstr "照合順序の編集"
 
@@ -2282,8 +2284,8 @@ msgstr "無効な16進数値"
 msgid "Invalid hexadecimal character"
 msgstr "無効な16進数文字"
 
-#: gui/InsertDialog.cpp:580 gui/InsertParametersDialog.cpp:707
-#: gui/controls/DataGridRows.cpp:2418
+#: gui/InsertDialog.cpp:580 gui/InsertParametersDialog.cpp:708
+#: gui/controls/DataGridRows.cpp:2436
 msgid "Cannot open BLOB file."
 msgstr "BLOBファイルを開けません。"
 
@@ -2303,43 +2305,44 @@ msgstr "実行(&E)"
 msgid "Insert Parameter(s) Into SQL "
 msgstr "SQL へのパラメータの挿入 "
 
-#: gui/InsertParametersDialog.cpp:600 gui/controls/DataGridRows.cpp:937
+#: gui/InsertParametersDialog.cpp:600 gui/controls/DataGridRows.cpp:943
 msgid "Cannot parse date"
 msgstr "日付を解析出来ません"
 
-#: gui/InsertParametersDialog.cpp:618 gui/controls/DataGridRows.cpp:1055
+#: gui/InsertParametersDialog.cpp:618 gui/controls/DataGridRows.cpp:1067
 msgid "Cannot parse time"
 msgstr "時刻を解析出来ません"
 
-#: gui/InsertParametersDialog.cpp:651 gui/controls/DataGridRows.cpp:1199
+#: gui/InsertParametersDialog.cpp:651 gui/controls/DataGridRows.cpp:1217
 msgid "Cannot parse timestamp"
 msgstr "日付を解析出来ません"
 
-#: gui/InsertParametersDialog.cpp:731
+#: gui/InsertParametersDialog.cpp:732
 msgid "Unsupported array format"
 msgstr "未対応の配列形式"
 
-#: gui/InsertParametersDialog.cpp:747
+#: gui/InsertParametersDialog.cpp:748
 msgid "Invalid HEX value value"
 msgstr "無効な HEX値"
 
-#: gui/InsertParametersDialog.cpp:773 gui/InsertParametersDialog.cpp:779
+#: gui/InsertParametersDialog.cpp:774 gui/InsertParametersDialog.cpp:780
 msgid "Invalid integer value"
 msgstr "無効な整数値"
 
-#: gui/InsertParametersDialog.cpp:785
-msgid "Invalid large integer value"
-msgstr "無効な large Integer値"
-
-#: gui/InsertParametersDialog.cpp:791 gui/controls/DataGridRows.cpp:1264
+#: gui/InsertParametersDialog.cpp:788 gui/InsertParametersDialog.cpp:800
+#: gui/controls/DataGridRows.cpp:1282
 msgid "Invalid float numeric value"
 msgstr "無効なfloat型浮動小数点数値"
 
-#: gui/InsertParametersDialog.cpp:797 gui/controls/DataGridRows.cpp:1330
+#: gui/InsertParametersDialog.cpp:794
+msgid "Invalid large integer value"
+msgstr "無効な large Integer値"
+
+#: gui/InsertParametersDialog.cpp:806 gui/controls/DataGridRows.cpp:1348
 msgid "Invalid double numeric value"
 msgstr "無効なdouble型浮動小数点数値"
 
-#: gui/InsertParametersDialog.cpp:805
+#: gui/InsertParametersDialog.cpp:814
 msgid "Invalid boolean value"
 msgstr "無効な ブール値"
 
@@ -2922,10 +2925,8 @@ msgid "Restore Database \"%s:%s\""
 msgstr "データベースの復元 \"%s:%s\""
 
 #: gui/RestoreFrame.cpp:72
-#, fuzzy
-#| msgid "Start search"
 msgid "&Start Restore"
-msgstr "検索開始"
+msgstr "復元開始(&S)"
 
 #: gui/RestoreFrame.cpp:75
 msgid "Replace existing database"
@@ -3286,79 +3287,79 @@ msgstr ""
 msgid "Do not ask this question again"
 msgstr "この質問は今後表示しない"
 
-#: gui/controls/DataGridRows.cpp:593
+#: gui/controls/DataGridRows.cpp:599
 msgid "Invalid integer numeric value"
 msgstr "無効な整数値"
 
-#: gui/controls/DataGridRows.cpp:663
+#: gui/controls/DataGridRows.cpp:669
 msgid "Invalid 64bit numeric value"
 msgstr "無効な64bit数値"
 
-#: gui/controls/DataGridRows.cpp:1522
+#: gui/controls/DataGridRows.cpp:1540
 msgid "[BLOB]"
 msgstr "[BLOB]"
 
-#: gui/controls/DataGridRows.cpp:1524
+#: gui/controls/DataGridRows.cpp:1542
 msgid "[BINARY]"
 msgstr "[BINARY]"
 
-#: gui/controls/DataGridRows.cpp:1536
+#: gui/controls/DataGridRows.cpp:1554
 msgid "[ERROR]"
 msgstr "[エラー]"
 
-#: gui/controls/DataGridRows.cpp:2274
+#: gui/controls/DataGridRows.cpp:2292
 msgid "N/A value in key column."
 msgstr "キー列の N/A 値。"
 
-#: gui/controls/DataGridRows.cpp:2305
+#: gui/controls/DataGridRows.cpp:2323
 msgid "Invalid Column"
 msgstr "無効な列"
 
-#: gui/controls/DataGridRows.cpp:2307
+#: gui/controls/DataGridRows.cpp:2325
 msgid "N/A value in DB_KEY column."
 msgstr "DB_KEY 列の N/A 値。"
 
-#: gui/controls/DataGridRows.cpp:2329
+#: gui/controls/DataGridRows.cpp:2347
 msgid "Invalid row index."
 msgstr "行インデックスが無効です。"
 
-#: gui/controls/DataGridRows.cpp:2331
+#: gui/controls/DataGridRows.cpp:2349
 msgid "Invalid col index."
 msgstr "無効な列インデックスです。"
 
-#: gui/controls/DataGridRows.cpp:2334
+#: gui/controls/DataGridRows.cpp:2352
 msgid "BLOB data not valid"
 msgstr "BLOBデータが不正です"
 
-#: gui/controls/DataGridRows.cpp:2356
+#: gui/controls/DataGridRows.cpp:2374
 msgid "Blob table not found."
 msgstr "BLOBテーブルが見つかりません。"
 
-#: gui/controls/DataGridRows.cpp:2379
+#: gui/controls/DataGridRows.cpp:2397
 msgid "Not a BLOB column."
 msgstr "BLOB列ではありません。"
 
-#: gui/controls/DataGridRows.cpp:2388
+#: gui/controls/DataGridRows.cpp:2406
 msgid "Cannot open destination file."
 msgstr "対象のファイルを開けません。"
 
-#: gui/controls/DataGridRows.cpp:2397
+#: gui/controls/DataGridRows.cpp:2415
 msgid "Saving..."
 msgstr "保存中..."
 
-#: gui/controls/DataGridRows.cpp:2420
+#: gui/controls/DataGridRows.cpp:2438
 msgid "Loading..."
 msgstr "ロード中..."
 
-#: gui/controls/DataGridRows.cpp:2466
+#: gui/controls/DataGridRows.cpp:2484
 msgid "This column is not editable."
 msgstr "この列は編集可能ではありません。"
 
-#: gui/controls/DataGridRows.cpp:2473
+#: gui/controls/DataGridRows.cpp:2491
 msgid "This column does not accept NULLs."
 msgstr "この列にNULL値は設定出来ません。"
 
-#: gui/controls/DataGridRows.cpp:2529
+#: gui/controls/DataGridRows.cpp:2547
 msgid "This column should not be editable"
 msgstr "この列は編集可能であってはならない"
 
@@ -3435,20 +3436,20 @@ msgstr "HTMLとして保存..."
 msgid "Printed from FlameRobin - www.flamerobin.org"
 msgstr "FlameRobinから印刷 - www.flamerobin.org"
 
-#: ibpp/_ibpp.cpp:257
+#: ibpp/_ibpp.cpp:255
 msgid "Can't find or load FBEMBED.DLL FBCLIENT.DLL or GDS32.DLL"
 msgstr ""
 "FBEMBED.DLL、FBCLIENT.DLL 又は GDS32.DLL が 見つからないかロード出来ません"
 
-#: ibpp/_ibpp.cpp:280
+#: ibpp/_ibpp.cpp:276
 msgid "Can't find or load the Firebird Client Library"
 msgstr "Firebird Client Library が見つからないかロード出来ません"
 
-#: ibpp/_ibpp.cpp:291 ibpp/_ibpp.cpp:300
+#: ibpp/_ibpp.cpp:286 ibpp/_ibpp.cpp:298
 msgid "Entry-point isc_"
 msgstr "エントリポイント isc_"
 
-#: ibpp/_ibpp.cpp:294 ibpp/_ibpp.cpp:303
+#: ibpp/_ibpp.cpp:289 ibpp/_ibpp.cpp:301
 msgid "Entry-point fb_"
 msgstr "エントリポイント fb_"
 
@@ -3507,8 +3508,8 @@ msgstr "無効な次元です。"
 msgid "Invalid bounds. You can only narrow the bounds."
 msgstr "無効な範囲です。限定した範囲だけが利用可能です。"
 
-#: ibpp/array.cpp:104 ibpp/row.cpp:767 ibpp/row.cpp:1475 ibpp/row.cpp:1511
-#: ibpp/row.cpp:1620 ibpp/row.cpp:1678
+#: ibpp/array.cpp:104 ibpp/row.cpp:779 ibpp/row.cpp:1487 ibpp/row.cpp:1523
+#: ibpp/row.cpp:1632 ibpp/row.cpp:1690
 msgid "Found an unknown sqltype !"
 msgstr "未知のSQLタイプが見つかりました!"
 
@@ -3536,21 +3537,21 @@ msgstr "内部バッファーサイズが相違しています。"
 #: ibpp/array.cpp:455 ibpp/array.cpp:460 ibpp/array.cpp:471 ibpp/array.cpp:496
 #: ibpp/array.cpp:507 ibpp/array.cpp:518 ibpp/array.cpp:574 ibpp/array.cpp:600
 #: ibpp/array.cpp:670 ibpp/array.cpp:737 ibpp/array.cpp:808 ibpp/array.cpp:819
-#: ibpp/array.cpp:845 ibpp/array.cpp:856 ibpp/array.cpp:867 ibpp/row.cpp:900
-#: ibpp/row.cpp:924 ibpp/row.cpp:965 ibpp/row.cpp:1003 ibpp/row.cpp:1038
-#: ibpp/row.cpp:1044 ibpp/row.cpp:1051 ibpp/row.cpp:1065 ibpp/row.cpp:1072
-#: ibpp/row.cpp:1079 ibpp/row.cpp:1096 ibpp/row.cpp:1102 ibpp/row.cpp:1117
-#: ibpp/row.cpp:1151 ibpp/row.cpp:1189 ibpp/row.cpp:1222 ibpp/row.cpp:1262
-#: ibpp/row.cpp:1305 ibpp/row.cpp:1352 ibpp/row.cpp:1361 ibpp/row.cpp:1370
-#: ibpp/row.cpp:1379 ibpp/row.cpp:1385 ibpp/row.cpp:1392 ibpp/row.cpp:1407
-#: ibpp/row.cpp:1415 ibpp/row.cpp:1423 ibpp/row.cpp:1444 ibpp/row.cpp:1450
-#: ibpp/row.cpp:1461 ibpp/row.cpp:1469
+#: ibpp/array.cpp:845 ibpp/array.cpp:856 ibpp/array.cpp:867 ibpp/row.cpp:912
+#: ibpp/row.cpp:936 ibpp/row.cpp:977 ibpp/row.cpp:1015 ibpp/row.cpp:1050
+#: ibpp/row.cpp:1056 ibpp/row.cpp:1063 ibpp/row.cpp:1077 ibpp/row.cpp:1084
+#: ibpp/row.cpp:1091 ibpp/row.cpp:1108 ibpp/row.cpp:1114 ibpp/row.cpp:1129
+#: ibpp/row.cpp:1163 ibpp/row.cpp:1201 ibpp/row.cpp:1234 ibpp/row.cpp:1274
+#: ibpp/row.cpp:1317 ibpp/row.cpp:1364 ibpp/row.cpp:1373 ibpp/row.cpp:1382
+#: ibpp/row.cpp:1391 ibpp/row.cpp:1397 ibpp/row.cpp:1404 ibpp/row.cpp:1419
+#: ibpp/row.cpp:1427 ibpp/row.cpp:1435 ibpp/row.cpp:1456 ibpp/row.cpp:1462
+#: ibpp/row.cpp:1473 ibpp/row.cpp:1481
 msgid "Incompatible types."
 msgstr "互換性のない型。"
 
 #: ibpp/array.cpp:341 ibpp/array.cpp:406 ibpp/array.cpp:418 ibpp/array.cpp:628
-#: ibpp/array.cpp:640 ibpp/array.cpp:707 ibpp/row.cpp:940 ibpp/row.cpp:947
-#: ibpp/row.cpp:985 ibpp/row.cpp:1281 ibpp/row.cpp:1324 ibpp/row.cpp:1333
+#: ibpp/array.cpp:640 ibpp/array.cpp:707 ibpp/row.cpp:952 ibpp/row.cpp:959
+#: ibpp/row.cpp:997 ibpp/row.cpp:1293 ibpp/row.cpp:1336 ibpp/row.cpp:1345
 msgid "Out of range numeric conversion !"
 msgstr "数値に変換できない範囲です !"
 
@@ -3829,31 +3830,33 @@ msgstr " and "
 #: ibpp/row.cpp:578 ibpp/row.cpp:586 ibpp/row.cpp:594 ibpp/row.cpp:602
 #: ibpp/row.cpp:610 ibpp/row.cpp:618 ibpp/row.cpp:636 ibpp/row.cpp:644
 #: ibpp/row.cpp:700 ibpp/row.cpp:713 ibpp/row.cpp:726 ibpp/row.cpp:739
-#: ibpp/row.cpp:776 ibpp/row.cpp:787 ibpp/row.cpp:798 ibpp/row.cpp:809
-#: ibpp/row.cpp:819 ibpp/statement.cpp:1019 ibpp/statement.cpp:1027
-#: ibpp/statement.cpp:1037 ibpp/statement.cpp:1045 ibpp/statement.cpp:1053
-#: ibpp/statement.cpp:1061 ibpp/statement.cpp:1069 ibpp/statement.cpp:1079
-#: ibpp/statement.cpp:1087 ibpp/statement.cpp:1097 ibpp/statement.cpp:1105
-#: ibpp/statement.cpp:1115 ibpp/statement.cpp:1123 ibpp/statement.cpp:1131
-#: ibpp/statement.cpp:1141 ibpp/statement.cpp:1149 ibpp/statement.cpp:1159
-#: ibpp/statement.cpp:1167 ibpp/statement.cpp:1175 ibpp/statement.cpp:1184
-#: ibpp/statement.cpp:1192 ibpp/statement.cpp:1200 ibpp/statement.cpp:1208
-#: ibpp/statement.cpp:1216 ibpp/statement.cpp:1224 ibpp/statement.cpp:1242
-#: ibpp/statement.cpp:1250 ibpp/statement.cpp:1260 ibpp/statement.cpp:1268
-#: ibpp/statement.cpp:1276 ibpp/statement.cpp:1284 ibpp/statement.cpp:1292
-#: ibpp/statement.cpp:1302 ibpp/statement.cpp:1310 ibpp/statement.cpp:1320
-#: ibpp/statement.cpp:1328 ibpp/statement.cpp:1338 ibpp/statement.cpp:1346
-#: ibpp/statement.cpp:1356 ibpp/statement.cpp:1364 ibpp/statement.cpp:1374
-#: ibpp/statement.cpp:1382 ibpp/statement.cpp:1390 ibpp/statement.cpp:1398
-#: ibpp/statement.cpp:1406 ibpp/statement.cpp:1414 ibpp/statement.cpp:1422
-#: ibpp/statement.cpp:1448 ibpp/statement.cpp:1456 ibpp/statement.cpp:1464
-#: ibpp/statement.cpp:1472 ibpp/statement.cpp:1502 ibpp/statement.cpp:1512
+#: ibpp/row.cpp:751 ibpp/row.cpp:788 ibpp/row.cpp:799 ibpp/row.cpp:810
+#: ibpp/row.cpp:821 ibpp/row.cpp:831 ibpp/statement.cpp:1019
+#: ibpp/statement.cpp:1027 ibpp/statement.cpp:1037 ibpp/statement.cpp:1045
+#: ibpp/statement.cpp:1053 ibpp/statement.cpp:1061 ibpp/statement.cpp:1069
+#: ibpp/statement.cpp:1079 ibpp/statement.cpp:1087 ibpp/statement.cpp:1097
+#: ibpp/statement.cpp:1105 ibpp/statement.cpp:1115 ibpp/statement.cpp:1123
+#: ibpp/statement.cpp:1131 ibpp/statement.cpp:1141 ibpp/statement.cpp:1149
+#: ibpp/statement.cpp:1159 ibpp/statement.cpp:1167 ibpp/statement.cpp:1175
+#: ibpp/statement.cpp:1184 ibpp/statement.cpp:1192 ibpp/statement.cpp:1200
+#: ibpp/statement.cpp:1208 ibpp/statement.cpp:1216 ibpp/statement.cpp:1224
+#: ibpp/statement.cpp:1242 ibpp/statement.cpp:1250 ibpp/statement.cpp:1260
+#: ibpp/statement.cpp:1268 ibpp/statement.cpp:1276 ibpp/statement.cpp:1284
+#: ibpp/statement.cpp:1292 ibpp/statement.cpp:1302 ibpp/statement.cpp:1310
+#: ibpp/statement.cpp:1320 ibpp/statement.cpp:1328 ibpp/statement.cpp:1338
+#: ibpp/statement.cpp:1346 ibpp/statement.cpp:1356 ibpp/statement.cpp:1364
+#: ibpp/statement.cpp:1374 ibpp/statement.cpp:1382 ibpp/statement.cpp:1390
+#: ibpp/statement.cpp:1398 ibpp/statement.cpp:1406 ibpp/statement.cpp:1414
+#: ibpp/statement.cpp:1422 ibpp/statement.cpp:1448 ibpp/statement.cpp:1456
+#: ibpp/statement.cpp:1464 ibpp/statement.cpp:1472 ibpp/statement.cpp:1512
+#: ibpp/statement.cpp:1522
 msgid "The row is not initialized."
 msgstr "行は初期化されていません。"
 
 #: ibpp/row.cpp:45 ibpp/row.cpp:265 ibpp/row.cpp:702 ibpp/row.cpp:715
-#: ibpp/row.cpp:728 ibpp/row.cpp:741 ibpp/row.cpp:778 ibpp/row.cpp:789
-#: ibpp/row.cpp:800 ibpp/row.cpp:811 ibpp/row.cpp:865 ibpp/row.cpp:1130
+#: ibpp/row.cpp:728 ibpp/row.cpp:741 ibpp/row.cpp:753 ibpp/row.cpp:790
+#: ibpp/row.cpp:801 ibpp/row.cpp:812 ibpp/row.cpp:823 ibpp/row.cpp:877
+#: ibpp/row.cpp:1142
 msgid "Variable index out of range."
 msgstr "可変インデックスの範囲外です。"
 
@@ -3905,11 +3908,11 @@ msgstr "列名 <empty> が見つかりません。"
 msgid "Could not find matching column."
 msgstr "一致する列が見つかりません。"
 
-#: ibpp/row.cpp:867
+#: ibpp/row.cpp:879
 msgid "Unexpected null pointer detected."
 msgstr "予期せぬNULLポインタが検出されました。"
 
-#: ibpp/row.cpp:1121
+#: ibpp/row.cpp:1133
 msgid "The field uses an unsupported SQL type !"
 msgstr "この列は未サポートのSQLタイプを使用しています!"
 
@@ -4025,7 +4028,7 @@ msgstr "isc_dsql_describe_bindが失敗しました"
 #: ibpp/statement.cpp:643 ibpp/statement.cpp:653 ibpp/statement.cpp:1480
 #: ibpp/statement.cpp:1490 ibpp/statement.cpp:1500 ibpp/statement.cpp:1510
 #: ibpp/statement.cpp:1520 ibpp/statement.cpp:1530 ibpp/statement.cpp:1540
-#: ibpp/statement.cpp:1550 ibpp/statement.cpp:1560
+#: ibpp/statement.cpp:1550 ibpp/statement.cpp:1560 ibpp/statement.cpp:1570
 msgid "No statement has been prepared."
 msgstr "SQL文が準備されていません。"
 
@@ -4073,7 +4076,7 @@ msgstr "SQL文が実行されていないか、または結果セットが入手
 msgid "isc_dsql_fetch failed."
 msgstr "isc_dsql_fetchが失敗しました。"
 
-#: ibpp/statement.cpp:496 ibpp/statement.cpp:1647
+#: ibpp/statement.cpp:496 ibpp/statement.cpp:1657
 msgid "isc_dsql_free_statement failed."
 msgstr "isc_dsql_free_statementが失敗しました。"
 
@@ -4103,28 +4106,28 @@ msgstr "マッチするパラメータが見つかりません。"
 msgid "Parameter does not exists."
 msgstr "パラメータが存在しません。"
 
-#: ibpp/statement.cpp:1482 ibpp/statement.cpp:1492
+#: ibpp/statement.cpp:1482 ibpp/statement.cpp:1492 ibpp/statement.cpp:1502
 msgid "The statement does not return results."
 msgstr "SQL文は結果を返しません。"
 
-#: ibpp/statement.cpp:1522 ibpp/statement.cpp:1532 ibpp/statement.cpp:1542
-#: ibpp/statement.cpp:1552 ibpp/statement.cpp:1562
+#: ibpp/statement.cpp:1532 ibpp/statement.cpp:1542 ibpp/statement.cpp:1552
+#: ibpp/statement.cpp:1562 ibpp/statement.cpp:1572
 msgid "The statement uses no parameters."
 msgstr "SQL文はパラメータを利用できません。"
 
-#: ibpp/statement.cpp:1600
+#: ibpp/statement.cpp:1610
 msgid "Can't attach a 0 IDatabase object."
 msgstr "0 IDatabaseオブジェクトに接続できません。"
 
-#: ibpp/statement.cpp:1620
+#: ibpp/statement.cpp:1630
 msgid "Can't attach a 0 ITransaction object."
 msgstr "0 ITransactionオブジェクトに接続できません。"
 
-#: ibpp/time.cpp:43
+#: ibpp/time.cpp:45
 msgid "Invalid time value"
 msgstr "時刻値が無効です"
 
-#: ibpp/time.cpp:57
+#: ibpp/time.cpp:59
 msgid "Invalid hour, minute, second values"
 msgstr "時、分、秒の値が無効です"
 
@@ -4333,8 +4336,6 @@ msgid "SysCollation"
 msgstr "システム照合順序"
 
 #: metadata/Collation.cpp:249
-#, fuzzy
-#| msgid "Collation"
 msgid "Collations"
 msgstr "照合順序"
 
@@ -4375,108 +4376,108 @@ msgstr "無効な正規表現"
 msgid "getIdentifiers"
 msgstr "getIdentifiers"
 
-#: metadata/database.cpp:1232
+#: metadata/database.cpp:1234
 msgid "Complete"
 msgstr "完了"
 
-#: metadata/database.cpp:1269
+#: metadata/database.cpp:1271
 #, c-format
 msgid "Loading %s..."
 msgstr "%s をロード中..."
 
-#: metadata/database.cpp:1284
+#: metadata/database.cpp:1286
 msgid "tables"
 msgstr "テーブル"
 
-#: metadata/database.cpp:1287
+#: metadata/database.cpp:1289
 msgid "system tables"
 msgstr "システムテーブル"
 
-#: metadata/database.cpp:1291
+#: metadata/database.cpp:1293
 msgid "global temporary table"
 msgstr "グローバル一時テーブル"
 
-#: metadata/database.cpp:1295
+#: metadata/database.cpp:1297
 msgid "views"
 msgstr "ビュー"
 
-#: metadata/database.cpp:1298
+#: metadata/database.cpp:1300
 msgid "procedures"
 msgstr "プロシージャ"
 
-#: metadata/database.cpp:1301
+#: metadata/database.cpp:1303
 msgid "DML triggers"
 msgstr "DMLトリガー"
 
-#: metadata/database.cpp:1304
+#: metadata/database.cpp:1306
 msgid "roles"
 msgstr "ロール"
 
-#: metadata/database.cpp:1307
+#: metadata/database.cpp:1309
 msgid "system roles"
 msgstr "システムロール"
 
-#: metadata/database.cpp:1310
+#: metadata/database.cpp:1312
 msgid "domains"
 msgstr "ドメイン"
 
-#: metadata/database.cpp:1314
+#: metadata/database.cpp:1316
 msgid "functions SQL"
 msgstr "関数(SQL)"
 
-#: metadata/database.cpp:1318
+#: metadata/database.cpp:1320
 msgid "functions UDF"
 msgstr "関数(UDF)"
 
-#: metadata/database.cpp:1321
+#: metadata/database.cpp:1323
 msgid "generators"
 msgstr "ジェネレータ"
 
-#: metadata/database.cpp:1324
+#: metadata/database.cpp:1326
 msgid "exceptions"
 msgstr "例外"
 
-#: metadata/database.cpp:1328
+#: metadata/database.cpp:1330
 msgid "packages"
 msgstr "パッケージ"
 
-#: metadata/database.cpp:1331
+#: metadata/database.cpp:1333
 msgid "system packages"
 msgstr "システムパッケージ"
 
-#: metadata/database.cpp:1336
+#: metadata/database.cpp:1338
 msgid "DBTriggers"
 msgstr "DBトリガー"
 
-#: metadata/database.cpp:1341
+#: metadata/database.cpp:1343
 msgid "DDLTriggers"
 msgstr "DDLトリガー"
 
-#: metadata/database.cpp:1345
+#: metadata/database.cpp:1347
 msgid "system domains"
 msgstr "システムドメイン"
 
-#: metadata/database.cpp:1348 metadata/database.cpp:1354
+#: metadata/database.cpp:1350 metadata/database.cpp:1356
 msgid "indices"
 msgstr "インデックス"
 
-#: metadata/database.cpp:1351
+#: metadata/database.cpp:1353
 msgid "system indices"
 msgstr "システムインデックス"
 
-#: metadata/database.cpp:1357
+#: metadata/database.cpp:1359
 msgid "CharacterSet"
 msgstr "文字セット"
 
-#: metadata/database.cpp:1360
+#: metadata/database.cpp:1362
 msgid "User Collations"
 msgstr "User Collations"
 
-#: metadata/database.cpp:1829
+#: metadata/database.cpp:1831
 msgid "[Trusted user]"
 msgstr "[信頼されたユーザー]"
 
-#: metadata/database.cpp:2230
+#: metadata/database.cpp:2232
 #, c-format
 msgid "Operation \"%s\" not allowed on a disconnected database."
 msgstr "切断済みデータベースに対する操作 \"%s\" は許可されていません。"
