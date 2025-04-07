@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: flamerobin\n"
-"POT-Creation-Date: 2024-10-31 09:30+0900\n"
-"PO-Revision-Date: 2024-10-31 09:32+0900\n"
+"POT-Creation-Date: 2025-04-04 16:36+0900\n"
+"PO-Revision-Date: 2025-04-04 16:36+0900\n"
 "Last-Translator: akira uemura <git@arumeu.sakura.ne.jp>\n"
 "Language-Team: a.uemura\n"
 "Language: ja\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-Basepath: ../src\n"
 "X-Poedit-KeywordsList: _;wxGetTranslation\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -4504,13 +4504,13 @@ msgid "Function %s depends on parameter %s.%s"
 msgstr "ストアドプロシージャ %s はパラメータ %s.%s に依存しています"
 
 #: metadata/function.cpp:465 metadata/package.cpp:400
-#: metadata/procedure.cpp:485
+#: metadata/procedure.cpp:490
 #, c-format
 msgid "%d total dependencies (20 shown)."
 msgstr "全部で %d 個の依存関係があります。(その内 20 個を表示)"
 
 #: metadata/function.cpp:468 metadata/package.cpp:403
-#: metadata/procedure.cpp:488
+#: metadata/procedure.cpp:493
 msgid "Dependencies broken"
 msgstr "依存関係が壊れています"
 
@@ -4558,17 +4558,17 @@ msgstr "パッケージ"
 msgid "System Packages"
 msgstr "システムパッケージ"
 
-#: metadata/procedure.cpp:472
+#: metadata/procedure.cpp:477
 #, c-format
 msgid "Procedure %s depends on parameter %s.%s"
 msgstr "プロシージャ %s はパラメータ %s.%s に依存しています"
 
-#: metadata/procedure.cpp:490
+#: metadata/procedure.cpp:495
 #, c-format
 msgid "Some other procedures depend on %s:%s%s%s"
 msgstr "他の一部のプロシージャは %s:%s%s%s に依存しています"
 
-#: metadata/procedure.cpp:575
+#: metadata/procedure.cpp:580
 msgid "Procedures"
 msgstr "プロシージャ"
 
