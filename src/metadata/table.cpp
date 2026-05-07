@@ -45,7 +45,7 @@ Table::Table(DatabasePtr database, const wxString& name)
     : Relation(ntTable, database, name),
         primaryKeyLoadedM(false), foreignKeysLoadedM(false),
         checkConstraintsLoadedM(false), uniqueConstraintsLoadedM(false),
-        indicesLoadedM(false)
+        indicesLoadedM(false), externalCSVOptionsLoadedM(false)
 {
 }
 
@@ -53,6 +53,52 @@ wxString Table::getExternalPath()
 {
     ensurePropertiesLoaded();
     return externalPathM;
+}
+
+bool Table::isCSVExternal()
+{
+    return getExternalFormat() == 1;
+}
+
+std::map<wxString, wxString> Table::getExternalCSVOptions()
+{
+    loadExternalCSVOptions();
+    return externalCSVOptionsM;
+}
+
+void Table::loadExternalCSVOptions()
+{
+    if (externalCSVOptionsLoadedM || !isCSVExternal())
+        return;
+    externalCSVOptionsM.clear();
+
+    DatabasePtr db = getDatabase();
+    if (!db->getInfo().getODSVersionIsHigherOrEqualTo(14, 0))
+    {
+        externalCSVOptionsLoadedM = true;
+        return;
+    }
+
+    MetadataLoader* loader = db->getMetadataLoader();
+    MetadataLoaderTransaction tr(loader);
+    wxMBConv* conv = db->getCharsetConverter();
+
+    fr::IStatementPtr& st1 = loader->getStatement(
+        "select rdb$option_name, rdb$option_value "
+        "from rdb$external_table_options "
+        "where rdb$relation_name = ? "
+        "order by 1"
+    );
+
+    st1->setString(0, wx2std(getName_(), conv));
+    st1->execute();
+    while (st1->fetch())
+    {
+        wxString name = std2wxIdentifier(st1->getString(0), conv);
+        wxString value = wxString(st1->getString(1).c_str(), *conv);
+        externalCSVOptionsM[name] = value;
+    }
+    externalCSVOptionsLoadedM = true;
 }
 
 void Table::setExternalFilePath(const wxString& value)

@@ -183,6 +183,24 @@ wxString MetadataItemCreateStatementVisitor::getCreateTableStatement()
         ");\n";
 }
 
+/*static*/
+wxString MetadataItemCreateStatementVisitor::getCreateCSVExternalTableStatement()
+{
+    return "CREATE TABLE table_name\n"
+        "EXTERNAL 'file_path'\n"
+        "FORMAT CSV (\n"
+        "    DELIMITER ',',\n"
+        "    QUOTE '\"',\n"
+        "    ESCAPE '\"',\n"
+        "    SKIP_ROWS 1,\n"
+        "    NULL AS ''\n"
+        ")\n"
+        "(\n"
+        "    column_name <datatype>,\n"
+        "    ...\n"
+        ");\n";
+}
+
 wxString MetadataItemCreateStatementVisitor::getCreateGTTTableStatement()
 {
     return "CREATE TABLE table_name\n"

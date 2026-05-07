@@ -37,6 +37,7 @@ class Relation: public MetadataItem
 {
 private:
     int relationTypeM;
+    int externalFormatM;
     wxString ownerM;
     wxString sqlSecurityM;
 protected:
@@ -56,6 +57,7 @@ protected:
     // (called from loadProperties() method)
     // this loads more data than necesary, but causes less database roundtrips
     virtual void setExternalFilePath(const wxString& value);
+    virtual void setExternalFormat(int value);
     virtual void setSource(const wxString& value);
 
 public:
@@ -73,6 +75,7 @@ public:
 	*/
     wxString getSqlSecurity();
     int getRelationType();
+    int getExternalFormat();
 
     ColumnPtrs::iterator begin();
     ColumnPtrs::iterator end();

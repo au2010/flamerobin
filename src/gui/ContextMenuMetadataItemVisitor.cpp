@@ -417,6 +417,10 @@ void MainObjectMenuMetadataItemVisitor::visitTable(Table& table)
 void MainObjectMenuMetadataItemVisitor::visitTables(Tables& tables)
 {
     addCreateItem();
+    if (tables.getDatabase()->getInfo().getODSVersionIsHigherOrEqualTo(14, 0))
+    {
+        menuM->Append(Cmds::Menu_CreateCSVExternalTable, _("Create new &CSV external table..."));
+    }
     addSeparator();
     addGenerateCodeMenu(tables);
     addSeparator();

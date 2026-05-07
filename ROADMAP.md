@@ -84,7 +84,7 @@ The following phases track FlameRobin UI/metadata support for features introduce
 - [x] **Enhanced SQL Security Management** — UI for `ALTER ... SQL SECURITY {DEFINER | INVOKER}` across all applicable metadata objects.
 - [ ] Optional String Max Lengths — Ensure `VARCHAR` / `CHAR` column DDL handles implicit-length syntax per SQL:2023.
 
-- [ ] **CSV External Tables** — UI support for defining external tables backed by CSV files when the engine supports it.
+- [x] **CSV External Tables** — UI support for defining external tables backed by CSV files when the engine supports it.
 - [x] **Enhanced Security: Owner Assignment on CREATE DATABASE** — Expose ownership and initial-user options in the Create Database dialog.
 
 ---

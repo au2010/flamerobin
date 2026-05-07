@@ -87,6 +87,7 @@ public:
     void OnMenuToggleSearchBar(wxCommandEvent& event);
     void OnMenuToggleDisconnected(wxCommandEvent& event);
     void OnMenuCreateObject(wxCommandEvent& event);
+    void OnMenuCreateCSVExternalTable(wxCommandEvent& event);
     void OnMenuAddColumn(wxCommandEvent& event);
     void OnMenuObjectProperties(wxCommandEvent& event);
     void OnMenuObjectRefresh(wxCommandEvent& event);

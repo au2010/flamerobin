@@ -105,6 +105,7 @@ enum {
     Menu_Disconnect,
     Menu_ExecuteStatements,
     Menu_CreateObject,
+    Menu_CreateCSVExternalTable,
     Menu_DatabasePreferences,
     Menu_ShowAllGeneratorValues,
     Menu_BrowseData,

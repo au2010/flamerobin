@@ -462,6 +462,7 @@ EVT_UPDATE_UI(Cmds::Menu_StartupDatabase, MainFrame::OnMenuUpdateIfDatabaseNotCo
 
 
     EVT_MENU(Cmds::Menu_CreateObject, MainFrame::OnMenuCreateObject)
+    EVT_MENU(Cmds::Menu_CreateCSVExternalTable, MainFrame::OnMenuCreateCSVExternalTable)
     EVT_MENU(Cmds::Menu_AlterObject, MainFrame::OnMenuAlterObject)
     EVT_MENU(Cmds::Menu_DropObject, MainFrame::OnMenuDropObject)
     EVT_MENU(Cmds::Menu_ObjectProperties, MainFrame::OnMenuObjectProperties)
@@ -1684,6 +1685,12 @@ void MainFrame::OnMenuCreateObject(wxCommandEvent& WXUNUSED(event))
     MetadataItemCreateStatementVisitor csv;
     item->acceptVisitor(&csv);
     showCreateTemplate(csv.getStatement());
+}
+
+void MainFrame::OnMenuCreateCSVExternalTable(wxCommandEvent& WXUNUSED(event))
+{
+    showCreateTemplate(
+        MetadataItemCreateStatementVisitor::getCreateCSVExternalTableStatement());
 }
 
 void MainFrame::showCreateTemplate(const wxString& statement)

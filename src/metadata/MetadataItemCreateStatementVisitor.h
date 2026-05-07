@@ -41,6 +41,7 @@ public:
     static wxString getCreateFunctionSQLStatement();
     static wxString getCreateGeneratorStatement();
     static wxString getCreateGTTTableStatement();
+    static wxString getCreateCSVExternalTableStatement();
     static wxString getCreateIndexStatement();
     static wxString getCreatePackageStatement();
     static wxString getCreateProcedureStatement();

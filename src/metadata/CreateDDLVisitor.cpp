@@ -618,6 +618,26 @@ void CreateDDLVisitor::visitTable(Table& t)
         external.Replace("'", "''");
         preSqlM += " EXTERNAL '" + external + "'";
     }
+    if (t.isCSVExternal())
+    {
+        preSqlM += " FORMAT CSV";
+        std::map<wxString, wxString> options = t.getExternalCSVOptions();
+        if (!options.empty())
+        {
+            preSqlM += " (";
+            for (std::map<wxString, wxString>::iterator it = options.begin(); it != options.end(); ++it)
+            {
+                if (it != options.begin())
+                    preSqlM += ", ";
+                preSqlM += it->first;
+                if (it->first == "SKIP_ROWS")
+                    preSqlM += " " + it->second;
+                else
+                    preSqlM += " '" + it->second + "'";
+            }
+            preSqlM += ")";
+        }
+    }
     preSqlM += "\n(\n  ";
     t.ensureChildrenLoaded();
     for (ColumnPtrs::iterator it=t.begin(); it!=t.end(); ++it)

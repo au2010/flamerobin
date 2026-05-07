@@ -705,6 +705,33 @@ void MetadataTemplateCmdHandler::handleTemplateCmd(TemplateProcessor *tp,
             processedText += tp->escapeChars(v->getSource(), false);
     }
 
+    // {%tableinfo:<property>%}
+    // If the current object is a table, expands to the table's
+    // requested property.
+    else if ((cmdName == "tableinfo") && (cmdParams.Count() >= 1))
+    {
+        Table* t = dynamic_cast<Table*>(object);
+        if (!t)
+            return;
+
+        if (cmdParams[0] == "external_path")
+            processedText += tp->escapeChars(t->getExternalPath());
+        else if (cmdParams[0] == "is_external")
+            processedText += getBooleanAsString(!t->getExternalPath().IsEmpty());
+        else if (cmdParams[0] == "is_csv")
+            processedText += getBooleanAsString(t->isCSVExternal());
+        else if (cmdParams[0] == "csv_options")
+        {
+            std::map<wxString, wxString> options = t->getExternalCSVOptions();
+            for (std::map<wxString, wxString>::iterator it = options.begin(); it != options.end(); ++it)
+            {
+                if (it != options.begin())
+                    processedText += ", ";
+                processedText += it->first + "='" + it->second + "'";
+            }
+        }
+    }
+
     // {%procedureinfo:<property>%}
     // If the current object is a procedure, expands to the procedure's
     // requested property.

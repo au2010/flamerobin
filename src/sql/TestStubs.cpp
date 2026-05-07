@@ -59,6 +59,7 @@ const wxString MetadataItem::getTypeName() const { return ""; }
 const wxString MetadataItem::getItemPath() const { return ""; }
 const wxString MetadataItem::getPathId() const { return ""; }
 const wxString MetadataItem::getId() const { return getName_(); }
+wxString MetadataItem::getSqlSecurity() { return ""; }
 
 void MetadataItem::loadDescription() {}
 void MetadataItem::saveDescription(const wxString&) {}
@@ -165,7 +166,10 @@ void Relation::loadChildren() {}
 void Relation::lockChildren() {}
 void Relation::unlockChildren() {}
 void Relation::setExternalFilePath(const wxString&) {}
+void Relation::setExternalFormat(int) {}
 void Relation::setSource(const wxString&) {}
+wxString Relation::getSqlSecurity() { return ""; }
+int Relation::getExternalFormat() { return 0; }
 bool Relation::getChildren(std::vector<MetadataItem *>&) { return false; }
 
 // --- Table Stubs ---
@@ -195,6 +199,7 @@ void Procedure::lockChildren() {}
 void Procedure::unlockChildren() {}
 bool Procedure::getChildren(std::vector<MetadataItem *>&) { return false; }
 wxString Procedure::getQuotedName() const { return getIdentifier().getQuoted(); }
+wxString Procedure::getSqlSecurity() { return ""; }
 
 // --- Trigger Stubs ---
 Trigger::Trigger(NodeType type, DatabasePtr database, const wxString& name)
@@ -202,6 +207,7 @@ Trigger::Trigger(NodeType type, DatabasePtr database, const wxString& name)
 const wxString Trigger::getTypeName() const { return ""; }
 void Trigger::acceptVisitor(MetadataItemVisitor*) {}
 void Trigger::loadProperties() {}
+wxString Trigger::getSqlSecurity() { return ""; }
 
 DMLTrigger::DMLTrigger(DatabasePtr database, const wxString& name) 
     : Trigger(ntDMLTrigger, database, name) {}
@@ -229,6 +235,7 @@ CharacterSetPtr Database::getCharsetById(int) { return CharacterSetPtr(); }
 DatabasePtr Database::getDatabase() const { return std::const_pointer_cast<Database>(shared_from_this()); }
 const wxString Database::getTypeName() const { return ""; }
 const wxString Database::getId() const { return getName_(); }
+wxString Database::getSqlSecurity() { return ""; }
 void Database::acceptVisitor(MetadataItemVisitor*) {}
 fr::IDatabasePtr Database::getDALDatabase() const { return fr::IDatabasePtr(); }
 void Database::loadChildren() {}

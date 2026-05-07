@@ -122,6 +122,7 @@ void Relation::loadProperties()
     // for views: source as blob
     sql += "rdb$view_source ";
     sql += db->getInfo().getODSVersionIsHigherOrEqualTo(13, 0)? ", rdb$sql_security " : ", null ";
+    sql += db->getInfo().getODSVersionIsHigherOrEqualTo(14, 0)? ", rdb$external_format " : ", 0 ";
     sql += "from rdb$relations where rdb$relation_name = ?";
 
     fr::IStatementPtr& st1 = loader->getStatement(sql);
@@ -160,6 +161,11 @@ void Relation::loadProperties()
         }
         else
             sqlSecurityM.clear();
+        // External Format (FB 6.0+)
+        if (!st1->isNull(5))
+            setExternalFormat(st1->getInt32(5));
+        else
+            setExternalFormat(0);
     }
 
     setPropertiesLoaded(true);
@@ -167,6 +173,11 @@ void Relation::loadProperties()
 
 void Relation::setExternalFilePath(const wxString& /*value*/)
 {
+}
+
+void Relation::setExternalFormat(int value)
+{
+    externalFormatM = value;
 }
 
 void Relation::setSource(const wxString& /*value*/)
@@ -189,6 +200,12 @@ int Relation::getRelationType()
 {
     ensurePropertiesLoaded();
     return relationTypeM;
+}
+
+int Relation::getExternalFormat()
+{
+    ensurePropertiesLoaded();
+    return externalFormatM;
 }
 
 void Relation::loadChildren()

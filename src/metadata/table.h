@@ -54,6 +54,9 @@ private:
     void loadIndices();
 
     wxString externalPathM;
+    std::map<wxString, wxString> externalCSVOptionsM;
+    bool externalCSVOptionsLoadedM;
+    void loadExternalCSVOptions();
 
 protected:
     virtual void setExternalFilePath(const wxString& value);
@@ -69,6 +72,8 @@ public:
     void invalidateIndices(const wxString& forIndex = wxEmptyString);
 
     wxString getExternalPath();
+    bool isCSVExternal();
+    std::map<wxString, wxString> getExternalCSVOptions();
 
     PrimaryKeyConstraint *getPrimaryKey();
     std::vector<ForeignKey> *getForeignKeys();
