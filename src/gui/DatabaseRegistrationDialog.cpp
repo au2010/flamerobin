@@ -659,6 +659,10 @@ void DatabaseRegistrationDialog::OnOkButtonClick(wxCommandEvent& WXUNUSED(event)
     {
         wxMessageBox(e.what(), _("Error"), wxOK|wxICON_ERROR);
     }
+    catch (const std::exception& e)
+    {
+        wxMessageBox(wxString::FromUTF8(e.what()), _("Error"), wxOK|wxICON_ERROR);
+    }
     catch (...)
     {
         wxMessageBox(_("SYSTEM ERROR!"), _("Error"), wxOK|wxICON_ERROR);

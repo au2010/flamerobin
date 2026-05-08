@@ -27,6 +27,7 @@
 #include "engine/db/fbcpp/FbCppBlob.h"
 #include "core/StringUtils.h"
 
+#include <fb-cpp/Exception.h>
 #include <stdexcept>
 #include <firebird/Interface.h>
 
@@ -97,7 +98,7 @@ void FbCppDatabase::create(int /*pagesize*/, int dialect, const std::string& own
     if (!owner.empty() || !initialUser.empty())
     {
         auto status = getClient().newStatus();
-        Firebird::ThrowStatusWrapper statusWrapper(status.get());
+        fbcpp::impl::StatusWrapper statusWrapper(getClient(), status.get());
         auto dpbBuilder = fbcpp::fbUnique(getClient().getUtil()->getXpbBuilder(&statusWrapper, 
             Firebird::IXpbBuilder::DPB, nullptr, 0));
 
@@ -286,7 +287,7 @@ std::string FbCppDatabase::getTimezoneName(int timezoneId)
         unsigned dummyHour = 0, dummyMinute = 0, dummySecond = 0, dummyFractions = 0;
         
         auto status = getClient().newStatus();
-        Firebird::ThrowStatusWrapper statusWrapper(status.get());
+        fbcpp::impl::StatusWrapper statusWrapper(getClient(), status.get());
         getClient().getUtil()->decodeTimeTz(&statusWrapper, &iscTmTz,
             &dummyHour, &dummyMinute, &dummySecond, &dummyFractions,
             sizeof(tzBuf), tzBuf);

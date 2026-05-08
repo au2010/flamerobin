@@ -74,8 +74,8 @@ void IbppDatabase::create(int pagesize, int dialect, const std::string& owner,
         extra += "INITIAL USER '" + initialUser + "'";
     }
 
-    databaseM = IBPP::DatabaseFactory(clientLibM, connStrM, userM, passwordM,
-        roleM, charsetM, extra, cryptKeyDataM);
+    databaseM = IBPP::DatabaseFactory("", connStrM, userM, passwordM,
+        roleM, charsetM, extra, clientLibM, cryptKeyDataM);
     databaseM->Create(dialect);
 }
 
