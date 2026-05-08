@@ -91,6 +91,18 @@ int main()
             return 0;
         }
 
+        // Check active profiler plugin
+        try {
+            st->prepare("SELECT RDB$CONFIG_VALUE FROM RDB$CONFIG WHERE RDB$CONFIG_NAME = 'Default_Profiler'");
+            st->execute();
+            if (st->fetch())
+                std::cout << "    Debug: Default_Profiler = " << st->getString(0) << "\n";
+            else
+                std::cout << "    Debug: Default_Profiler NOT SET in RDB$CONFIG\n";
+        } catch(...) {
+             std::cout << "    Debug: RDB$CONFIG check failed (normal on older versions)\n";
+        }
+
         // Check if profiler tables exist
         std::vector<std::string> tables = { "PLG$PROF_SESSIONS", "PLG$PROF_STATEMENTS", "PLG$PROF_RECORD_SOURCES", "PLG$PROF_RECORD_SOURCE_STATS", "PLG$PROF_REQUESTS" };
         for (const auto& t : tables)
@@ -125,6 +137,12 @@ int main()
         // Use INSERT ... SELECT to ensure there is a record source to profile
         st->prepare("INSERT INTO t1 (id, val) SELECT 1, 'test' FROM RDB$DATABASE");
         st->execute();
+        
+        // Add a simple SELECT as well
+        st->prepare("SELECT * FROM t1");
+        st->execute();
+        while (st->fetch()) {}
+
         tr->commitRetain();
 
         // Flush and finish
