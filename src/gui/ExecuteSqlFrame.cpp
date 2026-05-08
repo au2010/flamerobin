@@ -2895,11 +2895,10 @@ bool ExecuteSqlFrame::execute(wxString sql, const wxString& terminator,
             executedStatementsM.push_back(stm);
         }
     }
-    catch(std::exception& e)
+    catch(const std::exception& e)
     {
         splitScreen();
-        wxString msg(e.what(),
-            *databaseM->getCharsetConverter());
+        wxString msg(wxString::FromUTF8(e.what()));
         log(_("Error: ") + msg + "\n", ttError);
         retval = false;
     }
