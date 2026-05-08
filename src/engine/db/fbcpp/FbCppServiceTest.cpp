@@ -70,7 +70,7 @@ int main()
 
         std::cout << "  Testing getConnectedUsers (via IDatabase)...\n";
         fr::IDatabasePtr db = fr::DatabaseFactory::createDatabase(fr::DatabaseBackend::FbCpp);
-        std::string fullConnStr = "inet://" + serverName + dbName;
+        std::string fullConnStr = serverName + ":" + dbName;
         std::cout << "  Connecting to database: " << fullConnStr << "\n";
         db->setConnectionString(fullConnStr);
         db->setCredentials("SYSDBA", "masterkey");
