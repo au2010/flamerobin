@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build Windows (${{ matrix.arch }})
-    runs-on: windows-latest
+    runs-on: windows-2022
     strategy:
       fail-fast: false
       matrix:
@@ -63,16 +63,17 @@ jobs:
             Write-Error "Tools path not found: $toolsPath"
             exit 1
         }
-        Write-Host "Found VS Tools at: $toolsPath"
-        "tools_path=$toolsPath" | Add-Content -Path $env:GITHUB_OUTPUT
+        $toolsPathWithBackslash = $toolsPath + "\"
+        Write-Host "Found VS Tools at: $toolsPathWithBackslash"
+        echo "tools_path=$toolsPathWithBackslash" >> $env:GITHUB_OUTPUT
         
         # Set for global use in subsequent steps
-        "VS170COMNTOOLS=$toolsPath" | Add-Content -Path $env:GITHUB_ENV
+        echo "VS170COMNTOOLS=$toolsPathWithBackslash" >> $env:GITHUB_ENV
     
     - name: Bootstrap vcpkg
       run: |
         .\vcpkg\bootstrap-vcpkg.bat -disableMetrics
-        "VCPKG_ROOT=${{ github.workspace }}\vcpkg" | Add-Content -Path $env:GITHUB_ENV
+        echo "VCPKG_ROOT=${{ github.workspace }}\vcpkg" >> $env:GITHUB_ENV
     
     - name: Cache vcpkg binaries
       uses: actions/cache@v4

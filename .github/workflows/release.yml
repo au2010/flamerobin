@@ -142,7 +142,7 @@ jobs:
           files: flamerobin-*.flatpak
 
   build-windows:
-    runs-on: windows-latest
+    runs-on: windows-2022
     strategy:
       fail-fast: false
       matrix:
@@ -194,16 +194,16 @@ jobs:
           # Many legacy scripts expect the trailing backslash
           $toolsPathWithBackslash = $toolsPath + "\"
           Write-Host "Found VS Tools at: $toolsPathWithBackslash"
-          "tools_path=$toolsPathWithBackslash" | Add-Content -Path $env:GITHUB_OUTPUT
+          echo "tools_path=$toolsPathWithBackslash" >> $env:GITHUB_OUTPUT
           # Also set for global use just in case
-          "VS170COMNTOOLS=$toolsPathWithBackslash" | Add-Content -Path $env:GITHUB_ENV
-          "VS160COMNTOOLS=$toolsPathWithBackslash" | Add-Content -Path $env:GITHUB_ENV
-          "VS150COMNTOOLS=$toolsPathWithBackslash" | Add-Content -Path $env:GITHUB_ENV
+          echo "VS170COMNTOOLS=$toolsPathWithBackslash" >> $env:GITHUB_ENV
+          echo "VS160COMNTOOLS=$toolsPathWithBackslash" >> $env:GITHUB_ENV
+          echo "VS150COMNTOOLS=$toolsPathWithBackslash" >> $env:GITHUB_ENV
 
       - name: Bootstrap vcpkg
         run: |
           .\vcpkg\bootstrap-vcpkg.bat -disableMetrics
-          "VCPKG_ROOT=${{ github.workspace }}\vcpkg" | Add-Content -Path $env:GITHUB_ENV
+          echo "VCPKG_ROOT=${{ github.workspace }}\vcpkg" >> $env:GITHUB_ENV
 
       - name: Cache vcpkg binaries
         uses: actions/cache@v4
