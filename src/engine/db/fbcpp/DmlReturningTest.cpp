@@ -74,6 +74,7 @@ int main()
         bool isFb5 = (version.find("V5.0") != std::string::npos || 
                       version.find("V6.0") != std::string::npos ||
                       version.find("V7.0") != std::string::npos);
+        std::cout << "  Detected as FB5+: " << (isFb5 ? "YES" : "NO") << "\n";
         bool isFb4 = (version.find("V4.0") != std::string::npos);
         bool isFb3 = (version.find("V3.0") != std::string::npos);
 
