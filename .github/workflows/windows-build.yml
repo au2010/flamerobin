@@ -34,6 +34,13 @@ jobs:
         submodules: recursive
         fetch-depth: 0
 
+    - name: Patch fb-cpp
+      shell: pwsh
+      run: |
+        perl -i -pe 's/\.emplace_back\(value, ([^)]+)\)/.push_back({value, $1})/g' src/fb-cpp/src/fb-cpp/BackupManager.h
+        perl -i -0777 -pe 's/set\(VCPKG_ROOT "vcpkg"\)\nset\(CMAKE_TOOLCHAIN_FILE/option(ENABLE_VCPKG "Enable vcpkg" ON)\nif(ENABLE_VCPKG)\nset(VCPKG_ROOT "vcpkg")\nif(EXISTS "\${VCPKG_ROOT}\/scripts\/buildsystems\/vcpkg.cmake")\nset(CMAKE_TOOLCHAIN_FILE/g' src/fb-cpp/CMakeLists.txt
+        perl -i -0777 -pe 's/(set\(CMAKE_TOOLCHAIN_FILE.*"\)\n)/$1endif()\nelse()\nif(CMAKE_TOOLCHAIN_FILE MATCHES "vcpkg.cmake\$")\nunset(CMAKE_TOOLCHAIN_FILE CACHE)\nunset(CMAKE_TOOLCHAIN_FILE)\nendif()\nendif()\n/g' src/fb-cpp/CMakeLists.txt
+
     - name: Set up MSVC environment
       uses: ilammy/msvc-dev-cmd@v1
       with:
@@ -43,7 +50,10 @@ jobs:
       id: vs
       shell: pwsh
       run: |
-        $vsPath = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -property installationPath
+        $vsPath = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -version "[17.0,18.0)" -latest -property installationPath
+        if (-not $vsPath) {
+            $vsPath = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -property installationPath
+        }
         if (-not $vsPath) {
             Write-Error "Visual Studio installation not found"
             exit 1
@@ -60,7 +70,9 @@ jobs:
         "VS170COMNTOOLS=$toolsPath" | Add-Content -Path $env:GITHUB_ENV
     
     - name: Bootstrap vcpkg
-      run: .\vcpkg\bootstrap-vcpkg.bat -disableMetrics
+      run: |
+        .\vcpkg\bootstrap-vcpkg.bat -disableMetrics
+        "VCPKG_ROOT=${{ github.workspace }}\vcpkg" | Add-Content -Path $env:GITHUB_ENV
     
     - name: Cache vcpkg binaries
       uses: actions/cache@v4
