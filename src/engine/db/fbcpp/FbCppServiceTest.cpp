@@ -78,7 +78,9 @@ int main()
         }
 
         std::cout << "    Engine Version: " << db->getEngineVersion() << "\n";
-        std::cout << "    ODS Version: " << db->getInfo().getODSVersion() << "." << db->getInfo().getODSMinorVersion() << "\n";
+        fr::DatabaseInfoData info;
+        db->getInfo(&info);
+        std::cout << "    ODS Version: " << info.ods << "." << info.odsMinor << "\n";
         
         std::vector<std::string> users;
         db->getConnectedUsers(users);
