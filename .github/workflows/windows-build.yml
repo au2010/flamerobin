@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build Windows (${{ matrix.arch }})
-    runs-on: windows-2019
+    runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
@@ -58,9 +58,6 @@ jobs:
         
         # Set for global use in subsequent steps
         "VS170COMNTOOLS=$toolsPath" | Add-Content -Path $env:GITHUB_ENV
-        "VS160COMNTOOLS=$toolsPath" | Add-Content -Path $env:GITHUB_ENV
-        "VS150COMNTOOLS=$toolsPath" | Add-Content -Path $env:GITHUB_ENV
-        "VS140COMNTOOLS=$toolsPath" | Add-Content -Path $env:GITHUB_ENV
     
     - name: Bootstrap vcpkg
       run: .\vcpkg\bootstrap-vcpkg.bat -disableMetrics
@@ -77,10 +74,7 @@ jobs:
       env:
         VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}\vcpkg_archives
         VS170COMNTOOLS: ${{ steps.vs.outputs.tools_path }}
-        VS160COMNTOOLS: ${{ steps.vs.outputs.tools_path }}
-        VS150COMNTOOLS: ${{ steps.vs.outputs.tools_path }}
-        VS140COMNTOOLS: ${{ steps.vs.outputs.tools_path }}
-        VCPKG_KEEP_ENV_VARS: VS170COMNTOOLS;VS160COMNTOOLS;VS150COMNTOOLS;VS140COMNTOOLS
+        VCPKG_KEEP_ENV_VARS: VS170COMNTOOLS
         VCPKG_MAX_CONCURRENCY: 1
       run: |
         if (!(Test-Path vcpkg_archives)) { New-Item -ItemType Directory -Path vcpkg_archives }
