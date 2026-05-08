@@ -2339,39 +2339,51 @@ void Database::loadDefaultTimezone()
     }
 
     // Session Timezone
-    fr::IStatementPtr& st1 = loader->getStatement(
-        "select z.RDB$TIME_ZONE_ID, "
-        "       z.RDB$TIME_ZONE_NAME "
-        "from RDB$TIME_ZONES z "
-        "where z.RDB$TIME_ZONE_NAME = RDB$GET_CONTEXT('SYSTEM', 'SESSION_TIMEZONE');");
-
-    st1->execute();
-    if (st1->fetch())
+    try
     {
-        tzId = st1->getInt32(0);
-        tzName = st1->getString(1);
+        fr::IStatementPtr& st1 = loader->getStatement(
+            "select z.RDB$TIME_ZONE_ID, "
+            "       z.RDB$TIME_ZONE_NAME "
+            "from RDB$TIME_ZONES z "
+            "where z.RDB$TIME_ZONE_NAME = RDB$GET_CONTEXT('SYSTEM', 'SESSION_TIMEZONE');");
 
-        std::lock_guard<std::mutex> lock(timezoneDataMutexM);
-        defaultTimezoneM.id = tzId;
-        defaultTimezoneM.name = std2wxIdentifier(tzName, converter);
+        st1->execute();
+        if (st1->fetch())
+        {
+            tzId = st1->getInt32(0);
+            tzName = st1->getString(1);
+
+            std::lock_guard<std::mutex> lock(timezoneDataMutexM);
+            defaultTimezoneM.id = tzId;
+            defaultTimezoneM.name = std2wxIdentifier(tzName, converter);
+        }
+    }
+    catch (...)
+    {
     }
 
     // Database Timezone
-    fr::IStatementPtr& st2 = loader->getStatement(
-        "select z.RDB$TIME_ZONE_ID, "
-        "       z.RDB$TIME_ZONE_NAME "
-        "from RDB$TIME_ZONES z "
-        "where z.RDB$TIME_ZONE_NAME = RDB$GET_CONTEXT('SYSTEM', 'DATABASE_TIMEZONE');");
-
-    st2->execute();
-    if (st2->fetch())
+    try
     {
-        tzId = st2->getInt32(0);
-        tzName = st2->getString(1);
+        fr::IStatementPtr& st2 = loader->getStatement(
+            "select z.RDB$TIME_ZONE_ID, "
+            "       z.RDB$TIME_ZONE_NAME "
+            "from RDB$TIME_ZONES z "
+            "where z.RDB$TIME_ZONE_NAME = RDB$GET_CONTEXT('SYSTEM', 'DATABASE_TIMEZONE');");
 
-        std::lock_guard<std::mutex> lock(timezoneDataMutexM);
-        databaseTimezoneM.id = tzId;
-        databaseTimezoneM.name = std2wxIdentifier(tzName, converter);
+        st2->execute();
+        if (st2->fetch())
+        {
+            tzId = st2->getInt32(0);
+            tzName = st2->getString(1);
+
+            std::lock_guard<std::mutex> lock(timezoneDataMutexM);
+            databaseTimezoneM.id = tzId;
+            databaseTimezoneM.name = std2wxIdentifier(tzName, converter);
+        }
+    }
+    catch (...)
+    {
     }
 }
 
