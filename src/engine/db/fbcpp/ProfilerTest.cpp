@@ -68,6 +68,8 @@ int main()
             throw;
         }
 
+        std::cout << "  Engine version: " << db->getEngineVersion() << "\n";
+
         fr::ITransactionPtr tr = db->createTransaction();
         tr->start();
 
@@ -87,6 +89,20 @@ int main()
         } catch(const std::exception& e) {
             fr_test::printException(e, "checking for RDB$PROFILER");
             return 0;
+        }
+
+        // Check if profiler tables exist
+        std::vector<std::string> tables = { "PLG$PROF_SESSIONS", "PLG$PROF_STATEMENTS", "PLG$PROF_RECORD_SOURCES", "PLG$PROF_RECORD_SOURCE_STATS", "PLG$PROF_REQUESTS" };
+        for (const auto& t : tables)
+        {
+            try {
+                st->prepare("SELECT COUNT(*) FROM " + t);
+                st->execute();
+                if (st->fetch())
+                    std::cout << "    Debug: Table " << t << " exists, count = " << st->getInt32(0) << "\n";
+            } catch(const std::exception& e) {
+                std::cout << "    Debug: Table " << t << " check FAILED: " << e.what() << "\n";
+            }
         }
 
         // Create table first, then profile
@@ -113,10 +129,14 @@ int main()
 
         // Flush and finish
         try {
+            std::cout << "    Flushing stats...\n";
             st->prepare("EXECUTE PROCEDURE RDB$PROFILER.FLUSH_STATS");
             st->execute();
-        } catch(...) {}
+        } catch(const std::exception& e) {
+             std::cout << "    Debug: FLUSH_STATS failed: " << e.what() << " (continuing...)\n";
+        }
 
+        std::cout << "    Finishing session...\n";
         st->prepare("EXECUTE PROCEDURE RDB$PROFILER.FINISH_SESSION(TRUE)");
         st->execute();
         tr->commit();
@@ -134,6 +154,17 @@ int main()
         if (st->fetch()) stmtCount = st->getInt32(0);
         std::cout << "    Debug: Statement count in PLG$PROF_STATEMENTS for session " << sessionId << ": " << stmtCount << "\n";
 
+        if (stmtCount == 0)
+        {
+            std::cout << "    Debug: Dumping PLG$PROF_STATEMENTS for all sessions:\n";
+            st->prepare("SELECT PROFILE_ID, STATEMENT_ID, SQL_TEXT FROM PLG$PROF_STATEMENTS");
+            st->execute();
+            while (st->fetch())
+            {
+                std::cout << "      Profile: " << st->getInt64(0) << ", Stmt ID: " << st->getInt32(1) << ", SQL: " << st->getString(2).substr(0, 50) << "...\n";
+            }
+        }
+
         // Give Firebird a moment to flush profiler data if needed
         st->prepare("SELECT COUNT(*) FROM PLG$PROF_RECORD_SOURCE_STATS WHERE PROFILE_ID = ?");
         st->setInt64(0, sessionId);
@@ -142,23 +173,33 @@ int main()
         if (st->fetch())
             count = st->getInt32(0);
         
+        std::cout << "    Debug: Record source stats count for session " << sessionId << ": " << count << "\n";
+
         if (count == 0)
         {
              std::cout << "    FAILURE: No record source stats found for session " << sessionId << "\n";
              // Debug: check session and profiling setup
-             st->prepare("SELECT PROFILE_ID, ATTACHMENT_ID, DESCRIPTION FROM PLG$PROF_SESSIONS WHERE PROFILE_ID = ?");
+             st->prepare("SELECT PROFILE_ID, ATTACHMENT_ID, DESCRIPTION, STATE FROM PLG$PROF_SESSIONS WHERE PROFILE_ID = ?");
              st->setInt64(0, sessionId);
              st->execute();
              if (st->fetch())
              {
                  std::cout << "    Debug: Session exists: " << st->getInt64(0) 
                            << ", Attachment: " << st->getInt64(1)
-                           << " (" << st->getString(2) << ")\n";
+                           << ", Description: " << st->getString(2)
+                           << ", State: " << st->getInt32(3) << "\n";
              }
              else
              {
                  std::cout << "    Debug: Session NOT FOUND in PLG$PROF_SESSIONS for ID " << sessionId << "\n";
              }
+             
+             st->prepare("SELECT COUNT(*) FROM PLG$PROF_RECORD_SOURCES WHERE PROFILE_ID = ?");
+             st->setInt64(0, sessionId);
+             st->execute();
+             int rsCount = 0;
+             if (st->fetch()) rsCount = st->getInt32(0);
+             std::cout << "    Debug: Record sources defined for this session: " << rsCount << "\n";
 
              st->prepare("SELECT MON$ATTACHMENT_ID, MON$USER, MON$REMOTE_PROTOCOL FROM MON$ATTACHMENTS WHERE MON$ATTACHMENT_ID = CURRENT_CONNECTION");
              st->execute();
@@ -167,20 +208,6 @@ int main()
                  std::cout << "    Debug: Current Connection: " << st->getInt64(0) 
                            << ", User: " << st->getString(1) 
                            << ", Protocol: " << st->getString(2) << "\n";
-             }
-
-             st->prepare("SELECT COUNT(*) FROM PLG$PROF_STATEMENTS");
-             st->execute();
-             int totalStmts = 0;
-             if (st->fetch()) totalStmts = st->getInt32(0);
-             std::cout << "    Debug: Total statements across ALL sessions: " << totalStmts << "\n";
-
-             st->prepare("SELECT PROFILE_ID, ATTACHMENT_ID FROM PLG$PROF_SESSIONS");
-             st->execute();
-             while (st->fetch())
-             {
-                 std::cout << "    Debug: Existing Session ID: " << st->getInt64(0) 
-                           << ", Attachment ID: " << st->getInt64(1) << "\n";
              }
         }
 
@@ -201,6 +228,7 @@ int main()
         if (st->fetch())
             sessionId = st->getInt64(0);
 
+        std::cout << "    Executing parent procedure...\n";
         st->prepare("EXECUTE PROCEDURE p_parent");
         st->execute();
 
@@ -218,6 +246,19 @@ int main()
         count = 0;
         if (st->fetch())
             count = st->getInt32(0);
+        
+        std::cout << "    Debug: Distinct request count for nested session " << sessionId << ": " << count << "\n";
+        if (count < 2)
+        {
+            std::cout << "    Debug: Dumping PLG$PROF_REQUESTS for session " << sessionId << ":\n";
+            st->prepare("SELECT REQUEST_ID, REQUEST_NAME, CALLER_ID FROM PLG$PROF_REQUESTS WHERE PROFILE_ID = ?");
+            st->setInt64(0, sessionId);
+            st->execute();
+            while (st->fetch())
+            {
+                std::cout << "      Req ID: " << st->getInt32(0) << ", Name: " << st->getString(1) << ", Caller ID: " << st->getInt32(2) << "\n";
+            }
+        }
         ok = fr_test::check(count >= 2, "Stats collected for both parent and child procedures") && ok;
 
         // Test 3: Triggers
@@ -252,6 +293,19 @@ int main()
         count = 0;
         if (st->fetch())
             count = st->getInt32(0);
+        
+        std::cout << "    Debug: Trigger stats count for session " << sessionId << ": " << count << "\n";
+        if (count == 0)
+        {
+            std::cout << "    Debug: Dumping PLG$PROF_REQUESTS for session " << sessionId << ":\n";
+            st->prepare("SELECT REQUEST_ID, REQUEST_NAME FROM PLG$PROF_REQUESTS WHERE PROFILE_ID = ?");
+            st->setInt64(0, sessionId);
+            st->execute();
+            while (st->fetch())
+            {
+                std::cout << "      Req ID: " << st->getInt32(0) << ", Name: " << st->getString(1) << "\n";
+            }
+        }
         ok = fr_test::check(count > 0, "Stats collected for trigger") && ok;
 
         // Test 4: Record Source Stats with JOIN
@@ -281,6 +335,20 @@ int main()
         count = 0;
         if (st->fetch())
             count = st->getInt32(0);
+        
+        std::cout << "    Debug: Record source stats count for JOIN session " << sessionId << ": " << count << "\n";
+        if (count < 2)
+        {
+            std::cout << "    Debug: Dumping PLG$PROF_RECORD_SOURCES for session " << sessionId << ":\n";
+            st->prepare("SELECT STATEMENT_ID, RECORD_SOURCE_ID, PARENT_ID, LEVEL, LINE, COLUMN FROM PLG$PROF_RECORD_SOURCES WHERE PROFILE_ID = ?");
+            st->setInt64(0, sessionId);
+            st->execute();
+            while (st->fetch())
+            {
+                std::cout << "      Stmt: " << st->getInt32(0) << ", RS ID: " << st->getInt32(1) << ", Parent: " << st->getInt32(2) 
+                          << ", Level: " << st->getInt32(3) << ", Line: " << st->getInt32(4) << ", Col: " << st->getInt32(5) << "\n";
+            }
+        }
         ok = fr_test::check(count >= 2, "Record source stats collected for JOIN") && ok;
 
         tr->commit();
@@ -312,4 +380,3 @@ int main()
         return 1;
     }
 }
-

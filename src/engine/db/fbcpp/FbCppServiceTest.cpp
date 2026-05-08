@@ -76,6 +76,9 @@ int main()
             std::cerr << "    FAILED to connect to " << dbName << "\n";
             throw;
         }
+
+        std::cout << "    Engine Version: " << db->getEngineVersion() << "\n";
+        std::cout << "    ODS Version: " << db->getInfo().getODSVersion() << "." << db->getInfo().getODSMinorVersion() << "\n";
         
         std::vector<std::string> users;
         db->getConnectedUsers(users);

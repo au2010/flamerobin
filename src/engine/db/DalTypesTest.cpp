@@ -79,6 +79,11 @@ bool runTestsForBackend(fr::DatabaseBackend backend, const std::string& /*server
             throw;
         }
 
+        std::cout << "    Engine Version: " << db->getEngineVersion() << "\n";
+        fr::DatabaseInfoData dbInfo;
+        db->getInfo(&dbInfo);
+        std::cout << "    ODS Version: " << dbInfo.ods << "." << dbInfo.odsMinor << "\n";
+
         fr::ITransactionPtr tr = db->createTransaction();
         tr->start();
 
