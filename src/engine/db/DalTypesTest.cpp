@@ -61,7 +61,7 @@ bool checkStr(const std::string& actual, const std::string& expected, const char
 
 } // namespace
 
-bool runTestsForBackend(fr::DatabaseBackend backend, const std::string& /*serverName*/, const std::string& dbName)
+bool runTestsForBackend(fr::DatabaseBackend backend, const std::string& serverName, const std::string& dbName)
 {
     bool ok = true;
     std::cout << "Testing backend: " << (backend == fr::DatabaseBackend::IBPP ? "IBPP" : "FbCpp") << "\n";
@@ -69,12 +69,15 @@ bool runTestsForBackend(fr::DatabaseBackend backend, const std::string& /*server
     try 
     {
         fr::IDatabasePtr db = fr::DatabaseFactory::createDatabase(backend);
-        db->setConnectionString(dbName);
+        std::string fullConnStr = serverName + ":" + dbName;
+        std::cout << "    Connection string: " << fullConnStr << "\n";
+        db->setConnectionString(fullConnStr);
         db->setCredentials("SYSDBA", "masterkey");
         try {
             db->connect();
+            std::cout << "    Connected successfully.\n";
         } catch (const std::exception& e) {
-            std::cerr << "    FAILED to connect to " << dbName << " using " 
+            std::cerr << "    FAILED to connect to " << fullConnStr << " using " 
                       << (backend == fr::DatabaseBackend::IBPP ? "IBPP" : "FbCpp") << " backend\n";
             throw;
         }
@@ -94,30 +97,39 @@ bool runTestsForBackend(fr::DatabaseBackend backend, const std::string& /*server
         st->prepare("SELECT CAST(1.23 AS NUMERIC(18,4)) AS MY_ALIAS FROM RDB$DATABASE");
         st->execute();
         st->fetch();
+        std::cout << "    Debug: Columns = " << st->getColumnCount() << "\n";
         ok = checkInt(st->getColumnCount(), 1, "getColumnCount") && ok;
-        ok = fr_test::check(st->getColumnType(0) == fr::ColumnType::Numeric, "ColumnType::Numeric identification") && ok;
+        fr::ColumnType ct = st->getColumnType(0);
+        std::cout << "    Debug: Column 0 type = " << (int)ct << "\n";
+        ok = fr_test::check(ct == fr::ColumnType::Numeric, "ColumnType::Numeric identification") && ok;
+        std::cout << "    Debug: Column 0 scale = " << st->getColumnScale(0) << "\n";
         ok = checkInt(st->getColumnScale(0), 4, "getColumnScale") && ok;
+        std::cout << "    Debug: Column 0 size = " << st->getColumnSize(0) << "\n";
         ok = checkInt(st->getColumnSize(0), 8, "getColumnSize (int64)") && ok;
+        std::cout << "    Debug: Column 0 alias = [" << st->getColumnAlias(0) << "]\n";
         ok = checkStr(st->getColumnAlias(0), "MY_ALIAS", "getColumnAlias") && ok;
         
         // Subtype test (OCTETS)
+        std::cout << "  Testing BLOB/String subtypes...\n";
         st->prepare("SELECT CAST('abc' AS VARCHAR(10) CHARACTER SET OCTETS) FROM RDB$DATABASE");
         st->execute();
         st->fetch();
         int subtype = st->getColumnSubtype(0);
+        std::cout << "    Debug: Subtype for OCTETS string = " << subtype << "\n";
         if (subtype != 1)
         {
             std::cout << "    INFO: Subtype reported as " << subtype << " (expected 1 for OCTETS)\n";
-            // Some API versions might report charset ID differently in subtype field for strings
         }
         ok = fr_test::check(subtype != 0, "getColumnSubtype (non-zero for OCTETS)") && ok;
 
         // Table name test
+        std::cout << "  Testing table name metadata...\n";
         st->prepare("SELECT RDB$RELATION_NAME FROM RDB$RELATIONS");
         st->execute();
         st->fetch();
-        std::string tableName = st->getColumnTable(0);
-        // Trim trailing spaces if any (IBPP might return padded strings for metadata)
+        std::string tableNameRaw = st->getColumnTable(0);
+        std::cout << "    Debug: Raw table name = [" << tableNameRaw << "]\n";
+        std::string tableName = tableNameRaw;
         size_t last = tableName.find_last_not_of(' ');
         if (last != std::string::npos) tableName = tableName.substr(0, last + 1);
         ok = fr_test::check(tableName == "RDB$RELATIONS", "getColumnTable") && ok;
@@ -127,16 +139,20 @@ bool runTestsForBackend(fr::DatabaseBackend backend, const std::string& /*server
         st->prepare("SELECT CAST('2023-05-20' AS DATE), CAST('12:34:56.7890' AS TIME), CAST('2023-05-20 12:34:56.7890' AS TIMESTAMP) FROM RDB$DATABASE");
         st->execute();
         st->fetch();
+        std::cout << "    Debug: Types: " << (int)st->getColumnType(0) << ", " << (int)st->getColumnType(1) << ", " << (int)st->getColumnType(2) << "\n";
         ok = fr_test::check(st->getColumnType(0) == fr::ColumnType::Date, "ColumnType::Date identification") && ok;
         ok = fr_test::check(st->getColumnType(1) == fr::ColumnType::Time, "ColumnType::Time identification") && ok;
         ok = fr_test::check(st->getColumnType(2) == fr::ColumnType::Timestamp, "ColumnType::Timestamp identification") && ok;
         
         int y, mo, d, h, mi, s, f;
         st->getDate(0, y, mo, d);
+        std::cout << "    Debug: Date = " << y << "-" << mo << "-" << d << "\n";
         ok = fr_test::check(y == 2023 && mo == 5 && d == 20, "getDate content") && ok;
         st->getTime(1, h, mi, s, f);
+        std::cout << "    Debug: Time = " << h << ":" << mi << ":" << s << "." << f << "\n";
         ok = fr_test::check(h == 12 && mi == 34 && s == 56 && f == 7890, "getTime content") && ok;
         st->getTimestamp(2, y, mo, d, h, mi, s, f);
+        std::cout << "    Debug: Timestamp = " << y << "-" << mo << "-" << d << " " << h << ":" << mi << ":" << s << "." << f << "\n";
         ok = fr_test::check(y == 2023 && mo == 5 && d == 20 && h == 12 && mi == 34 && s == 56 && f == 7890, "getTimestamp content") && ok;
 
         // Check for Timezone support

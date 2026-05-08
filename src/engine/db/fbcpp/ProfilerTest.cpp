@@ -59,12 +59,14 @@ int main()
     try 
     {
         fr::IDatabasePtr db = fr::DatabaseFactory::createDatabase(fr::DatabaseBackend::FbCpp);
-        db->setConnectionString(dbName);
+        std::string fullConnStr = serverName + ":" + dbName;
+        std::cout << "  Connecting to database: " << fullConnStr << "\n";
+        db->setConnectionString(fullConnStr);
         db->setCredentials("SYSDBA", "masterkey");
         try {
             db->connect();
         } catch (const std::exception& e) {
-            std::cerr << "    FAILED to connect to " << dbName << " using fb-cpp backend\n";
+            std::cerr << "    FAILED to connect to " << fullConnStr << " using fb-cpp backend\n";
             throw;
         }
 
@@ -131,14 +133,16 @@ int main()
         if (st->fetch())
             sessionId = st->getInt64(0);
         
-        ok = fr_test::check(sessionId != 0, "Session started") && ok;
         std::cout << "    Debug: Session ID = " << sessionId << "\n";
+        ok = fr_test::check(sessionId != 0, "Session started") && ok;
 
         // Use INSERT ... SELECT to ensure there is a record source to profile
+        std::cout << "    Executing INSERT ... SELECT...\n";
         st->prepare("INSERT INTO t1 (id, val) SELECT 1, 'test' FROM RDB$DATABASE");
         st->execute();
         
         // Add a simple SELECT as well
+        std::cout << "    Executing SELECT * FROM t1...\n";
         st->prepare("SELECT * FROM t1");
         st->execute();
         while (st->fetch()) {}
@@ -150,6 +154,7 @@ int main()
             std::cout << "    Flushing stats...\n";
             st->prepare("EXECUTE PROCEDURE RDB$PROFILER.FLUSH_STATS");
             st->execute();
+            std::cout << "    Debug: FLUSH_STATS executed.\n";
         } catch(const std::exception& e) {
              std::cout << "    Debug: FLUSH_STATS failed: " << e.what() << " (continuing...)\n";
         }
@@ -157,6 +162,7 @@ int main()
         std::cout << "    Finishing session...\n";
         st->prepare("EXECUTE PROCEDURE RDB$PROFILER.FINISH_SESSION(TRUE)");
         st->execute();
+        std::cout << "    Debug: FINISH_SESSION executed.\n";
         tr->commit();
 
         // Start new transaction to check results

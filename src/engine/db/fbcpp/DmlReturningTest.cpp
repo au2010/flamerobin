@@ -59,25 +59,33 @@ int main()
     try 
     {
         fr::IDatabasePtr db = fr::DatabaseFactory::createDatabase(fr::DatabaseBackend::FbCpp);
-        db->setConnectionString(dbName);
+        std::string fullConnStr = serverName + ":" + dbName;
+        std::cout << "  Connecting to database: " << fullConnStr << "\n";
+        db->setConnectionString(fullConnStr);
         db->setCredentials("SYSDBA", "masterkey");
         try {
             db->connect();
+            std::cout << "    Connected successfully.\n";
         } catch (const std::exception& e) {
-            std::cerr << "    FAILED to connect to " << dbName << " using fb-cpp backend\n";
+            std::cerr << "    FAILED to connect to " << fullConnStr << " using fb-cpp backend\n";
             throw;
         }
 
         // Check version - multi-row RETURNING requires FB 5.0+
         std::string version = db->getEngineVersion();
         std::cout << "  Engine version: " << version << "\n";
-        bool isFb5 = (version.find("V5.0") != std::string::npos || 
-                      version.find("V6.0") != std::string::npos ||
-                      version.find("V7.0") != std::string::npos);
+        // Check for 5.0, 6.0, 7.0 etc.
+        bool isFb5 = (version.find(" 5.") != std::string::npos || 
+                      version.find(" 6.") != std::string::npos ||
+                      version.find(" 7.") != std::string::npos ||
+                      version.find("V5.") != std::string::npos ||
+                      version.find("V6.") != std::string::npos ||
+                      version.find("T5.") != std::string::npos ||
+                      version.find("T6.") != std::string::npos);
         std::cout << "  Detected as FB5+: " << (isFb5 ? "YES" : "NO") << "\n";
-        bool isFb4 = (version.find("V4.0") != std::string::npos);
-        bool isFb3 = (version.find("V3.0") != std::string::npos);
-
+        bool isFb4 = (version.find(" 4.") != std::string::npos || version.find("V4.") != std::string::npos);
+        bool isFb3 = (version.find(" 3.") != std::string::npos || version.find("V3.") != std::string::npos);
+        
         fr::ITransactionPtr tr = db->createTransaction();
         tr->start();
 
@@ -94,13 +102,18 @@ int main()
         st->prepare("INSERT INTO t1 (val) VALUES ('B')");
         st->execute();
 
+
         // Test 1: Single-row INSERT ... RETURNING (Supported in FB 3+)
         std::cout << "  Testing Single-row INSERT ... RETURNING...\n";
         st->prepare("INSERT INTO t1 (val) VALUES ('C') RETURNING id, val");
         st->execute();
+        std::cout << "    Debug: Columns = " << st->getColumnCount() << "\n";
         ok = fr_test::check(st->getColumnCount() == 2, "Single-row INSERT column count") && ok;
         int rows = 0;
-        while (st->fetch()) rows++;
+        while (st->fetch()) {
+            rows++;
+            std::cout << "    Debug: Row " << rows << ": id=" << st->getInt32(0) << ", val=[" << st->getString(1) << "]\n";
+        }
         ok = fr_test::check(rows == 1, "Single-row INSERT row count") && ok;
 
         // Test 2: Multiple-row INSERT ... RETURNING (Supported in FB 5+)
@@ -110,9 +123,13 @@ int main()
             st->prepare("INSERT INTO t1 (val) SELECT val || '2' FROM t1 WHERE val IN ('A', 'B') RETURNING id, val");
             st->execute();
             
+            std::cout << "    Debug: Columns = " << st->getColumnCount() << "\n";
             ok = fr_test::check(st->getColumnCount() == 2, "Multi-row INSERT column count") && ok;
             rows = 0;
-            while (st->fetch()) rows++;
+            while (st->fetch()) {
+                rows++;
+                std::cout << "    Debug: Row " << rows << ": id=" << st->getInt32(0) << ", val=[" << st->getString(1) << "]\n";
+            }
             
             if (isFb5)
                 ok = fr_test::check(rows == 2, "Multi-row INSERT row count (FB5)") && ok;
@@ -123,6 +140,7 @@ int main()
         {
             if (isFb5)
             {
+                std::cout << "    Debug: Multi-row INSERT FAILED with exception: " << e.what() << "\n";
                 fr_test::printException(e, "Multi-row INSERT");
                 ok = false;
             }
@@ -139,9 +157,13 @@ int main()
             st->prepare("UPDATE t1 SET val = val || '!' WHERE val IN ('A', 'B') RETURNING id, val");
             st->execute();
             
+            std::cout << "    Debug: Columns = " << st->getColumnCount() << "\n";
             ok = fr_test::check(st->getColumnCount() == 2, "Multi-row UPDATE column count") && ok;
             rows = 0;
-            while (st->fetch()) rows++;
+            while (st->fetch()) {
+                rows++;
+                std::cout << "    Debug: Row " << rows << ": id=" << st->getInt32(0) << ", val=[" << st->getString(1) << "]\n";
+            }
             
             if (isFb5)
                 ok = fr_test::check(rows == 2, "Multi-row UPDATE row count (FB5)") && ok;
@@ -152,6 +174,7 @@ int main()
         {
             if (isFb5)
             {
+                std::cout << "    Debug: Multi-row UPDATE FAILED with exception: " << e.what() << "\n";
                 fr_test::printException(e, "Multi-row UPDATE");
                 ok = false;
             }
@@ -172,13 +195,18 @@ int main()
                             "WHEN MATCHED THEN UPDATE SET t.val = s.val "
                             "RETURNING t.id, t.val");
                 st->execute();
+                std::cout << "    Debug: Columns = " << st->getColumnCount() << "\n";
                 ok = fr_test::check(st->getColumnCount() == 2, "MERGE RETURNING column count") && ok;
                 rows = 0;
-                while (st->fetch()) rows++;
+                while (st->fetch()) {
+                    rows++;
+                    std::cout << "    Debug: Row " << rows << ": id=" << st->getInt32(0) << ", val=[" << st->getString(1) << "]\n";
+                }
                 ok = fr_test::check(rows == 1, "MERGE RETURNING row count (singleton)") && ok;
             }
             catch (const std::exception& e)
             {
+                std::cout << "    Debug: MERGE RETURNING FAILED with exception: " << e.what() << "\n";
                 fr_test::printException(e, "MERGE RETURNING");
                 ok = false;
             }

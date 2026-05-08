@@ -58,45 +58,60 @@ int main()
     try 
     {
         fr::IServicePtr svc = fr::DatabaseFactory::createService(fr::DatabaseBackend::FbCpp);
+        std::cout << "  Setting connection string: " << serverName << "\n";
         svc->setConnectionString(serverName);
         svc->setCredentials("SYSDBA", "masterkey");
         
         std::cout << "  Testing getVersion...\n";
         std::string version = svc->getVersion();
-        ok = fr_test::check(!version.empty(), "getVersion") && ok;
+        std::cout << "    Debug: Raw version string length: " << version.length() << "\n";
         std::cout << "    Version: " << version << "\n";
+        ok = fr_test::check(!version.empty(), "getVersion result is not empty") && ok;
 
         std::cout << "  Testing getConnectedUsers (via IDatabase)...\n";
         fr::IDatabasePtr db = fr::DatabaseFactory::createDatabase(fr::DatabaseBackend::FbCpp);
-        db->setConnectionString(dbName);
+        std::string fullConnStr = "inet://" + serverName + dbName;
+        std::cout << "  Connecting to database: " << fullConnStr << "\n";
+        db->setConnectionString(fullConnStr);
         db->setCredentials("SYSDBA", "masterkey");
         try {
             db->connect();
+            std::cout << "    Connected successfully.\n";
         } catch (const std::exception& e) {
-            std::cerr << "    FAILED to connect to " << dbName << "\n";
+            std::cerr << "    FAILED to connect to " << fullConnStr << "\n";
+            std::cerr << "    Exception: " << e.what() << "\n";
             throw;
         }
 
         std::cout << "    Engine Version: " << db->getEngineVersion() << "\n";
         fr::DatabaseInfoData info;
+        std::cout << "    Fetching database info...\n";
         db->getInfo(&info);
         std::cout << "    ODS Version: " << info.ods << "." << info.odsMinor << "\n";
+        std::cout << "    Page Size: " << info.pageSize << ", Pages: " << info.pages << "\n";
+        std::cout << "    Next Transaction: " << info.nextTransaction << "\n";
         
+        std::cout << "    Fetching connected users...\n";
         std::vector<std::string> users;
         db->getConnectedUsers(users);
-        ok = fr_test::check(!users.empty(), "getConnectedUsers not empty") && ok;
+        std::cout << "    Debug: Found " << users.size() << " connected users.\n";
+        ok = fr_test::check(!users.empty(), "getConnectedUsers list is not empty") && ok;
         bool foundSysdba = false;
         for (const auto& u : users)
         {
+            std::cout << "    Connected user: [" << u << "]\n";
             if (u == "SYSDBA") foundSysdba = true;
-            std::cout << "    Connected user: " << u << "\n";
         }
-        ok = fr_test::check(foundSysdba, "found SYSDBA in connected users") && ok;
+        ok = fr_test::check(foundSysdba, "found SYSDBA in connected users list") && ok;
 
         std::cout << "  Testing getDialect...\n";
-        ok = fr_test::check(db->getDialect() == 3, "getDialect") && ok;
+        int dialect = db->getDialect();
+        std::cout << "    Dialect: " << dialect << "\n";
+        ok = fr_test::check(dialect == 3, "getDialect returns 3") && ok;
 
+        std::cout << "  Disconnecting...\n";
         db->disconnect();
+        std::cout << "    Disconnected successfully.\n";
     }
     catch (const std::exception& e)
     {
