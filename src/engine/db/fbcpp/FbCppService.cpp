@@ -23,6 +23,7 @@
 
 #include "engine/db/fbcpp/FbCppService.h"
 #include <stdexcept>
+#include <fb-cpp/Exception.h>
 #include <firebird/Interface.h>
 
 extern "C" Firebird::IMaster* ISC_EXPORT fb_get_master_interface();
@@ -226,6 +227,45 @@ bool FbCppService::versionIsHigherOrEqualTo(int major, int minor)
 
 std::string FbCppService::getVersion()
 {
+    try
+    {
+        if (!serviceM)
+            connect();
+
+        auto& client = serviceM->getClient();
+        fbcpp::impl::StatusWrapper status(client);
+
+        auto receiveBuilder = fbcpp::fbUnique(client.getUtil()->getXpbBuilder(&status, fb::IXpbBuilder::SPB_RECEIVE, nullptr, 0));
+        receiveBuilder->insertTag(&status, isc_info_svc_server_version);
+
+        const auto receiveLength = receiveBuilder->getBufferLength(&status);
+        const auto* receiveBuffer = receiveBuilder->getBuffer(&status);
+
+        std::vector<std::uint8_t> buffer(1024);
+        auto sendBuilder = fbcpp::fbUnique(client.getUtil()->getXpbBuilder(&status, fb::IXpbBuilder::SPB_SEND, nullptr, 0));
+
+        serviceM->getHandle()->query(&status, sendBuilder->getBufferLength(&status),
+            sendBuilder->getBuffer(&status), receiveLength, receiveBuffer, static_cast<unsigned>(buffer.size()),
+            buffer.data());
+
+        auto responseBuilder = fbcpp::fbUnique(client.getUtil()->getXpbBuilder(
+            &status, fb::IXpbBuilder::SPB_RESPONSE, buffer.data(), static_cast<unsigned>(buffer.size())));
+
+        for (responseBuilder->rewind(&status); !responseBuilder->isEof(&status);
+            responseBuilder->moveNext(&status))
+        {
+            if (responseBuilder->getTag(&status) == isc_info_svc_server_version)
+            {
+                const auto* version = responseBuilder->getString(&status);
+                const auto length = responseBuilder->getLength(&status);
+                return std::string(version, length);
+            }
+        }
+    }
+    catch (...)
+    {
+    }
+
     return "Firebird (fb-cpp)";
 }
 
