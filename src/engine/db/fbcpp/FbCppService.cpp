@@ -23,6 +23,7 @@
 
 #include "engine/db/fbcpp/FbCppService.h"
 #include <stdexcept>
+#include <cstdio>
 #include <fb-cpp/Exception.h>
 #include <firebird/Interface.h>
 
@@ -251,14 +252,14 @@ std::string FbCppService::getVersion()
         auto& client = serviceM->getClient();
         fbcpp::impl::StatusWrapper status(client);
 
-        auto receiveBuilder = fbcpp::fbUnique(client.getUtil()->getXpbBuilder(&status, fb::IXpbBuilder::SPB_RECEIVE, nullptr, 0));
+        auto receiveBuilder = fbcpp::fbUnique(client.getUtil()->getXpbBuilder(&status, Firebird::IXpbBuilder::SPB_RECEIVE, nullptr, 0));
         receiveBuilder->insertTag(&status, isc_info_svc_server_version);
 
         const auto receiveLength = receiveBuilder->getBufferLength(&status);
         const auto* receiveBuffer = receiveBuilder->getBuffer(&status);
 
         std::vector<std::uint8_t> buffer(1024);
-        auto sendBuilder = fbcpp::fbUnique(client.getUtil()->getXpbBuilder(&status, fb::IXpbBuilder::SPB_SEND, nullptr, 0));
+        auto sendBuilder = fbcpp::fbUnique(client.getUtil()->getXpbBuilder(&status, Firebird::IXpbBuilder::SPB_SEND, nullptr, 0));
 
         serviceM->getHandle()->query(&status, sendBuilder->getBufferLength(&status),
             sendBuilder->getBuffer(&status), receiveLength, receiveBuffer, static_cast<unsigned>(buffer.size()),
