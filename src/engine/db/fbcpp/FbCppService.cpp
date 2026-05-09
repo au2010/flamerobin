@@ -221,7 +221,23 @@ void FbCppService::removeUser(const std::string& /*username*/)
 
 bool FbCppService::versionIsHigherOrEqualTo(int major, int minor)
 {
-    // Mocking for now, could be implemented using ServiceManager::getInfo
+    std::string version = getVersion();
+    // Firebird version string typically contains "V" followed by major.minor
+    // Examples: "WI-V3.0.7.33374 Firebird 3.0", "LI-V4.0.0.2496 Firebird 4.0"
+    size_t pos = version.find("-V");
+    if (pos == std::string::npos)
+        pos = version.find(" V");
+    
+    if (pos != std::string::npos)
+    {
+        int vMajor = 0, vMinor = 0;
+        if (sscanf(version.c_str() + pos + 2, "%d.%d", &vMajor, &vMinor) >= 1)
+        {
+            if (vMajor > major) return true;
+            if (vMajor < major) return false;
+            return vMinor >= minor;
+        }
+    }
     return true; 
 }
 
@@ -248,18 +264,32 @@ std::string FbCppService::getVersion()
             sendBuilder->getBuffer(&status), receiveLength, receiveBuffer, static_cast<unsigned>(buffer.size()),
             buffer.data());
 
-        auto responseBuilder = fbcpp::fbUnique(client.getUtil()->getXpbBuilder(
-            &status, fb::IXpbBuilder::SPB_RESPONSE, buffer.data(), static_cast<unsigned>(buffer.size())));
+        if (status.getState() & Firebird::IStatus::STATE_ERRORS)
+            return "Firebird (fb-cpp)";
 
-        for (responseBuilder->rewind(&status); !responseBuilder->isEof(&status);
-            responseBuilder->moveNext(&status))
+        // Manual parsing of the info buffer. 
+        // Service info items like isc_info_svc_server_version use 2-byte length.
+        const unsigned char* p = buffer.data();
+        const unsigned char* end = p + buffer.size();
+        while (p < end)
         {
-            if (responseBuilder->getTag(&status) == isc_info_svc_server_version)
-            {
-                const auto* version = responseBuilder->getString(&status);
-                const auto length = responseBuilder->getLength(&status);
-                return std::string(version, length);
-            }
+            unsigned char item = *p++;
+            if (item == isc_info_end || item == 0)
+                break;
+            
+            // All svc info items should have a 2-byte length
+            if (p + 2 > end)
+                break;
+            unsigned short len = p[0] | (p[1] << 8);
+            p += 2;
+
+            if (p + len > end)
+                break;
+
+            if (item == isc_info_svc_server_version)
+                return std::string(reinterpret_cast<const char*>(p), len);
+            
+            p += len;
         }
     }
     catch (...)
