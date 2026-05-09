@@ -44,7 +44,7 @@ BaseFrame::FrameIdMap BaseFrame::frameIdsM;
 BaseFrame::BaseFrame(wxWindow* parent, int id, const wxString& title,
         const wxPoint& pos, const wxSize& size, long style,
         const wxString& name)
-    : wxFrame(parent, id, title, pos, size, style, name)
+    : wxFrame(parent, id, title, pos, size, style, name), maximizedM(false)
 {
     frameIdsM.insert(FrameIdPair(this, wxEmptyString));
 
@@ -58,9 +58,13 @@ BaseFrame::~BaseFrame()
 
 bool BaseFrame::Show(bool show)
 {
-    if (show && !IsShown())
+    bool firstTime = show && !IsShown();
+    if (firstTime)
          readConfigSettings();
-    return wxFrame::Show(show);
+    bool ret = wxFrame::Show(show);
+    if (firstTime && maximizedM)
+        Maximize();
+    return ret;
 }
 
 bool BaseFrame::Destroy()
@@ -89,13 +93,13 @@ void BaseFrame::readConfigSettings()
     wxRect rcDefault = getDefaultRect();
     wxRect rc = rcDefault;
     bool enabled = false;
-    bool maximized = false;
+    maximizedM = false;
     if (config().getValue("FrameStorage", enabled) && enabled)
     {
         wxString itemPrefix = getStorageName();
         if (!itemPrefix.empty())
         {
-            config().getValue(itemPrefix + Config::pathSeparator + "maximized", maximized);
+            config().getValue(itemPrefix + Config::pathSeparator + "maximized", maximizedM);
             config().getValue(itemPrefix + Config::pathSeparator + "x", rc.x);
             config().getValue(itemPrefix + Config::pathSeparator + "y", rc.y);
             config().getValue(itemPrefix + Config::pathSeparator + "width", rc.width);
@@ -103,6 +107,10 @@ void BaseFrame::readConfigSettings()
             doReadConfigSettings(itemPrefix);
         }
     }
+
+    // Ensure a minimum sensible size to prevent starting "minimized" or invisible
+    if (rc.width < 100) rc.width = rcDefault.width > 0 ? rcDefault.width : 360;
+    if (rc.height < 100) rc.height = rcDefault.height > 0 ? rcDefault.height : 480;
 
     // check whether rect intersects at least one monitor rect
     // otherwise (for example because monitor is not attached any more
@@ -113,8 +121,6 @@ void BaseFrame::readConfigSettings()
         if (dsp.IsOk() && rc.Intersects(dsp.GetClientArea()))
         {
             SetSize(rc);
-            if (maximized)
-                Maximize();
             return;
         }
     }
@@ -157,8 +163,8 @@ void BaseFrame::writeConfigSettings() const
                 r.SetRight(wp.rcNormalPosition.right);
                 r.SetBottom(wp.rcNormalPosition.bottom);
             }
-            config().setValue(itemPrefix + Config::pathSeparator + "maximized", IsMaximized());
 #endif
+            config().setValue(itemPrefix + Config::pathSeparator + "maximized", IsMaximized());
             config().setValue(itemPrefix + Config::pathSeparator + "x", r.x);
             config().setValue(itemPrefix + Config::pathSeparator + "y", r.y);
             config().setValue(itemPrefix + Config::pathSeparator + "width", r.width);

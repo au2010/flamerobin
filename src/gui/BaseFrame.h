@@ -70,6 +70,7 @@ protected:
     // readConfigSettings() to get first-time default position and size.
     // The predefined implementation returns -1 for all 4 items.
     virtual const wxRect getDefaultRect() const;
+    bool maximizedM;
     // Maintains the connection between the frame object and its id string.
     // The id string may be constant over the lifetime of the frame
     // (e.g. "BackupFrame/database_42"), or it may change with the content
