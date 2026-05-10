@@ -2780,7 +2780,14 @@ bool ExecuteSqlFrame::execute(wxString sql, const wxString& terminator,
                 
                 // PSQL Stats
                 fr::IStatementPtr stPsql = databaseM->getDALDatabase()->createStatement(transactionM);
-                stPsql->prepare("SELECT REQ.REQUEST_NAME, STAT.LINE_NUM, STAT.COLUMN_NUM, STAT.COUNTER, STAT.TOTAL_TIME / 1000000.0, STAT.MAX_TIME / 1000000.0 "
+                std::string reqNameCol = "REQUEST_NAME";
+                try {
+                    stPsql->prepare("SELECT REQUEST_NAME FROM PLG$PROF_REQUESTS WHERE 1=0");
+                } catch(...) {
+                    reqNameCol = "NAME";
+                }
+
+                stPsql->prepare("SELECT REQ." + reqNameCol + ", STAT.LINE_NUM, STAT.COLUMN_NUM, STAT.COUNTER, STAT.TOTAL_TIME / 1000000.0, STAT.MAX_TIME / 1000000.0 "
                                 "FROM PLG$PROF_PSQL_STATS STAT "
                                 "JOIN PLG$PROF_REQUESTS REQ ON STAT.PROFILE_ID = REQ.PROFILE_ID AND STAT.REQUEST_ID = REQ.REQUEST_ID "
                                 "WHERE STAT.PROFILE_ID = ? "

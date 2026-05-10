@@ -21,7 +21,7 @@ The Profiler tab displays two grids providing deep insights into your query perf
 
 #### 1. PSQL Statistics
 This grid shows line-by-line execution statistics for PSQL modules (procedures, triggers, packages, anonymous blocks).
--   **REQUEST_NAME**: The name of the PSQL module being executed.
+-   **NAME** (or **REQUEST_NAME**): The name of the PSQL module being executed.
 -   **LINE_NUM**: The line number in the source code.
 -   **COLUMN_NUM**: The column number (if available).
 -   **COUNTER**: The number of times this specific line was executed.

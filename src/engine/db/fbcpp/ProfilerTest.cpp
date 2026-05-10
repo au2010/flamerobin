@@ -114,8 +114,8 @@ int main()
                 st->execute();
                 if (st->fetch())
                     std::cout << "    Debug: Table " << t << " exists, count = " << st->getInt32(0) << "\n";
-            } catch(const std::exception& e) {
-                std::cout << "    Debug: Table " << t << " check FAILED: " << e.what() << "\n";
+            } catch(...) {
+                 std::cout << "    Debug: Table " << t << " check FAILED (normal if not yet initialized)\n";
             }
         }
 
@@ -149,16 +149,6 @@ int main()
 
         tr->commitRetain();
 
-        // Flush and finish
-        try {
-            std::cout << "    Flushing stats...\n";
-            st->prepare("EXECUTE PROCEDURE RDB$PROFILER.FLUSH_STATS");
-            st->execute();
-            std::cout << "    Debug: FLUSH_STATS executed.\n";
-        } catch(const std::exception& e) {
-             std::cout << "    Debug: FLUSH_STATS failed: " << e.what() << " (continuing...)\n";
-        }
-
         std::cout << "    Finishing session...\n";
         st->prepare("EXECUTE PROCEDURE RDB$PROFILER.FINISH_SESSION(TRUE)");
         st->execute();
@@ -169,6 +159,14 @@ int main()
         tr = db->createTransaction();
         tr->start();
         st = db->createStatement(tr);
+
+        // Determine correct column name for requests (NAME or REQUEST_NAME)
+        std::string reqNameCol = "NAME";
+        try {
+            st->prepare("SELECT REQUEST_NAME FROM PLG$PROF_REQUESTS WHERE 1=0");
+            reqNameCol = "REQUEST_NAME";
+        } catch(...) {}
+        std::cout << "    Debug: Using request name column: " << reqNameCol << "\n";
 
         // Check statements first
         st->prepare("SELECT COUNT(*) FROM PLG$PROF_STATEMENTS WHERE PROFILE_ID = ?");
@@ -256,15 +254,10 @@ int main()
         st->prepare("EXECUTE PROCEDURE p_parent");
         st->execute();
 
-        try {
-            st->prepare("EXECUTE PROCEDURE RDB$PROFILER.FLUSH_STATS");
-            st->execute();
-        } catch(...) {}
-
         st->prepare("EXECUTE PROCEDURE RDB$PROFILER.FINISH_SESSION(TRUE)");
         st->execute();
 
-        st->prepare("SELECT COUNT(DISTINCT REQUEST_NAME) FROM PLG$PROF_REQUESTS WHERE PROFILE_ID = ?");
+        st->prepare("SELECT COUNT(DISTINCT " + reqNameCol + ") FROM PLG$PROF_REQUESTS WHERE PROFILE_ID = ?");
         st->setInt64(0, sessionId);
         st->execute();
         count = 0;
@@ -275,7 +268,7 @@ int main()
         if (count < 2)
         {
             std::cout << "    Debug: Dumping PLG$PROF_REQUESTS for session " << sessionId << ":\n";
-            st->prepare("SELECT REQUEST_ID, REQUEST_NAME, CALLER_ID FROM PLG$PROF_REQUESTS WHERE PROFILE_ID = ?");
+            st->prepare("SELECT REQUEST_ID, " + reqNameCol + ", CALLER_ID FROM PLG$PROF_REQUESTS WHERE PROFILE_ID = ?");
             st->setInt64(0, sessionId);
             st->execute();
             while (st->fetch())
@@ -303,15 +296,10 @@ int main()
         st->prepare("INSERT INTO t2 VALUES (1)");
         st->execute();
 
-        try {
-            st->prepare("EXECUTE PROCEDURE RDB$PROFILER.FLUSH_STATS");
-            st->execute();
-        } catch(...) {}
-
         st->prepare("EXECUTE PROCEDURE RDB$PROFILER.FINISH_SESSION(TRUE)");
         st->execute();
 
-        st->prepare("SELECT COUNT(*) FROM PLG$PROF_REQUESTS WHERE PROFILE_ID = ? AND REQUEST_NAME = 'T2_AI'");
+        st->prepare("SELECT COUNT(*) FROM PLG$PROF_REQUESTS WHERE PROFILE_ID = ? AND " + reqNameCol + " = 'T2_AI'");
         st->setInt64(0, sessionId);
         st->execute();
         count = 0;
@@ -322,7 +310,7 @@ int main()
         if (count == 0)
         {
             std::cout << "    Debug: Dumping PLG$PROF_REQUESTS for session " << sessionId << ":\n";
-            st->prepare("SELECT REQUEST_ID, REQUEST_NAME FROM PLG$PROF_REQUESTS WHERE PROFILE_ID = ?");
+            st->prepare("SELECT REQUEST_ID, " + reqNameCol + " FROM PLG$PROF_REQUESTS WHERE PROFILE_ID = ?");
             st->setInt64(0, sessionId);
             st->execute();
             while (st->fetch())
@@ -345,11 +333,6 @@ int main()
         st->execute();
         if (st->fetch()) {}
 
-        try {
-            st->prepare("EXECUTE PROCEDURE RDB$PROFILER.FLUSH_STATS");
-            st->execute();
-        } catch(...) {}
-
         st->prepare("EXECUTE PROCEDURE RDB$PROFILER.FINISH_SESSION(TRUE)");
         st->execute();
 
@@ -364,7 +347,7 @@ int main()
         if (count < 2)
         {
             std::cout << "    Debug: Dumping PLG$PROF_RECORD_SOURCES for session " << sessionId << ":\n";
-            st->prepare("SELECT STATEMENT_ID, RECORD_SOURCE_ID, PARENT_ID, LEVEL, LINE, COLUMN FROM PLG$PROF_RECORD_SOURCES WHERE PROFILE_ID = ?");
+            st->prepare("SELECT STATEMENT_ID, RECORD_SOURCE_ID, PARENT_ID, LEVEL, LINE, \"COLUMN\" FROM PLG$PROF_RECORD_SOURCES WHERE PROFILE_ID = ?");
             st->setInt64(0, sessionId);
             st->execute();
             while (st->fetch())
