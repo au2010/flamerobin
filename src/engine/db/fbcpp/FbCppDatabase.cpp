@@ -63,13 +63,42 @@ fbcpp::Client& FbCppDatabase::getClient()
     return *client;
 }
 
+std::vector<uint8_t> FbCppDatabase::buildDpb(bool creating, const std::string& owner,
+    const std::string& initialUser)
+{
+    auto status = getClient().newStatus();
+    fbcpp::impl::StatusWrapper statusWrapper(getClient(), status.get());
+    auto dpbBuilder = fbcpp::fbUnique(getClient().getUtil()->getXpbBuilder(&statusWrapper, 
+        Firebird::IXpbBuilder::DPB, nullptr, 0));
+
+    // Force UTF8 for filenames
+    dpbBuilder->insertInt(&statusWrapper, isc_dpb_utf8_filename, 1);
+    
+    // Explicitly enable wire encryption if possible
+    // This helps when the client library doesn't have a firebird.conf
+    dpbBuilder->insertString(&statusWrapper, isc_dpb_config, "WireCrypt = Enabled");
+
+    if (creating)
+    {
+        if (!owner.empty())
+            dpbBuilder->insertString(&statusWrapper, isc_dpb_owner, owner.c_str());
+        if (!initialUser.empty())
+            dpbBuilder->insertString(&statusWrapper, isc_dpb_initial_user, initialUser.c_str());
+    }
+
+    std::vector<uint8_t> dpb(dpbBuilder->getBufferLength(&statusWrapper));
+    memcpy(dpb.data(), dpbBuilder->getBuffer(&statusWrapper), dpb.size());
+    return dpb;
+}
+
 void FbCppDatabase::connect()
 {
     auto options = fbcpp::AttachmentOptions()
         .setConnectionCharSet(charsetM)
         .setUserName(userM)
         .setPassword(passwordM)
-        .setRole(roleM);
+        .setRole(roleM)
+        .setDpb(buildDpb(false));
 
     attachmentM.emplace(getClient(), connStrM, options);
 }
@@ -93,24 +122,8 @@ void FbCppDatabase::create(int /*pagesize*/, int dialect, const std::string& own
         .setPassword(passwordM)
         .setRole(roleM)
         .setSqlDialect(static_cast<uint32_t>(dialect))
-        .setCreateDatabase(true);
-
-    if (!owner.empty() || !initialUser.empty())
-    {
-        auto status = getClient().newStatus();
-        fbcpp::impl::StatusWrapper statusWrapper(getClient(), status.get());
-        auto dpbBuilder = fbcpp::fbUnique(getClient().getUtil()->getXpbBuilder(&statusWrapper, 
-            Firebird::IXpbBuilder::DPB, nullptr, 0));
-
-        if (!owner.empty())
-            dpbBuilder->insertString(&statusWrapper, isc_dpb_owner, owner.c_str());
-        if (!initialUser.empty())
-            dpbBuilder->insertString(&statusWrapper, isc_dpb_initial_user, initialUser.c_str());
-
-        std::vector<uint8_t> dpb(dpbBuilder->getBufferLength(&statusWrapper));
-        memcpy(dpb.data(), dpbBuilder->getBuffer(&statusWrapper), dpb.size());
-        options.setDpb(std::move(dpb));
-    }
+        .setCreateDatabase(true)
+        .setDpb(buildDpb(true, owner, initialUser));
 
     attachmentM.emplace(getClient(), connStrM, options);
 }

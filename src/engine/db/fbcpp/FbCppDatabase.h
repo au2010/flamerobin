@@ -83,6 +83,9 @@ public:
     static fbcpp::Client& getClient();
 
 private:
+    std::vector<uint8_t> buildDpb(bool creating, const std::string& owner = "",
+        const std::string& initialUser = "");
+
     std::optional<fbcpp::Attachment> attachmentM;
     std::string connStrM;
     std::string userM;
