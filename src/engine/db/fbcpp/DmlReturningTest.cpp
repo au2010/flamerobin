@@ -74,17 +74,32 @@ int main()
         // Check version - multi-row RETURNING requires FB 5.0+
         std::string version = db->getEngineVersion();
         std::cout << "  Engine version: " << version << "\n";
-        // Check for 5.0, 6.0, 7.0 etc.
-        bool isFb5 = (version.find(" 5.") != std::string::npos || 
-                      version.find(" 6.") != std::string::npos ||
-                      version.find(" 7.") != std::string::npos ||
-                      version.find("V5.") != std::string::npos ||
-                      version.find("V6.") != std::string::npos ||
-                      version.find("T5.") != std::string::npos ||
-                      version.find("T6.") != std::string::npos);
+
+        fr::DatabaseInfoData dbInfo;
+        db->getInfo(&dbInfo);
+        std::cout << "  ODS version: " << dbInfo.ods << "." << dbInfo.odsMinor << "\n";
+
+        // FB 5.0+ requires ODS >= 13.1
+        bool isFb5 = (dbInfo.ods > 13 || (dbInfo.ods == 13 && dbInfo.odsMinor >= 1));
+        bool isFb4 = (dbInfo.ods == 13 && dbInfo.odsMinor == 0);
+        bool isFb3 = (dbInfo.ods == 12);
+
+        // Fallback to string parsing if ODS info is missing or ambiguous
+        if (dbInfo.ods == 0)
+        {
+            isFb5 = (version.find("Firebird 5") != std::string::npos || 
+                     version.find("Firebird 6") != std::string::npos ||
+                     version.find("V5.") != std::string::npos ||
+                     version.find("V6.0") != std::string::npos ||
+                     version.find("T5.") != std::string::npos ||
+                     version.find("T6.") != std::string::npos);
+            isFb4 = (version.find("Firebird 4") != std::string::npos || version.find("V4.") != std::string::npos);
+            isFb3 = (version.find("Firebird 3") != std::string::npos || version.find("V3.") != std::string::npos);
+        }
+
         std::cout << "  Detected as FB5+: " << (isFb5 ? "YES" : "NO") << "\n";
-        bool isFb4 = (version.find(" 4.") != std::string::npos || version.find("V4.") != std::string::npos);
-        bool isFb3 = (version.find(" 3.") != std::string::npos || version.find("V3.") != std::string::npos);
+        std::cout << "  Detected as FB4: " << (isFb4 ? "YES" : "NO") << "\n";
+        std::cout << "  Detected as FB3: " << (isFb3 ? "YES" : "NO") << "\n";
         
         fr::ITransactionPtr tr = db->createTransaction();
         tr->start();
