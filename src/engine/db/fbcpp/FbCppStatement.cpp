@@ -62,37 +62,33 @@ void FbCppStatement::execute()
     eofReachedM = false;
     resultSetM.reset();
 
-    // Support Multiple-Row DML RETURNING (Firebird 5.0+)
-    if (getColumnCount() > 0)
-    {
-        auto handle = statementM->getStatementHandle();
-        if (handle->cloopVTable->version >= 5)
-        {
-            auto& attachment = statementM->getAttachment();
-            auto& client = attachment.getClient();
-            auto status = client.newStatus();
-            fbcpp::impl::StatusWrapper statusWrapper(client, status.get());
+    auto& attachment = statementM->getAttachment();
+    auto& client = attachment.getClient();
+    auto status = client.newStatus();
+    fbcpp::impl::StatusWrapper statusWrapper(client, status.get());
+    auto handle = statementM->getStatementHandle();
 
-            if (handle->getFlags(&statusWrapper) & Firebird::IStatement::FLAG_HAS_CURSOR)
-            {
-                // Try to open a cursor (Firebird 5.0+ Multiple-Row RETURNING)
-                Firebird::IResultSet* rs = handle->openCursor(&statusWrapper, transactionM.getHandle().get(),
-                    statementM->getInputMetadata().get(), statementM->getInputMessage().data(),
-                    statementM->getOutputMetadata().get(), 0);
-                
-                if (rs)
-                {
-                    resultSetM.reset(rs);
-                    bool hasRow = resultSetM->fetchNext(&statusWrapper, statementM->getOutputMessage().data()) == Firebird::IStatus::RESULT_OK;
-                    firstRowFetchedM = hasRow;
-                    eofReachedM = !hasRow;
-                    return;
-                }
-            }
-            statusWrapper.clearException();
-        }
+    // Determine if we should use a cursor (SELECT or multi-row RETURNING)
+    auto stType = statementM->getType();
+    bool isSelect = (stType == fbcpp::StatementType::SELECT || stType == fbcpp::StatementType::SELECT_FOR_UPDATE);
+    
+    bool hasCursor = isSelect;
+    if (!hasCursor && handle->cloopVTable->version >= 5)
+    {
+        hasCursor = (handle->getFlags(&statusWrapper) & Firebird::IStatement::FLAG_HAS_CURSOR);
     }
 
+    if (hasCursor)
+    {
+        resultSetM.reset(handle->openCursor(&statusWrapper, transactionM.getHandle().get(),
+            statementM->getInputMetadata().get(), statementM->getInputMessage().data(),
+            statementM->getOutputMetadata().get(), 0));
+        return;
+    }
+
+    // For statements without a cursor (normal INSERT/UPDATE/DELETE, EXECUTE PROCEDURE)
+    // Note: DML RETURNING on older engines (FB < 5) might NOT have FLAG_HAS_CURSOR
+    // but instead return data via the execute call.
     bool hasRow = statementM->execute(transactionM);
     // If the statement has output columns, we must handle the first row
     // and subsequent fetches, even if it's not a SELECT statement.
