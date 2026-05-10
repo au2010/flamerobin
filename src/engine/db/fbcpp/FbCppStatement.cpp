@@ -156,6 +156,8 @@ void FbCppStatement::setNull(int index)
 {
     if (!statementM)
         throw std::runtime_error("Statement not prepared");
+    if (index < 0 || (unsigned)index >= statementM->getInputDescriptors().size())
+        return;
     statementM->setNull((unsigned)index);
 }
 
@@ -163,6 +165,8 @@ void FbCppStatement::setString(int index, const std::string& value)
 {
     if (!statementM)
         throw std::runtime_error("Statement not prepared");
+    if (index < 0 || (unsigned)index >= statementM->getInputDescriptors().size())
+        return;
     statementM->set((unsigned)index, std::string_view(value));
 }
 
@@ -170,6 +174,9 @@ void FbCppStatement::setInt32(int index, int32_t value)
 {
     if (!statementM)
         throw std::runtime_error("Statement not prepared");
+
+    if (index < 0 || (unsigned)index >= statementM->getInputDescriptors().size())
+        return;
 
     ColumnType type = getParameterType(index);
     if (type == ColumnType::Boolean)
@@ -183,6 +190,9 @@ void FbCppStatement::setInt64(int index, int64_t value)
     if (!statementM)
         throw std::runtime_error("Statement not prepared");
 
+    if (index < 0 || (unsigned)index >= statementM->getInputDescriptors().size())
+        return;
+
     ColumnType type = getParameterType(index);
     if (type == ColumnType::Boolean)
         statementM->setBool((unsigned)index, value != 0);
@@ -194,6 +204,8 @@ void FbCppStatement::setDouble(int index, double value)
 {
     if (!statementM)
         throw std::runtime_error("Statement not prepared");
+    if (index < 0 || (unsigned)index >= statementM->getInputDescriptors().size())
+        return;
     statementM->setDouble((unsigned)index, value);
 }
 
@@ -201,6 +213,9 @@ void FbCppStatement::setBool(int index, bool value)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+
+    if (index < 0 || (unsigned)index >= statementM->getInputDescriptors().size())
+        return;
 
     ColumnType type = getParameterType(index);
     if (type == ColumnType::Boolean)
@@ -215,6 +230,8 @@ void FbCppStatement::setDate(int index, int year, int month, int day)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getInputDescriptors().size())
+        return;
     statementM->setDate((unsigned)index, std::chrono::year(year) / month / day);
 }
 
@@ -222,6 +239,8 @@ void FbCppStatement::setTime(int index, int hour, int minute, int second, int fr
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getInputDescriptors().size())
+        return;
     auto duration = std::chrono::hours(hour) + std::chrono::minutes(minute) +
         std::chrono::seconds(second) + std::chrono::microseconds(fraction * 100);
     statementM->setTime((unsigned)index, fbcpp::Time(duration));
@@ -232,6 +251,8 @@ void FbCppStatement::setTimestamp(int index, int year, int month, int day,
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getInputDescriptors().size())
+        return;
     auto date = std::chrono::year(year) / month / day;
     auto duration = std::chrono::hours(hour) + std::chrono::minutes(minute) +
         std::chrono::seconds(second) + std::chrono::microseconds(fraction * 100);
@@ -239,10 +260,11 @@ void FbCppStatement::setTimestamp(int index, int year, int month, int day,
 }
 
 void FbCppStatement::setBytes(int index, const void* data, int size)
-
 {
     if (!statementM)
         throw std::runtime_error("Statement not prepared");
+    if (index < 0 || (unsigned)index >= statementM->getInputDescriptors().size())
+        return;
     // fb-cpp's set method can take a std::string for OCTETS
     statementM->set((unsigned)index, std::string_view(static_cast<const char*>(data), size));
 }
@@ -251,6 +273,8 @@ bool FbCppStatement::isNull(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+        return true;
     return statementM->isNull((unsigned)index);
 }
 
@@ -258,6 +282,8 @@ std::string FbCppStatement::getString(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+        return "";
     return statementM->get<std::optional<std::string>>((unsigned)index).value_or("");
 }
 
@@ -265,6 +291,9 @@ int32_t FbCppStatement::getInt32(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+        return 0;
 
     ColumnType type = getColumnType(index);
     if (type == ColumnType::Boolean)
@@ -278,6 +307,9 @@ int64_t FbCppStatement::getInt64(int index)
     if (!statementM)
         throw std::runtime_error("No statement available");
 
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+        return 0;
+
     ColumnType type = getColumnType(index);
     if (type == ColumnType::Boolean)
         return statementM->get<std::optional<bool>>((unsigned)index).value_or(false) ? 1 : 0;
@@ -289,6 +321,8 @@ double FbCppStatement::getDouble(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+        return 0.0;
     return statementM->get<std::optional<double>>((unsigned)index).value_or(0.0);
 }
 
@@ -296,6 +330,9 @@ bool FbCppStatement::getBool(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+        return false;
 
     ColumnType type = getColumnType(index);
     if (type == ColumnType::Boolean)
@@ -310,6 +347,8 @@ void FbCppStatement::getBytes(int index, void* data, int size)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+        return;
     auto val = statementM->get<std::optional<std::string>>((unsigned)index);
     if (val)
     {
@@ -322,6 +361,8 @@ IBlobPtr FbCppStatement::getBlob(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+        return nullptr;
     auto blobId = statementM->get<std::optional<fbcpp::BlobId>>((unsigned)index);
     if (!blobId || blobId->isEmpty())
         return nullptr;
@@ -332,6 +373,8 @@ void FbCppStatement::setBlob(int index, IBlobPtr blob)
 {
     if (!statementM)
         throw std::runtime_error("Statement not prepared");
+    if (index < 0 || (unsigned)index >= statementM->getInputDescriptors().size())
+        return;
     auto fbCppBlob = std::dynamic_pointer_cast<FbCppBlob>(blob);
     if (!fbCppBlob)
         throw std::runtime_error("Invalid blob type for fb-cpp backend");
@@ -342,6 +385,8 @@ std::string FbCppStatement::getDate(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+        return "";
     return statementM->get<std::optional<std::string>>((unsigned)index).value_or("");
 }
 
@@ -349,6 +394,8 @@ std::string FbCppStatement::getTime(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+        return "";
     return statementM->get<std::optional<std::string>>((unsigned)index).value_or("");
 }
 
@@ -356,6 +403,8 @@ std::string FbCppStatement::getTimestamp(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+        return "";
     return statementM->get<std::optional<std::string>>((unsigned)index).value_or("");
 }
 
@@ -363,6 +412,8 @@ std::string FbCppStatement::getTimeTz(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+        return "";
     return statementM->get<std::optional<std::string>>((unsigned)index).value_or("");
 }
 
@@ -370,6 +421,8 @@ std::string FbCppStatement::getTimestampTz(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+        return "";
     return statementM->get<std::optional<std::string>>((unsigned)index).value_or("");
 }
 
@@ -377,6 +430,11 @@ void FbCppStatement::getDate(int index, int& year, int& month, int& day)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+    {
+        year = 0; month = 0; day = 0;
+        return;
+    }
     auto d = statementM->get<std::optional<fbcpp::Date>>((unsigned)index).value_or(fbcpp::Date{});
     year = (int)d.year();
     month = (unsigned)d.month();
@@ -387,6 +445,11 @@ void FbCppStatement::getTime(int index, int& hour, int& minute, int& second, int
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+    {
+        hour = 0; minute = 0; second = 0; fraction = 0;
+        return;
+    }
     auto t = statementM->get<std::optional<fbcpp::Time>>((unsigned)index).value_or(fbcpp::Time{});
     hour = (int)t.hours().count();
     minute = (int)t.minutes().count();
@@ -399,6 +462,11 @@ void FbCppStatement::getTimestamp(int index, int& year, int& month, int& day,
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+    if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
+    {
+        year = 0; month = 0; day = 0; hour = 0; minute = 0; second = 0; fraction = 0;
+        return;
+    }
     auto ts = statementM->get<std::optional<fbcpp::Timestamp>>((unsigned)index).value_or(fbcpp::Timestamp{});
     year = (int)ts.date.year();
     month = (unsigned)ts.date.month();
