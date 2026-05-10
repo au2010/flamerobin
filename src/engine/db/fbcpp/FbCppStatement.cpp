@@ -62,33 +62,50 @@ void FbCppStatement::execute()
     eofReachedM = false;
     resultSetM.reset();
 
-    auto& attachment = statementM->getAttachment();
-    auto& client = attachment.getClient();
-    auto status = client.newStatus();
-    fbcpp::impl::StatusWrapper statusWrapper(client, status.get());
-    auto handle = statementM->getStatementHandle();
-
     // Determine if we should use a cursor (SELECT or multi-row RETURNING)
     auto stType = statementM->getType();
     bool isSelect = (stType == fbcpp::StatementType::SELECT || stType == fbcpp::StatementType::SELECT_FOR_UPDATE);
     
     bool hasCursor = isSelect;
-    if (!hasCursor && handle->cloopVTable->version >= 5)
+    if (!hasCursor)
     {
-        hasCursor = (handle->getFlags(&statusWrapper) & Firebird::IStatement::FLAG_HAS_CURSOR);
+        auto handle = statementM->getStatementHandle();
+        if (handle->cloopVTable->version >= 5)
+        {
+            auto& attachment = statementM->getAttachment();
+            auto& client = attachment.getClient();
+            auto status = client.newStatus();
+            fbcpp::impl::StatusWrapper statusWrapper(client, status.get());
+            hasCursor = (handle->getFlags(&statusWrapper) & Firebird::IStatement::FLAG_HAS_CURSOR);
+        }
     }
 
     if (hasCursor)
     {
+        auto& attachment = statementM->getAttachment();
+        auto& client = attachment.getClient();
+        auto status = client.newStatus();
+        fbcpp::impl::StatusWrapper statusWrapper(client, status.get());
+        auto handle = statementM->getStatementHandle();
+
+        // Initialize null indicators for output columns (as fb-cpp would)
+        auto outMessageData = statementM->getOutputMessage().data();
+        if (outMessageData)
+        {
+            const auto& descriptors = statementM->getOutputDescriptors();
+            for (const auto& desc : descriptors)
+            {
+                // Mark as NULL initially (1 in Firebird null indicators)
+                *reinterpret_cast<std::int16_t*>(&outMessageData[desc.nullOffset]) = 1;
+            }
+        }
+
         resultSetM.reset(handle->openCursor(&statusWrapper, transactionM.getHandle().get(),
             statementM->getInputMetadata().get(), statementM->getInputMessage().data(),
             statementM->getOutputMetadata().get(), 0));
         return;
     }
 
-    // For statements without a cursor (normal INSERT/UPDATE/DELETE, EXECUTE PROCEDURE)
-    // Note: DML RETURNING on older engines (FB < 5) might NOT have FLAG_HAS_CURSOR
-    // but instead return data via the execute call.
     bool hasRow = statementM->execute(transactionM);
     // If the statement has output columns, we must handle the first row
     // and subsequent fetches, even if it's not a SELECT statement.

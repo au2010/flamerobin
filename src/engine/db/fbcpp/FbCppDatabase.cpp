@@ -74,10 +74,6 @@ std::vector<uint8_t> FbCppDatabase::buildDpb(bool creating, const std::string& o
     // Force UTF8 for filenames
     dpbBuilder->insertInt(&statusWrapper, isc_dpb_utf8_filename, 1);
     
-    // Explicitly enable wire encryption if possible
-    // This helps when the client library doesn't have a firebird.conf
-    dpbBuilder->insertString(&statusWrapper, isc_dpb_config, "WireCrypt = Enabled");
-
     if (creating)
     {
         if (!owner.empty())
