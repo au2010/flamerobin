@@ -167,6 +167,19 @@ void FbCppStatement::setString(int index, const std::string& value)
         throw std::runtime_error("Statement not prepared");
     if (index < 0 || (unsigned)index >= statementM->getInputDescriptors().size())
         return;
+
+    ColumnType type = getParameterType(index);
+    if (type == ColumnType::Blob)
+    {
+        IBlobPtr b = std::make_shared<FbCppBlob>(attachmentM, transactionM);
+        b->create();
+        b->open();
+        b->write(value.c_str(), (int)value.size());
+        b->close();
+        setBlob(index, b);
+        return;
+    }
+
     statementM->set((unsigned)index, std::string_view(value));
 }
 
@@ -265,6 +278,19 @@ void FbCppStatement::setBytes(int index, const void* data, int size)
         throw std::runtime_error("Statement not prepared");
     if (index < 0 || (unsigned)index >= statementM->getInputDescriptors().size())
         return;
+
+    ColumnType type = getParameterType(index);
+    if (type == ColumnType::Blob)
+    {
+        IBlobPtr b = std::make_shared<FbCppBlob>(attachmentM, transactionM);
+        b->create();
+        b->open();
+        b->write(data, size);
+        b->close();
+        setBlob(index, b);
+        return;
+    }
+
     // fb-cpp's set method can take a std::string for OCTETS
     statementM->set((unsigned)index, std::string_view(static_cast<const char*>(data), size));
 }
@@ -284,6 +310,34 @@ std::string FbCppStatement::getString(int index)
         throw std::runtime_error("No statement available");
     if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
         return "";
+
+    ColumnType type = getColumnType(index);
+    if (type == ColumnType::Blob)
+    {
+        IBlobPtr b = getBlob(index);
+        if (!b)
+            return "";
+        try
+        {
+            b->open();
+            std::string result;
+            char buffer[8192];
+            while (true)
+            {
+                int bytesRead = b->read(buffer, sizeof(buffer));
+                if (bytesRead <= 0)
+                    break;
+                result.append(buffer, bytesRead);
+            }
+            b->close();
+            return result;
+        }
+        catch (...)
+        {
+            return "";
+        }
+    }
+
     return statementM->get<std::optional<std::string>>((unsigned)index).value_or("");
 }
 
@@ -298,6 +352,8 @@ int32_t FbCppStatement::getInt32(int index)
     ColumnType type = getColumnType(index);
     if (type == ColumnType::Boolean)
         return statementM->get<std::optional<bool>>((unsigned)index).value_or(false) ? 1 : 0;
+    if (type == ColumnType::Float || type == ColumnType::Double)
+        return (int32_t)statementM->get<std::optional<double>>((unsigned)index).value_or(0.0);
 
     return statementM->get<std::optional<std::int32_t>>((unsigned)index).value_or(0);
 }
@@ -313,6 +369,8 @@ int64_t FbCppStatement::getInt64(int index)
     ColumnType type = getColumnType(index);
     if (type == ColumnType::Boolean)
         return statementM->get<std::optional<bool>>((unsigned)index).value_or(false) ? 1 : 0;
+    if (type == ColumnType::Float || type == ColumnType::Double)
+        return (int64_t)statementM->get<std::optional<double>>((unsigned)index).value_or(0.0);
 
     return statementM->get<std::optional<std::int64_t>>((unsigned)index).value_or(0);
 }
@@ -349,6 +407,33 @@ void FbCppStatement::getBytes(int index, void* data, int size)
         throw std::runtime_error("No statement available");
     if (index < 0 || (unsigned)index >= statementM->getOutputDescriptors().size())
         return;
+
+    ColumnType type = getColumnType(index);
+    if (type == ColumnType::Blob)
+    {
+        IBlobPtr b = getBlob(index);
+        if (!b)
+            return;
+        try
+        {
+            b->open();
+            int totalRead = 0;
+            while (totalRead < size)
+            {
+                int bytesRead = b->read(static_cast<char*>(data) + totalRead, size - totalRead);
+                if (bytesRead <= 0)
+                    break;
+                totalRead += bytesRead;
+            }
+            b->close();
+            return;
+        }
+        catch (...)
+        {
+            return;
+        }
+    }
+
     auto val = statementM->get<std::optional<std::string>>((unsigned)index);
     if (val)
     {
