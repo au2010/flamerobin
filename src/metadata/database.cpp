@@ -1331,7 +1331,7 @@ void Database::loadCollections(ProgressIndicator* progressIndicator)
     pih.init(_("system tables"), collectionCount, 1);
     sysTablesM->load(progressIndicator);
 
-    if (getInfo().getODSVersionIsHigherOrEqualTo(11.1)) {
+    if (getInfo().getODSVersionIsHigherOrEqualTo(11, 1)) {
         pih.init(_("global temporary table"), collectionCount, 2);
         GTTablesM->load(progressIndicator);
     }
@@ -1354,7 +1354,7 @@ void Database::loadCollections(ProgressIndicator* progressIndicator)
     pih.init(_("domains"), collectionCount, 8);
     userDomainsM->load(progressIndicator);
 
-    if (getInfo().getODSVersionIsHigherOrEqualTo(12.0)) {
+    if (getInfo().getODSVersionIsHigherOrEqualTo(12, 0)) {
         pih.init(_("functions SQL"), collectionCount, 9);
         functionSQLsM->load(progressIndicator);
     }
@@ -1368,7 +1368,7 @@ void Database::loadCollections(ProgressIndicator* progressIndicator)
     pih.init(_("exceptions"), collectionCount, 12);
     exceptionsM->load(progressIndicator);
 
-    if (getInfo().getODSVersionIsHigherOrEqualTo(12.0)) {
+    if (getInfo().getODSVersionIsHigherOrEqualTo(12, 0)) {
         pih.init(_("packages"), collectionCount, 13);
         packagesM->load(progressIndicator);
 
@@ -1376,12 +1376,12 @@ void Database::loadCollections(ProgressIndicator* progressIndicator)
         sysPackagesM->load(progressIndicator);
     }
 
-    if (getInfo().getODSVersionIsHigherOrEqualTo(11.1)) {
+    if (getInfo().getODSVersionIsHigherOrEqualTo(11, 1)) {
         pih.init(_("DBTriggers"), collectionCount, 15);
         DBTriggersM->load(progressIndicator);
     }
 
-    if (getInfo().getODSVersionIsHigherOrEqualTo(12.0)) {
+    if (getInfo().getODSVersionIsHigherOrEqualTo(12, 0)) {
         pih.init(_("DDLTriggers"), collectionCount, 16);
         DDLTriggersM->load(progressIndicator);
     }
@@ -1720,16 +1720,16 @@ void Database::getCollections(std::vector<MetadataItem*>& temp, bool system)
     
     temp.push_back(collationsM.get());
 
-    if (getInfo().getODSVersionIsHigherOrEqualTo(11.1)) 
+    if (getInfo().getODSVersionIsHigherOrEqualTo(11, 1)) 
         temp.push_back(DBTriggersM.get());
-    if (getInfo().getODSVersionIsHigherOrEqualTo(12.0)) 
+    if (getInfo().getODSVersionIsHigherOrEqualTo(12, 0)) 
         temp.push_back(DDLTriggersM.get());
     temp.push_back(userDomainsM.get());
     temp.push_back(exceptionsM.get());
-    if (getInfo().getODSVersionIsHigherOrEqualTo(12.0))
+    if (getInfo().getODSVersionIsHigherOrEqualTo(12, 0))
         temp.push_back(functionSQLsM.get());
     temp.push_back(generatorsM.get());
-    if (getInfo().getODSVersionIsHigherOrEqualTo(11.1)) 
+    if (getInfo().getODSVersionIsHigherOrEqualTo(11, 1)) 
         temp.push_back(GTTablesM.get());
     
     if (showOneNodeIndices() && showSystemIndices())
@@ -1737,12 +1737,12 @@ void Database::getCollections(std::vector<MetadataItem*>& temp, bool system)
     else
         temp.push_back(usrIndicesM.get());
 
-    if (getInfo().getODSVersionIsHigherOrEqualTo(12.0)) 
+    if (getInfo().getODSVersionIsHigherOrEqualTo(12, 0)) 
         temp.push_back(packagesM.get());
     temp.push_back(proceduresM.get());
     temp.push_back(rolesM.get());
     // Only push back system objects when they should be shown
-    if (getInfo().getODSVersionIsHigherOrEqualTo(12.0)) {
+    if (getInfo().getODSVersionIsHigherOrEqualTo(12, 0)) {
         if (system && showSystemPackages())
             temp.push_back(sysPackagesM.get());
     }
@@ -1755,7 +1755,7 @@ void Database::getCollections(std::vector<MetadataItem*>& temp, bool system)
     if (system && showSystemTables())
         temp.push_back(sysTablesM.get());
     temp.push_back(tablesM.get());
-    if (getInfo().getODSVersionIsHigherOrEqualTo(13.0))
+    if (getInfo().getODSVersionIsHigherOrEqualTo(13, 0))
         temp.push_back(replicationM.get());
     temp.push_back(DMLtriggersM.get());
     temp.push_back(UDFsM.get());

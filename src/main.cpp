@@ -50,12 +50,17 @@ IMPLEMENT_APP(Application)
 
 void parachute()
 {
-    if (wxYES == ::wxMessageBox(::wxGetTranslation(
+    wxString msg = ::wxGetTranslation(
         "A fatal error has occurred. If you know how to\n"
         "reproduce the problem, please submit the bug report at:\n"
         "http://flamerobin.org/bugs.php\n\n"
         "The program can try to keep running so that you\n"
-        "can save your data. Do you wish to try?\n"),
+        "can save your data. Do you wish to try?\n");
+
+    fprintf(stderr, "\n*** FATAL ERROR ***\n%s\n********************\n",
+        (const char*)msg.mb_str());
+
+    if (wxYES == ::wxMessageBox(msg,
         _("Fatal error"), wxYES_NO | wxICON_ERROR))
     {
         int result = ::wxGetApp().OnRun();

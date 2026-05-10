@@ -31,6 +31,7 @@
 #endif
 
 #include <algorithm>
+#include <exception>
 #include <list>
 
 #include "core/Observer.h"
@@ -127,7 +128,7 @@ void Subject::unlockSubject()
         if (!isLocked())
         {
             lockedChanged(false);
-            if (needsNotifyObjectsM)
+            if (needsNotifyObjectsM && std::uncaught_exceptions() == 0)
                 notifyObservers();
         }
     }

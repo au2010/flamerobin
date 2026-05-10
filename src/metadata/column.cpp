@@ -199,7 +199,7 @@ Column::Column(Relation* relation, const wxString& name)
 void Column::initialize(const wxString& source, const wxString& computedSource,
     const wxString& collation, bool nullable,
     const wxString& defaultValue, bool hasDefault, bool hasDescription,
-    const wxString& identityType, const long initialValue, const long incrementalValue)
+    const wxString& identityType, const int64_t initialValue, const int64_t incrementalValue)
 {
     SubjectLocker lock(this);
 
@@ -270,7 +270,7 @@ Table* Column::getTable() const
     return dynamic_cast<Table*>(getParent());
 }
 
-long Column::getInitialValue() const
+int64_t Column::getInitialValue() const
 {
     return initialValueM;
 }
@@ -308,14 +308,14 @@ wxString Column::getSource(bool identity)
     if (isIdentity() && identity) {
         wxString sql;
         sql = " GENERATED " + identityTypeM + " AS IDENTITY";
-        if (initialValueM != 0 || incrementalValueM != 1) {
+        if (initialValueM != 1 || incrementalValueM != 1) {
             sql += " (";
-            if (initialValueM != 0)
-                sql += "START WITH " + wxString::Format("%ld", initialValueM);
+            if (initialValueM != 1)
+                sql += "START WITH " + wxString::Format("%" wxLongLongFmtSpec "d", initialValueM);
             if (incrementalValueM != 1) {
-                if (initialValueM != 0)
+                if (initialValueM != 1)
                     sql += " ";
-                sql += "INCREMENT BY " + wxString::Format("%ld", incrementalValueM);
+                sql += "INCREMENT BY " + wxString::Format("%" wxLongLongFmtSpec "d", incrementalValueM);
             }
             sql += ")";
         }
@@ -334,4 +334,3 @@ wxString Column::getSource(bool identity)
         }
     }
 }
-

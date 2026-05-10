@@ -59,14 +59,14 @@ private:
     bool computedM;
     wxString sourceM, computedSourceM, collationM;
     wxString identityTypeM; // ODS 12
-    long initialValueM, incrementalValueM; // ODS 12
+    int64_t initialValueM, incrementalValueM; // ODS 12
 public:
     Column(Relation* relation, const wxString& name);
 
     void initialize(const wxString& source, const wxString& computedSource,
         const wxString& collation, bool nullable,
         const wxString& defaultValue, bool hasDefault, bool hasDescription,
-        const wxString& identityType, const long initialValue, const long incrementalValue);
+        const wxString& identityType, const int64_t initialValue, const int64_t incrementalValue);
     virtual const wxString getTypeName() const;
     virtual wxString getDropSqlStatement() const;
 
@@ -77,7 +77,7 @@ public:
     virtual wxString getComputedSource() const;
     wxString getCollation() const;
     Table* getTable() const;
-    long getInitialValue() const;
+    int64_t getInitialValue() const;
     virtual void acceptVisitor(MetadataItemVisitor* visitor);
     virtual wxString getSource(bool identity=false);
 };

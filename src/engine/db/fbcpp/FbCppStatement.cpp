@@ -170,14 +170,24 @@ void FbCppStatement::setInt32(int index, int32_t value)
 {
     if (!statementM)
         throw std::runtime_error("Statement not prepared");
-    statementM->setInt32((unsigned)index, value);
+
+    ColumnType type = getParameterType(index);
+    if (type == ColumnType::Boolean)
+        statementM->setBool((unsigned)index, value != 0);
+    else
+        statementM->setInt32((unsigned)index, value);
 }
 
 void FbCppStatement::setInt64(int index, int64_t value)
 {
     if (!statementM)
         throw std::runtime_error("Statement not prepared");
-    statementM->setInt64((unsigned)index, value);
+
+    ColumnType type = getParameterType(index);
+    if (type == ColumnType::Boolean)
+        statementM->setBool((unsigned)index, value != 0);
+    else
+        statementM->setInt64((unsigned)index, value);
 }
 
 void FbCppStatement::setDouble(int index, double value)
@@ -191,7 +201,14 @@ void FbCppStatement::setBool(int index, bool value)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
-    statementM->setBool((unsigned)index, value);
+
+    ColumnType type = getParameterType(index);
+    if (type == ColumnType::Boolean)
+        statementM->setBool((unsigned)index, value);
+    else if (type == ColumnType::Integer || type == ColumnType::BigInt || type == ColumnType::Numeric)
+        statementM->setInt64((unsigned)index, value ? 1 : 0);
+    else
+        statementM->setBool((unsigned)index, value);
 }
 
 void FbCppStatement::setDate(int index, int year, int month, int day)
@@ -248,6 +265,11 @@ int32_t FbCppStatement::getInt32(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+
+    ColumnType type = getColumnType(index);
+    if (type == ColumnType::Boolean)
+        return statementM->get<std::optional<bool>>((unsigned)index).value_or(false) ? 1 : 0;
+
     return statementM->get<std::optional<std::int32_t>>((unsigned)index).value_or(0);
 }
 
@@ -255,6 +277,11 @@ int64_t FbCppStatement::getInt64(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+
+    ColumnType type = getColumnType(index);
+    if (type == ColumnType::Boolean)
+        return statementM->get<std::optional<bool>>((unsigned)index).value_or(false) ? 1 : 0;
+
     return statementM->get<std::optional<std::int64_t>>((unsigned)index).value_or(0);
 }
 
@@ -269,6 +296,13 @@ bool FbCppStatement::getBool(int index)
 {
     if (!statementM)
         throw std::runtime_error("No statement available");
+
+    ColumnType type = getColumnType(index);
+    if (type == ColumnType::Boolean)
+        return statementM->get<std::optional<bool>>((unsigned)index).value_or(false);
+    if (type == ColumnType::Integer || type == ColumnType::BigInt || type == ColumnType::Numeric)
+        return statementM->get<std::optional<int64_t>>((unsigned)index).value_or(0) != 0;
+
     return statementM->get<std::optional<bool>>((unsigned)index).value_or(false);
 }
 

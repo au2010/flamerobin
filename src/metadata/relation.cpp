@@ -122,7 +122,7 @@ void Relation::loadProperties()
     // for views: source as blob
     sql += "rdb$view_source ";
     sql += db->getInfo().getODSVersionIsHigherOrEqualTo(13, 0)? ", rdb$sql_security " : ", null ";
-    sql += db->getInfo().getODSVersionIsHigherOrEqualTo(14, 0)? ", rdb$external_format " : ", 0 ";
+    sql += db->getInfo().getODSVersionIsHigherOrEqualTo(14, 1)? ", rdb$external_format " : ", 0 ";
     sql += "from rdb$relations where rdb$relation_name = ?";
 
     fr::IStatementPtr& st1 = loader->getStatement(sql);
@@ -229,7 +229,7 @@ void Relation::loadChildren()
             "select r.rdb$field_name, r.rdb$null_flag, r.rdb$field_source,"         //1,2,3
             " l.rdb$collation_name, f.rdb$computed_source, r.rdb$default_source,"   //4,5,6
             " r.rdb$description ");                                                 //7
-    sql += db->getInfo().getODSVersionIsHigherOrEqualTo(12, 0) ? ", r.RDB$GENERATOR_NAME, r.RDB$IDENTITY_TYPE, g.RDB$INITIAL_VALUE, RDB$GENERATOR_INCREMENT " : ", null, null, null, null "; //8,9, 10, 11
+    sql += db->getInfo().getODSVersionIsHigherOrEqualTo(12, 0) ? ", r.RDB$GENERATOR_NAME, r.RDB$IDENTITY_TYPE, g.RDB$INITIAL_VALUE, g.RDB$GENERATOR_INCREMENT " : ", null, null, null, null "; //8,9, 10, 11
     sql +=  " from rdb$fields f"
             " join rdb$relation_fields r "
             "     on f.rdb$field_name=r.rdb$field_source"
@@ -273,12 +273,12 @@ void Relation::loadChildren()
         }
         bool hasDescription = !st1->isNull(6);
         wxString identityType = "";
-        int initialValue = 0, incrementValue = 0;
+        int64_t initialValue = 0, incrementValue = 0;
         if (!st1->isNull(7)) {
             int i = st1->getInt32(8);
             identityType = i == IDENT_TYPE_BY_DEFAULT ? "BY DEFAULT" : i == IDENT_TYPE_ALWAYS ? "ALWAYS" : "";
-            initialValue = st1->getInt32(9);
-            incrementValue = st1->getInt32(10);
+            initialValue = st1->getInt64(9);
+            incrementValue = st1->getInt64(10);
         }
 
 
