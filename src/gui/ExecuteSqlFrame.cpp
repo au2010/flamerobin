@@ -1905,7 +1905,7 @@ void ExecuteSqlFrame::OnMenuGridExportBlob(wxCommandEvent& WXUNUSED(event))
     if (filename.IsEmpty())
         return;
 
-    ProgressDialog pd(this, _("Saving BLOB to file"));
+    ProgressDialog pd(0, _("Saving BLOB to file"));
     pd.doShow();
     dgt->exportBlobFile(filename, grid_data->GetGridCursorRow(),
         grid_data->GetGridCursorCol(), &pd);
@@ -1924,7 +1924,7 @@ void ExecuteSqlFrame::OnMenuGridImportBlob(wxCommandEvent& WXUNUSED(event))
    if (filename.IsEmpty())
         return;
 
-    ProgressDialog pd(this, _("Importing BLOB from file"));
+    ProgressDialog pd(0, _("Importing BLOB from file"));
     pd.doShow();
     dgt->importBlobFile(filename, grid_data->GetGridCursorRow(),
         grid_data->GetGridCursorCol(), &pd);
@@ -3870,7 +3870,7 @@ bool EditDDLHandler::handleURI(URI& uri)
     DatabasePtr db = m->getDatabase();
     MetadataLoaderTransaction tr(db->getMetadataLoader());
 
-    ProgressDialog pd(w, _("Extracting DDL Definitions"), 2);
+    ProgressDialog pd(0, _("Extracting DDL Definitions"), 2);
     pd.doShow();
     CreateDDLVisitor cdv(&pd);
     m->acceptVisitor(&cdv);

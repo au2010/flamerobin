@@ -1323,8 +1323,8 @@ void MainFrame::OnMenuGetServerVersion(wxCommandEvent& WXUNUSED(event))
     {
         // progress dialog will get closed in case of fatal exception or when
         // retieving is complete
-        ProgressDialog pd(this, _("Retrieving server version"), 1);
-        pd.doShow();
+    ProgressDialog pd(0, _("Retrieving server version"), 1);
+    pd.doShow();
         fr::IServicePtr svc = s->getDALService(&pd, false);    // false = no need for sysdba
         if (!svc)
             return;
@@ -2127,7 +2127,7 @@ void MainFrame::executeSysTemplate(const wxString& name, MetadataItem* item,
         return;
 
     wxString code;
-    ProgressDialog pd(parentWindow, _("Processing template..."));
+    ProgressDialog pd(0, _("Processing template..."));
     CodeTemplateProcessor tp(item, parentWindow);
     tp.processTemplateFile(code, config().getSysTemplateFileName(name),
         item, &pd);
@@ -2138,7 +2138,7 @@ void MainFrame::executeCodeTemplate(const wxFileName& fileName,
     MetadataItem* item, DatabasePtr database)
 {
     wxString code;
-    ProgressDialog pd(this, _("Processing template..."));
+    ProgressDialog pd(0, _("Processing template..."));
     CodeTemplateProcessor tp(item, this);
     tp.processTemplateFile(code, fileName, item, &pd);
     handleTemplateOutput(tp, database, code);

@@ -270,7 +270,7 @@ bool UserPropertiesHandler::handleURI(URI& uri)
     d.setUser(user);
     if (d.ShowModal() == wxID_OK)
     {
-        ProgressDialog pd(w, _("Connecting to Server..."), 1);
+        ProgressDialog pd(0, _("Connecting to Server..."), 1);
         pd.doShow();
         fr::IServicePtr svc = server->getDALService(&pd, true); // true = need SYSDBA password
         if (!svc)
@@ -325,7 +325,7 @@ bool DropUserHandler::handleURI(URI& uri)
         wxYES_NO|wxICON_QUESTION))
         return true;
 
-    ProgressDialog pd(w, _("Connecting to Server..."), 1);
+    ProgressDialog pd(0, _("Connecting to Server..."), 1);
     pd.doShow();
     fr::IServicePtr svc = s->getDALService(&pd, true); // true = need SYSDBA password
     if (!svc)

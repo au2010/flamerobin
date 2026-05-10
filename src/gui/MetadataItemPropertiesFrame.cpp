@@ -197,7 +197,7 @@ void MetadataItemPropertiesPanel::loadPage()
     MetadataLoaderTransaction tr((db) ? db->getMetadataLoader() : 0);
     SubjectLocker lock(objectM);
 
-    ProgressDialog pd(this, _("Processing template..."));
+    ProgressDialog pd(0, _("Processing template..."));
     pd.doShow();
 
     wxString htmlpage;

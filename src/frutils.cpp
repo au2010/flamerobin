@@ -147,7 +147,7 @@ bool connectDatabase(Database* db, wxWindow* parent,
     }
     else
     {
-        ProgressDialog pd(parent, caption, 1);
+        ProgressDialog pd(0, caption, 1);
         pd.setProgressMessage(caption);
         db->connect(pass, &pd);
     }

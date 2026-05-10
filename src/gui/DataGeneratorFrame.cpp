@@ -1594,7 +1594,7 @@ void DataGeneratorFrame::setParam(fr::IStatementPtr st, int param,
 
 void DataGeneratorFrame::generateData(std::list<Table *>& order)
 {
-    ProgressDialog pd(this, _("Generating data"), 2);
+    ProgressDialog pd(0, _("Generating data"), 2);
     pd.doShow();
     pd.initProgress(_("Inserting into tables"), (int)order.size());
 
